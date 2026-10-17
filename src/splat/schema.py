@@ -4,7 +4,7 @@ from falkordb import FalkorDB
 from falkordb.graph import Graph
 
 NODE_LABELS = [
-    "Team", "Person", "Goal", "Initiative", "Project", "Capability", "Task",
+    "Company", "Team", "Person", "Goal", "Initiative", "Project", "Capability", "Task",
     "Metric", "Reading", "Incident", "Assumption", "Decision", "Source",
 ]
 

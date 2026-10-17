@@ -103,6 +103,9 @@ EDGES = [
 
 
 def load(company: dict, graph: Graph) -> None:
+    # The export's as-of date is "today" for every time-based judgement.
+    graph.query("MERGE (c:Company {id: $id}) SET c.name = $name, c.as_of = $as_of",
+                {"id": company["company"].lower(), "name": company["company"], "as_of": company["as_of"]})
     for label, (key, set_clause) in NODES.items():
         _run(graph, f"UNWIND $rows AS row MERGE (n:{label} {{id: row.id}}) {set_clause}", company[key])
     for query, rows in EDGES:
