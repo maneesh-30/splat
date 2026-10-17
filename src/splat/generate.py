@@ -244,9 +244,13 @@ def build_plan(c: Company) -> None:
         ("EP-28", "Admin two-factor authentication", "platform", None, "done", None),
         ("EP-29", "Payment links in reminder emails", "payments", "I-6", "active", None),
     ]
+    # Epics that cannot work without another epic.
+    depends_on = {"EP-3": ["EP-1"], "EP-12": ["EP-1"], "EP-15": ["EP-3"], "EP-16": ["EP-2"],
+                  "EP-20": ["EP-19"], "EP-22": ["EP-21"], "EP-24": ["EP-6"], "EP-26": ["EP-8"],
+                  "EP-29": ["EP-18"]}
     for pid, title, t, ini, status, cap in projects:
-        c.projects.append({"id": pid, "title": title, "team": t, "initiative": ini,
-                           "status": status, "capability": cap, "owner": c.lead(t)})
+        c.projects.append({"id": pid, "title": title, "team": t, "initiative": ini, "status": status,
+                           "capability": cap, "owner": c.lead(t), "depends_on": depends_on.get(pid, [])})
 
 
 # ---------------------------------------------------------------------------
@@ -433,7 +437,7 @@ def decision_specs() -> list[dict]:
              alternatives=["Add a plan picker quiz"], risk="upsell paths get shorter"),
         dict(id="D-124", title="Add an invoice template gallery", team="growth", project="EP-24",
              decided="2026-02-23", shipped="2026-03-16", assumptions=["A-16"],
-             expects=("activation_rate_pct", 0.08, "2026-05-11"), effect=0.09,
+             expects=("activation_rate_pct", 0.08, "2026-05-11"), effect=0.105,
              context="New accounts open the invoice editor and leave without saving.",
              alternatives=["A design wizard", "Import invoices from a spreadsheet"],
              risk="templates look generic"),
@@ -479,7 +483,42 @@ REPLIES = [
     "Fine by me as long as we can turn it off quickly.",
     "Is this the most important thing for this quarter?",
     "Agree. Let's not over-design it.",
+    "I'd want a dashboard for {metric} before and after, otherwise we will argue about it later.",
+    "This feels like the right call. The current setup is held together with tape.",
+    "Who owns this once it ships? I don't want it to become nobody's problem.",
+    "Can we time-box it to two sprints and revisit?",
+    "Not against it, but {risk} worries me more than people think.",
+    "Is there a customer asking for this, or is it us?",
+    "We tried something close to this two years ago. Different team, though, so maybe it lands differently now.",
+    "Sounds good. Please loop in support before launch.",
+    "Let's make sure the on-call runbook is updated with this.",
+    "What happens if it doesn't work? Is there a clean rollback?",
+    "Strong yes from me.",
+    "I can take the first ticket.",
+    "Have we checked how '{alt}' compares on cost?",
+    "Can we get a rough estimate before committing?",
+    "Agree with the direction. Small nit: let's name the flag something searchable.",
+    "My gut says {metric} is driven by something else, but I don't have data either way.",
+    "Ok if we keep the old path around for a month.",
+    "Love it. This comes up in every customer call I'm on.",
+    "Please write the decision down this time, we lost the reasoning on the last one.",
+    "Let's do it. Worst case we learn something.",
 ]
+
+
+NEIGHBOUR = {"platform": "data", "data": "platform", "mobile": "data", "payments": "growth", "growth": "payments"}
+CROSS_TEAM_REPLIES = [
+    "Chiming in from the next team over: this affects us too, please keep us posted.",
+    "We depend on this path, so a heads-up before the rollout would help.",
+    "Sharing context: we saw something similar on our side last month.",
+    "Happy to review from our side.",
+]
+
+# Decisions that only make sense because an earlier decision was made.
+BUILDS_ON = {
+    "D-102": ["D-101"], "D-103": ["D-101"], "D-110": ["D-104"], "D-118": ["D-117"],
+    "D-120": ["D-119"], "D-122": ["D-121"], "D-123": ["D-114"], "D-128": ["D-111"],
+}
 
 
 def build_decisions(c: Company) -> list[tuple[str, date, float]]:
@@ -512,6 +551,11 @@ def build_decisions(c: Company) -> list[tuple[str, date, float]]:
             speaker = c.rng.choice([p for p in c.team[spec["team"]] if p != proposer])
             messages.append((speaker, reply.format(metric=metric_text, risk=spec["risk"],
                                                    alt=spec["alternatives"][0])))
+        # Teams that work closely chime in on each other's proposals. Payments and
+        # Platform never do, which is why they end up building the same thing.
+        if c.rng.random() < 0.7:
+            neighbour = c.rng.choice(c.team[NEIGHBOUR[spec["team"]]])
+            messages.insert(len(messages) // 2 + 1, (neighbour, c.rng.choice(CROSS_TEAM_REPLIES)))
         messages.append((decider, "Going ahead. Decision record to follow."))
         thread = c.source("slack", f"#{spec['team']}: {spec['title'].lower()}",
                           d(spec["decided"]) - timedelta(days=c.rng.randint(3, 9)), proposer,
@@ -533,6 +577,7 @@ def build_decisions(c: Company) -> list[tuple[str, date, float]]:
             "id": spec["id"], "title": spec["title"], "team": spec["team"], "decider": decider,
             "project": spec["project"], "decided_at": spec["decided"], "shipped_at": spec["shipped"],
             "status": spec.get("status", "active"), "supersedes": spec.get("supersedes"),
+            "builds_on": BUILDS_ON.get(spec["id"], []),
             "assumptions": spec["assumptions"], "decided_in": doc, "discussed_in": thread,
             "expects": None if not spec["expects"] else {
                 "metric": spec["expects"][0], "change": spec["expects"][1],
@@ -635,6 +680,33 @@ CHATTER = [
     ("question", "Where do we keep the runbook for the PDF queue?"),
     ("question", "Is there a reason we pin the old version of the date library?"),
     ("review", "Left comments on the {project} PR, mostly naming. Approve after those."),
+    ("standup", "Yesterday: on-call handover, quiet night. Today: writing tests for {project}."),
+    ("standup", "Blocked on a review for {project}, anyone free after lunch?"),
+    ("standup", "Spent the morning in interviews. Afternoon on {project}."),
+    ("standup", "Wrapping up the {project} migration script, should merge today."),
+    ("standup", "Sick today, will check messages later."),
+    ("standup", "Demo prep for Friday, then back to {project}."),
+    ("bug", "Duplicate reminder emails for two customers this morning. Looking into it."),
+    ("bug", "The invoice PDF cuts off long line items on page breaks."),
+    ("bug", "Timezone bug: invoices dated in UTC show the previous day for customers in the Americas."),
+    ("bug", "Search returns archived customers. Low priority but confusing."),
+    ("bug", "{project}: flaky integration test again, quarantined it for now."),
+    ("release", "Shipped: {project} behind a flag for internal accounts."),
+    ("release", "Hotfix out for the CSV export encoding issue."),
+    ("random", "Coffee machine on floor two is fixed, rejoice."),
+    ("random", "Happy birthday to everyone born in this month! Cake at 4."),
+    ("random", "Anyone up for badminton on Thursday evening?"),
+    ("random", "Reminder: expense reports are due on the 25th."),
+    ("random", "The all-hands recording is up in the shared drive."),
+    ("random", "Who left a laptop charger in meeting room B?"),
+    ("question", "Is staging down for anyone else?"),
+    ("question", "What's the process for getting read access to production logs?"),
+    ("question", "Who can approve a new SaaS tool purchase?"),
+    ("question", "Do we have a style guide for error messages?"),
+    ("question", "Is the {project} work still happening this quarter?"),
+    ("review", "Approved the {project} change, nice cleanup."),
+    ("review", "Requested changes on {project}: needs a migration rollback."),
+    ("review", "Can someone with more context review the {project} PR? It touches billing."),
 ]
 
 
@@ -694,7 +766,7 @@ def build(seed: int = SEED) -> Company:
     # retry projects stay genuinely unaware of each other.
     leave(c, c.member("growth", 3), "2026-05-29")      # EU metric and goal owner
     leave(c, c.member("platform", 9), "2026-08-14")
-    move(c, c.member("data", 4), "growth", "2026-04-06")
+    move(c, c.member("growth", 5), "payments", "2026-04-06")
     move(c, c.member("mobile", 5), "data", "2026-06-15")
 
     effects = build_decisions(c)
