@@ -97,6 +97,24 @@ EDGES = [
      lambda c: [{"id": d["id"], **d["expects"]} for d in c["decisions"] if d["expects"]]),
     ("MATCH (d:Decision {id: row.id}), (old:Decision {id: row.supersedes}) MERGE (d)-[:SUPERSEDES]->(old)",
      lambda c: [d for d in c["decisions"] if d["supersedes"]]),
+    ("MATCH (d:Decision {id: row.id}), (base:Decision {id: row.base}) MERGE (d)-[:BUILDS_ON]->(base)",
+     lambda c: [{"id": d["id"], "base": b} for d in c["decisions"] for b in d.get("builds_on", [])]),
+    ("MATCH (e:Project {id: row.id}), (dep:Project {id: row.dep}) MERGE (e)-[:DEPENDS_ON]->(dep)",
+     lambda c: [{"id": p["id"], "dep": x} for p in c["projects"] for x in p.get("depends_on", [])]),
+    ("MATCH (p:Person {id: row.person}), (s:Source {id: row.source}) MERGE (p)-[:POSTED_IN]->(s)",
+     lambda c: [{"person": who, "source": s["id"]} for s in c["sources"] for who in s.get("participants", [])]),
+]
+
+# Relationships derived from the ones above, so graph algorithms can run on one
+# relationship type. RELIES_ON points from anything to what it cannot stand
+# without; TALKS_WITH links people who posted in the same thread.
+DERIVED = [
+    "MATCH (d:Decision)-[:RESTS_ON]->(a:Assumption) MERGE (d)-[:RELIES_ON]->(a)",
+    "MATCH (d:Decision)-[:BUILDS_ON]->(base:Decision) MERGE (d)-[:RELIES_ON]->(base)",
+    "MATCH (d:Decision)-[:FOR]->(e:Project) MERGE (e)-[:RELIES_ON]->(d)",
+    "MATCH (e:Project)-[:DEPENDS_ON]->(dep:Project) MERGE (e)-[:RELIES_ON]->(dep)",
+    "MATCH (t:Task)-[:PART_OF]->(e:Project) WHERE t.closed_at IS NULL MERGE (t)-[:RELIES_ON]->(e)",
+    "MATCH (a:Person)-[:POSTED_IN]->(:Source)<-[:POSTED_IN]-(b:Person) WHERE a <> b MERGE (a)-[:TALKS_WITH]->(b)",
 ]
 
 
@@ -108,6 +126,8 @@ def load(company: dict, graph: Graph) -> None:
         _run(graph, f"UNWIND $rows AS row MERGE (n:{label} {{id: row.id}}) {set_clause}", company[key])
     for query, rows in EDGES:
         _run(graph, f"UNWIND $rows AS row {query}", rows(company))
+    for query in DERIVED:
+        graph.query(query)
 
 
 def main(path: str = "data/kestrel") -> None:
