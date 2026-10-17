@@ -120,6 +120,8 @@ class Agent:
 
     def _verdict_answer(self, v: dict) -> Answer:
         lines = [v["reason"]]
+        if v["verdict"] in ("worked", "partial") and any(a["contradicted_at"] for a in v.get("assumptions", [])):
+            lines.append("It moved the metric, but the reason it was made for was later disproved.")
         sources = [v["decided_in"]["id"]]
         path = [f"{v['id']} {v['title']}"]
         if v.get("expected"):
@@ -174,6 +176,8 @@ class Agent:
                     flags.append("decided AFTER the evidence")
                 if d["still_live"]:
                     flags.append("STILL LIVE")
+                if d["verdict"] in ("worked", "partial"):
+                    flags.append("but not for the stated reason")
                 lines.append(f"  {d['id']} {d['title']} ({d['owner']}): {VERDICT_LABEL[d['verdict']]}"
                              + (f"; {', '.join(flags)}" if flags else ""))
                 path.append(f"{d['id']} -RESTS_ON-> {a['id']} -CONTRADICTED_BY-> {a['evidence']['id']}")
