@@ -43,6 +43,8 @@ class Answer:
 
 # Order matters: the first matching route wins.
 ROUTES = [
+    ("load_bearing", r"load.?bearing|verify first|check first|riskiest|untested|most .*depend"),
+    ("blast_radius", r"blast|what breaks|downstream|ripple|knock.?on|relies on|rely on|depends on a-|a-\d+ .*(wrong|false)"),
     ("cascade", r"assumption|wrong|disprove|false|still true|still hold"),
     ("duplicate_work", r"duplicat|same thing|already build|two teams|overlap"),
     ("cancelled_goal_work", r"cancel"),
@@ -184,6 +186,44 @@ class Agent:
         return Answer("cascade", "Decisions resting on assumptions that turned out false", lines, found,
                       sources=sources, path=path)
 
+    def _blast_radius(self, question: str) -> Answer:
+        m = ID_PATTERN.search(question)
+        aid = m.group(1).upper() if m and m.group(1).upper().startswith("A-") else None
+        if not aid:
+            hits = self.tools.find("Assumption", question, limit=1)
+            aid = hits[0]["id"] if hits else None
+        if not aid:
+            return self._not_found("blast_radius", "assumption")
+        b = self.tools.blast_radius(aid)
+        if not b["items"]:
+            return Answer("blast_radius", f"Nothing in the graph relies on {aid}.", [], b)
+        lines = [f"{len(b['decisions'])} decisions, {len(b['epics'])} epics and {len(b['open_tasks'])} open tasks "
+                 f"rely on it, up to {b['max_hops']} steps away."]
+        for item in b["items"]:
+            lines.append(f"  {'  ' * (item['hops'] - 1)}{item['kind']} {item['id']} {item['title']}"
+                         + (f" ({item['status']})" if item["status"] else ""))
+        if b["goals"]:
+            lines.append("Goals at risk: " + "; ".join(b["goals"]) + ".")
+        if b["metrics"]:
+            lines.append("Metrics it was meant to move: " + ", ".join(b["metrics"]) + ".")
+        if b["people"]:
+            lines.append("People to tell: " + ", ".join(b["people"]) + ".")
+        return Answer("blast_radius", f"What relies on {aid}", lines, b,
+                      path=[f"(anything)-[:RELIES_ON*1..{b['max_hops']}]->({aid})"])
+
+    def _load_bearing(self, question: str) -> Answer:
+        ranked = self.tools.load_bearing()
+        untested = [a for a in ranked if a["status"] == "untested"]
+        lines = ["Untested assumptions, ranked by PageRank over everything that relies on them:"]
+        for n, a in enumerate(untested[:5], start=1):
+            lines.append(f"  {n}. {a['id']} \"{a['statement']}\": {a['dependents']} decisions, epics and "
+                         f"open tasks rest on it (score {a['score']}).")
+        disproved = [a for a in ranked if a["status"] == "disproved"]
+        if disproved:
+            lines.append("Already disproved: " + ", ".join(f"{a['id']} ({a['dependents']} dependents)"
+                                                         for a in disproved) + ".")
+        return Answer("load_bearing", "Assumptions to verify first", lines, ranked)
+
     def _similar(self, question: str) -> Answer:
         found = self.tools.similar(question)
         if not found:
@@ -264,4 +304,8 @@ class Agent:
                     if x["linked"] else "no shared person and no thread mentions both")
             lines.append(f"{a['team']} ({a['id']} {a['title']}) and {b['team']} ({b['id']} {b['title']}) both "
                          f"build \"{x['capability']}\": {link}.")
+            if not x["same_island"]:
+                groups = " and ".join("{" + ", ".join(i["teams"]) + "}" for i in x["islands"])
+                lines.append(f"The two teams are in separate conversation islands ({groups}): no chain of people "
+                             "who have talked to each other connects them.")
         return Answer("duplicate_work", f"{len(d)} pairs of teams are building the same thing", lines, d)
