@@ -100,6 +100,14 @@ RETURN start.id, coalesce(start.title, start.id), labels(start)[0],
        g.status, g.cancelled_at
 """
 
+# How far a piece of work gets toward a goal when it never reaches one.
+WHY_PARTIAL = """
+MATCH path = (start {id: $id})-[:FOR|PART_OF*1..3]->(end)
+WHERE NOT (end)-[:PART_OF|SERVES]->()
+WITH path ORDER BY length(path) DESC LIMIT 1
+RETURN [n IN nodes(path) | n.id + ': ' + coalesce(n.title, '')]
+"""
+
 # Active work with no path to any active goal.
 ORPHANED_PROJECTS = """
 MATCH (p:Project) WHERE p.status = 'active'

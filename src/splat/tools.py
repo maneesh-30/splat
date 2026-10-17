@@ -219,7 +219,11 @@ class Tools:
         if not rows:
             return {"id": node_id, "found": False}
         chains = [{"chain": r[3], "goal_status": r[4], "goal_cancelled_at": r[5]} for r in rows if r[3]]
-        return {"id": rows[0][0], "title": rows[0][1], "kind": rows[0][2], "found": True, "chains": chains}
+        out = {"id": rows[0][0], "title": rows[0][1], "kind": rows[0][2], "found": True, "chains": chains}
+        if not chains:
+            partial = self._q("why_partial", Q.WHY_PARTIAL, id=node_id)
+            out["partial"] = partial[0][0] if partial else []
+        return out
 
     def orphaned_work(self) -> dict:
         projects = [{"id": r[0], "title": r[1], "team": r[2], "reaches": r[3]}

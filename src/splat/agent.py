@@ -54,7 +54,7 @@ ROUTES = [
     ("verdict", r"work(ed)?\b|did .* (help|pay off|succeed)|result|outcome|impact|verdict"),
     ("why", r"\bwhy\b|what is .* for|which goal"),
 ]
-ID_PATTERN = re.compile(r"\b(D-\d+|PR-\d+|T-\d+|I-\d+|A-\d+|G-\d+)\b", re.I)
+ID_PATTERN = re.compile(r"\b(D-\d+|EP-\d+|KES-\d+|GH-\d+|I-\d+|A-\d+|G-\d+)\b", re.I)
 
 # Words that describe the question rather than the thing being asked about.
 GENERIC_WORDS = {"work", "worked", "working", "help", "helped", "decision", "result", "results", "outcome",
@@ -210,8 +210,12 @@ class Agent:
         if not w["found"]:
             return self._not_found("why", "task or project")
         if not w["chains"]:
-            return Answer("why", f"{w['id']} {w['title']} serves no goal",
-                          ["No path leads from it to any goal in the graph."], w)
+            partial = w.get("partial") or []
+            lines = ["No path leads from it to any goal in the graph."]
+            if partial:
+                lines.append("The trail stops at " + partial[-1] + ", which serves no goal.")
+            return Answer("why", f"{w['id']} {w['title']} serves no goal", lines, w,
+                          path=[" -> ".join(partial)] if partial else [])
         lines, path = [], []
         for c in w["chains"]:
             path.append(" -> ".join(c["chain"]))
