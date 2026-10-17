@@ -198,6 +198,43 @@ class Tools:
                         "suspect": len(missed) >= 2 or (contradicted_at is not None)})
         return out
 
+    def blast_radius(self, assumption_id: str) -> dict:
+        """Everything that relies on an assumption, at any depth."""
+        rows = self._q("blast_radius", Q.BLAST_RADIUS, id=assumption_id)
+        hit = [{"kind": r[0], "id": r[1], "title": r[2], "status": r[3], "hops": r[4]} for r in rows]
+        goals, workers, deciders, metrics = (self._q("blast_reach", Q.BLAST_REACH, id=assumption_id)[0]
+                                             if hit else ([], [], [], []))
+        return {"assumption": assumption_id, "items": hit,
+                "decisions": [h for h in hit if h["kind"] == "Decision"],
+                "epics": [h for h in hit if h["kind"] == "Project"],
+                "open_tasks": [h for h in hit if h["kind"] == "Task"],
+                "max_hops": max((h["hops"] for h in hit), default=0),
+                "goals": goals, "people": sorted(set(workers) | set(deciders)), "metrics": metrics}
+
+    def load_bearing(self) -> list[dict]:
+        """Assumptions ranked by PageRank over what relies on them."""
+        out = []
+        for aid, statement, score, disproved, supported, dependents in self._q("load_bearing", Q.LOAD_BEARING):
+            status = "disproved" if disproved else "supported" if supported else "untested"
+            out.append({"id": aid, "statement": statement, "score": round(score, 4),
+                        "status": status, "dependents": dependents})
+        return out
+
+    def islands(self) -> dict:
+        """Groups of people connected by any chain of conversation."""
+        groups: dict[int, dict] = {}
+        for pid, name, component, team in self._q("islands", Q.ISLANDS):
+            g = groups.setdefault(component, {"people": [], "teams": set()})
+            g["people"].append(name)
+            if team:
+                g["teams"].add(team)
+        team_islands: dict[str, set[int]] = {}
+        for component, g in groups.items():
+            for team in g["teams"]:
+                team_islands.setdefault(team, set()).add(component)
+        return {"groups": {k: {"people": v["people"], "teams": sorted(v["teams"])} for k, v in groups.items()},
+                "team_islands": team_islands}
+
     def similar(self, text: str) -> list[dict]:
         clean = search_terms(text)
         rows = self._q("similar_decisions", Q.SIMILAR_DECISIONS, text=clean) if clean else []
@@ -249,9 +286,21 @@ class Tools:
 
     def duplicate_work(self) -> list[dict]:
         out = []
+        islands = None
         for a, at, ateam, b, bt, bteam, capability in self._q("duplicate_candidates", Q.DUPLICATE_CANDIDATES):
             shared, threads = self._q("project_link", Q.PROJECT_LINK, a=a, b=b)[0]
+            islands = islands or self.islands()
+            team_id = {t["name"]: t["id"] for t in self._teams()}
+            ia = islands["team_islands"].get(team_id[ateam], set())
+            ib = islands["team_islands"].get(team_id[bteam], set())
             out.append({"capability": capability,
                         "projects": [{"id": a, "title": at, "team": ateam}, {"id": b, "title": bt, "team": bteam}],
-                        "linked": bool(shared or threads), "shared_people": shared, "shared_threads": threads})
+                        "linked": bool(shared or threads), "shared_people": shared, "shared_threads": threads,
+                        "same_island": bool(ia & ib),
+                        "islands": [{"teams": islands["groups"][k]["teams"],
+                                     "people": len(islands["groups"][k]["people"])}
+                                    for k in sorted(ia | ib) if len(islands["groups"][k]["people"]) > 1]})
         return out
+
+    def _teams(self) -> list[dict]:
+        return [{"id": r[0], "name": r[1]} for r in self._q("teams", "MATCH (t:Team) RETURN t.id, t.name")]

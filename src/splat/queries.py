@@ -89,6 +89,48 @@ MATCH (d:Decision)-[:RESTS_ON]->(node)
 RETURN d.id AS id, d.title AS title, score ORDER BY score DESC LIMIT 5
 """
 
+# Everything that relies on an assumption, at any depth: decisions resting on it,
+# decisions built on those, the epics they created, epics depending on those epics,
+# and the open work inside them. One variable-length pattern, however deep it goes.
+BLAST_RADIUS = """
+MATCH p = (n)-[:RELIES_ON*1..]->(:Assumption {id: $id})
+WITH n, min(length(p)) AS hops
+RETURN labels(n)[0], n.id, coalesce(n.title, n.id), n.status, hops
+ORDER BY hops, n.id
+"""
+
+BLAST_REACH = """
+MATCH (n)-[:RELIES_ON*1..]->(:Assumption {id: $id})
+WITH collect(DISTINCT n) AS hit
+UNWIND hit AS n
+OPTIONAL MATCH (n)-[:PART_OF]->(:Initiative)-[:SERVES]->(g:Goal)
+OPTIONAL MATCH (n)-[:ASSIGNED_TO]->(worker:Person)
+OPTIONAL MATCH (decider:Person)-[:DECIDED]->(n)
+OPTIONAL MATCH (n)-[:EXPECTS]->(m:Metric)
+RETURN collect(DISTINCT g.id + ': ' + g.title + ' (' + g.status + ')'),
+       collect(DISTINCT worker.name), collect(DISTINCT decider.name), collect(DISTINCT m.name)
+"""
+
+# PageRank over RELIES_ON: an assumption scores high when much of the company's
+# work rests on it, directly or through other decisions and epics.
+LOAD_BEARING = """
+CALL algo.pageRank(NULL, 'RELIES_ON') YIELD node, score
+WITH node, score WHERE node:Assumption
+OPTIONAL MATCH (node)-[c:CONTRADICTED_BY]->()
+OPTIONAL MATCH (node)-[s:SUPPORTED_BY]->()
+OPTIONAL MATCH (x)-[:RELIES_ON*1..]->(node)
+RETURN node.id, node.statement, score, count(DISTINCT c) > 0, count(DISTINCT s) > 0, count(DISTINCT x)
+ORDER BY score DESC
+"""
+
+# Who talks to whom, from people posting in the same threads, split into
+# connected groups. People in different groups have no chain of conversation at all.
+ISLANDS = """
+CALL algo.WCC({nodeLabels: ['Person'], relationshipTypes: ['TALKS_WITH']}) YIELD node, componentId
+OPTIONAL MATCH (node)-[m:MEMBER_OF]->(t:Team) WHERE m.until IS NULL
+RETURN node.id, node.name, componentId, t.id
+"""
+
 # --- Goals and work ---------------------------------------------------------------
 
 WHY = """
