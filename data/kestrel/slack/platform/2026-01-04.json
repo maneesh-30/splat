@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "Proposal for the EU data residency work: store eu customer data in frankfurt. Three EU prospects asked where their data would live.",
+  "ts": "1767517800.000000",
+  "thread_ts": "1767517800.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "Please write the decision down this time, we lost the reasoning on the last one.",
+  "ts": "1767517860.000000",
+  "thread_ts": "1767517800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U008",
+  "user_name": "Isha Rao",
+  "text": "Love it. This comes up in every customer call I'm on.",
+  "ts": "1767517920.000000",
+  "thread_ts": "1767517800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U036",
+  "user_name": "Chloe Weber",
+  "text": "Happy to review from our side.",
+  "ts": "1767517980.000000",
+  "thread_ts": "1767517800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U008",
+  "user_name": "Isha Rao",
+  "text": "Agree with the direction. Small nit: let's name the flag something searchable.",
+  "ts": "1767518040.000000",
+  "thread_ts": "1767517800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1767518100.000000",
+  "thread_ts": "1767517800.000000"
+ }
+]

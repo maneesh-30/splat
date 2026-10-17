@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U016",
+  "user_name": "Zoya Ito",
+  "text": "Proposal for the One-click card payments work: add one-click card payments to invoices. Invoices take 21 days to get paid on average; bank transfer is the only option.",
+  "ts": "1765271400.000000",
+  "thread_ts": "1765271400.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "My gut says average days until an invoice is paid is driven by something else, but I don't have data either way.",
+  "ts": "1765271460.000000",
+  "thread_ts": "1765271400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U018",
+  "user_name": "Riya Das",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1765271520.000000",
+  "thread_ts": "1765271400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1765271580.000000",
+  "thread_ts": "1765271400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "We tried something close to this two years ago. Different team, though, so maybe it lands differently now.",
+  "ts": "1765271640.000000",
+  "thread_ts": "1765271400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1765271700.000000",
+  "thread_ts": "1765271400.000000"
+ }
+]

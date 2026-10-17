@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U030",
+  "user_name": "Asha Lind",
+  "text": "Proposal for the Guided onboarding checklist work: launch a guided onboarding checklist. Accounts that never connect a bank account churn at three times the average rate.",
+  "ts": "1780650600.000000",
+  "thread_ts": "1780650600.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U032",
+  "user_name": "Mira Bose",
+  "text": "How sure are we this moves monthly churn? Do we have numbers, or is this a hunch?",
+  "ts": "1780650660.000000",
+  "thread_ts": "1780650600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U031",
+  "user_name": "Ravi Novak",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1780650720.000000",
+  "thread_ts": "1780650600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "Happy to review from our side.",
+  "ts": "1780650780.000000",
+  "thread_ts": "1780650600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U035",
+  "user_name": "Yusuf Silva",
+  "text": "Agree with the direction. Small nit: let's name the flag something searchable.",
+  "ts": "1780650840.000000",
+  "thread_ts": "1780650600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U029",
+  "user_name": "Hugo Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1780650900.000000",
+  "thread_ts": "1780650600.000000"
+ }
+]

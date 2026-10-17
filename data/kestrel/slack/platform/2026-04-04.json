@@ -1,8 +1,8 @@
 [
  {
   "type": "message",
-  "user": "U003",
-  "user_name": "Rohan Nair",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
   "text": "Proposal for the Admin two-factor authentication work: require two-factor authentication for admins. A customer's admin account was phished in March.",
   "ts": "1775293800.000000",
   "thread_ts": "1775293800.000000",
@@ -10,25 +10,25 @@
  },
  {
   "type": "message",
-  "user": "U009",
-  "user_name": "Arjun Costa",
-  "text": "Did we consider the other option, 'Make it optional with a banner'?",
+  "user": "U007",
+  "user_name": "Vikram Gupta",
+  "text": "How sure are we this moves the target metric? Do we have numbers, or is this a hunch?",
   "ts": "1775293860.000000",
   "thread_ts": "1775293800.000000"
  },
  {
   "type": "message",
-  "user": "U007",
-  "user_name": "Vikram Gupta",
-  "text": "Fine by me as long as we can turn it off quickly.",
+  "user": "U040",
+  "user_name": "Hana Nair",
+  "text": "Happy to review from our side.",
   "ts": "1775293920.000000",
   "thread_ts": "1775293800.000000"
  },
  {
   "type": "message",
-  "user": "U002",
-  "user_name": "Meera Khan",
-  "text": "+1, this has bitten us twice this quarter.",
+  "user": "U009",
+  "user_name": "Arjun Costa",
+  "text": "Let's do it. Worst case we learn something.",
   "ts": "1775293980.000000",
   "thread_ts": "1775293800.000000"
  },

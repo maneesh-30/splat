@@ -1,0 +1,59 @@
+[
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "Proposal for the Precomputed dashboard aggregates work: precompute dashboard aggregates. Dashboard requests are slow and share the invoice API.",
+  "ts": "1789031400.000000",
+  "thread_ts": "1789031400.000000",
+  "reply_count": 6
+ },
+ {
+  "type": "message",
+  "user": "U040",
+  "user_name": "Hana Nair",
+  "text": "Is there a customer asking for this, or is it us?",
+  "ts": "1789031460.000000",
+  "thread_ts": "1789031400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "Please write the decision down this time, we lost the reasoning on the last one.",
+  "ts": "1789031520.000000",
+  "thread_ts": "1789031400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Sharing context: we saw something similar on our side last month.",
+  "ts": "1789031580.000000",
+  "thread_ts": "1789031400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U036",
+  "user_name": "Chloe Weber",
+  "text": "I'd want a dashboard for api p95 latency before and after, otherwise we will argue about it later.",
+  "ts": "1789031640.000000",
+  "thread_ts": "1789031400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U036",
+  "user_name": "Chloe Weber",
+  "text": "Can we get a rough estimate before committing?",
+  "ts": "1789031700.000000",
+  "thread_ts": "1789031400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U036",
+  "user_name": "Chloe Weber",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1789031760.000000",
+  "thread_ts": "1789031400.000000"
+ }
+]

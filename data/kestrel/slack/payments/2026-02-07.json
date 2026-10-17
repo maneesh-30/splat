@@ -1,0 +1,59 @@
+[
+ {
+  "type": "message",
+  "user": "U013",
+  "user_name": "Karan Iyer",
+  "text": "Proposal: make the invoice digest daily and opt-in. The weekly digest has a 4% open rate and drew complaints.",
+  "ts": "1770455400.000000",
+  "thread_ts": "1770455400.000000",
+  "reply_count": 6
+ },
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Love it. This comes up in every customer call I'm on.",
+  "ts": "1770455460.000000",
+  "thread_ts": "1770455400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U018",
+  "user_name": "Riya Das",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1770455520.000000",
+  "thread_ts": "1770455400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U024",
+  "user_name": "Sara Mehta",
+  "text": "We depend on this path, so a heads-up before the rollout would help.",
+  "ts": "1770455580.000000",
+  "thread_ts": "1770455400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U016",
+  "user_name": "Zoya Ito",
+  "text": "We tried something close to this two years ago. Different team, though, so maybe it lands differently now.",
+  "ts": "1770455640.000000",
+  "thread_ts": "1770455400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U018",
+  "user_name": "Riya Das",
+  "text": "This feels like the right call. The current setup is held together with tape.",
+  "ts": "1770455700.000000",
+  "thread_ts": "1770455400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1770455760.000000",
+  "thread_ts": "1770455400.000000"
+ }
+]

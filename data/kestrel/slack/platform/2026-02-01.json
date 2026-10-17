@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Release notes: small fixes to async pdf rendering, faster search in the admin panel.",
+  "ts": "1769937000.000000",
+  "thread_ts": "1769937000.000000",
+  "reply_count": 0
+ }
+]

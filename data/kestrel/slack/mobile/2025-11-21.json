@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U033",
+  "user_name": "Leo Iyer",
+  "text": "Proposal for the Kotlin Multiplatform Android app work: rebuild the android app with kotlin multiplatform. Android crash-free sessions trail iOS by more than a point.",
+  "ts": "1763716200.000000",
+  "thread_ts": "1763716200.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U035",
+  "user_name": "Yusuf Silva",
+  "text": "Who owns this once it ships? I don't want it to become nobody's problem.",
+  "ts": "1763716260.000000",
+  "thread_ts": "1763716200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U030",
+  "user_name": "Asha Lind",
+  "text": "Can we get a rough estimate before committing?",
+  "ts": "1763716320.000000",
+  "thread_ts": "1763716200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U030",
+  "user_name": "Asha Lind",
+  "text": "Worried about a long rewrite with no visible wins. Can we roll it out to a few accounts first?",
+  "ts": "1763716380.000000",
+  "thread_ts": "1763716200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U029",
+  "user_name": "Hugo Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1763716440.000000",
+  "thread_ts": "1763716200.000000"
+ }
+]

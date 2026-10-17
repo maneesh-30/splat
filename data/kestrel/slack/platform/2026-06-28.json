@@ -1,0 +1,60 @@
+[
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Proposal for the Invoice renderer rewrite in Go work: rewrite the invoice renderer in go. The renderer is the slowest service and hard to change.",
+  "ts": "1782637800.000000",
+  "thread_ts": "1782637800.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U008",
+  "user_name": "Isha Rao",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1782637860.000000",
+  "thread_ts": "1782637800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "+1, this has bitten us twice this quarter.",
+  "ts": "1782637920.000000",
+  "thread_ts": "1782637800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "We depend on this path, so a heads-up before the rollout would help.",
+  "ts": "1782637980.000000",
+  "thread_ts": "1782637800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U007",
+  "user_name": "Vikram Gupta",
+  "text": "We looked at 'Optimise the existing renderer' last quarter. Slower to ship, and it does not fix the root cause.",
+  "ts": "1782638040.000000",
+  "thread_ts": "1782637800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1782638100.000000",
+  "thread_ts": "1782637800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U006",
+  "user_name": "Ananya Rossi",
+  "text": "Hotfix out for the CSV export encoding issue.",
+  "ts": "1782638400.000000",
+  "thread_ts": "1782638400.000000",
+  "reply_count": 0
+ }
+]

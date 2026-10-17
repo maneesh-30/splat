@@ -1,30 +1,30 @@
-id,title,team,initiative,status,capability
-EP-1,Invoice read cache,platform,I-1,done,CAP-cache
-EP-2,Async PDF rendering,platform,I-1,done,
-EP-3,Precomputed dashboard aggregates,data,I-1,active,CAP-cache
-EP-4,Annual plan pricing,growth,I-2,done,
-EP-5,Guided onboarding checklist,mobile,I-2,done,
-EP-6,Signup flow redesign,growth,I-3,done,
-EP-7,Referral programme,growth,I-3,active,
-EP-8,EU data residency,platform,I-4,active,
-EP-9,Database connection pool tuning,platform,I-1,done,
-EP-10,Email delivery provider switch,payments,I-5,done,
-EP-11,Admin panel theme refresh,mobile,,active,CAP-theme
-EP-12,Customer profile cache,payments,I-1,done,CAP-cache
-EP-13,Webhook retry library,payments,I-5,active,CAP-retry
-EP-14,Shared retry and backoff toolkit,platform,I-1,active,CAP-retry
-EP-15,Revenue dashboard v2,data,,active,CAP-reporting
-EP-16,Invoice renderer rewrite in Go,platform,I-1,active,
-EP-17,One-click card payments,payments,I-6,done,
-EP-18,Automatic payment reminders,payments,I-6,done,
-EP-19,Merge queue for CI,platform,I-7,done,
-EP-20,Feature flags for every release,platform,I-7,active,
-EP-21,Kotlin Multiplatform Android app,mobile,I-8,done,
-EP-22,Offline invoices on mobile,mobile,I-8,active,
-EP-23,Two-plan pricing page,growth,I-3,active,
-EP-24,Invoice template gallery,growth,I-3,done,
-EP-25,Weekly invoice statements,payments,I-5,done,
-EP-26,German localisation,growth,I-4,done,
-EP-27,Columnar analytics warehouse,data,,done,
-EP-28,Admin two-factor authentication,platform,,done,
-EP-29,Payment links in reminder emails,payments,I-6,active,
+id,title,team,initiative,status,capability,depends_on
+EP-1,Invoice read cache,platform,I-1,done,CAP-cache,
+EP-2,Async PDF rendering,platform,I-1,done,,
+EP-3,Precomputed dashboard aggregates,data,I-1,active,CAP-cache,EP-1
+EP-4,Annual plan pricing,growth,I-2,done,,
+EP-5,Guided onboarding checklist,mobile,I-2,done,,
+EP-6,Signup flow redesign,growth,I-3,done,,
+EP-7,Referral programme,growth,I-3,active,,
+EP-8,EU data residency,platform,I-4,active,,
+EP-9,Database connection pool tuning,platform,I-1,done,,
+EP-10,Email delivery provider switch,payments,I-5,done,,
+EP-11,Admin panel theme refresh,mobile,,active,CAP-theme,
+EP-12,Customer profile cache,payments,I-1,done,CAP-cache,EP-1
+EP-13,Webhook retry library,payments,I-5,active,CAP-retry,
+EP-14,Shared retry and backoff toolkit,platform,I-1,active,CAP-retry,
+EP-15,Revenue dashboard v2,data,,active,CAP-reporting,EP-3
+EP-16,Invoice renderer rewrite in Go,platform,I-1,active,,EP-2
+EP-17,One-click card payments,payments,I-6,done,,
+EP-18,Automatic payment reminders,payments,I-6,done,,
+EP-19,Merge queue for CI,platform,I-7,done,,
+EP-20,Feature flags for every release,platform,I-7,active,,EP-19
+EP-21,Kotlin Multiplatform Android app,mobile,I-8,done,,
+EP-22,Offline invoices on mobile,mobile,I-8,active,,EP-21
+EP-23,Two-plan pricing page,growth,I-3,active,,
+EP-24,Invoice template gallery,growth,I-3,done,,EP-6
+EP-25,Weekly invoice statements,payments,I-5,done,,
+EP-26,German localisation,growth,I-4,done,,EP-8
+EP-27,Columnar analytics warehouse,data,,done,,
+EP-28,Admin two-factor authentication,platform,,done,,
+EP-29,Payment links in reminder emails,payments,I-6,active,,EP-18

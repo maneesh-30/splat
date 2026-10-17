@@ -1,64 +1,65 @@
 id,title,epic,author,created,merged
-GH-400,Add Redis cluster to staging,EP-1,vikram.gupta@kestrel.example,2026-03-02,2026-03-09
-GH-402,Invalidate cache on invoice update,EP-1,diya.khan@kestrel.example,2026-02-17,2026-02-28
-GH-403,Handle cache stampede on the invoice list,EP-1,kabir.kapoor@kestrel.example,2026-03-03,2026-03-16
-GH-404,Add cache hit rate panel,EP-1,priya.rao@kestrel.example,2026-03-02,2026-03-18
-GH-405,Load test cached endpoints,EP-1,diya.khan@kestrel.example,2026-03-09,2026-03-15
-GH-406,Move PDF rendering onto the job queue,EP-2,kabir.kapoor@kestrel.example,2025-12-13,2025-12-25
-GH-410,Remove synchronous render path,EP-2,kabir.kapoor@kestrel.example,2026-01-14,2026-01-27
-GH-411,Design aggregate tables,EP-3,hana.nair@kestrel.example,2026-09-28,2026-10-03
-GH-412,Nightly aggregate job,EP-3,arun.lind@kestrel.example,2026-09-30,2026-10-04
-GH-414,Backfill twelve months of aggregates,EP-3,pooja.berg@kestrel.example,2026-10-02,
-GH-415,Compare aggregates against live totals,EP-3,pooja.berg@kestrel.example,2026-10-12,
-GH-417,Discount banner on upgrade page,EP-4,theo.park@kestrel.example,2026-10-12,
-GH-418,Proration for mid-cycle switch,EP-4,elif.bose@kestrel.example,2026-10-12,
-GH-419,Annual plan invoices and receipts,EP-4,maya.das@kestrel.example,2026-10-12,
-GH-422,Bank connection step,EP-5,hugo.sharma@kestrel.example,2026-07-04,2026-07-15
-GH-423,First invoice step,EP-5,hugo.sharma@kestrel.example,2026-07-09,2026-07-22
-GH-424,Email nudge for unfinished checklists,EP-5,mira.bose@kestrel.example,2026-07-17,2026-07-25
-GH-425,Cut signup form to three fields,EP-6,felix.novak@kestrel.example,2026-02-01,2026-02-03
-GH-430,Referral reward ledger,EP-7,felix.novak@kestrel.example,2026-09-20,2026-10-03
-GH-431,Referral landing page,EP-7,sara.mehta@kestrel.example,2026-09-19,2026-09-24
-GH-433,Share sheet on mobile,EP-7,ivan.rossi@kestrel.example,2026-10-12,
-GH-437,EU backups and restore drill,EP-8,priya.rao@kestrel.example,2026-08-20,2026-08-25
-GH-440,EU status page,EP-8,priya.rao@kestrel.example,2026-09-27,
-GH-442,Raise pool size on API nodes,EP-9,aarav.sharma@kestrel.example,2026-09-01,2026-09-17
-GH-443,Add pool wait time metric,EP-9,diya.khan@kestrel.example,2026-09-04,2026-09-20
-GH-445,Set up new provider domains,EP-10,riya.das@kestrel.example,2026-05-10,2026-05-14
-GH-447,Dual-send during migration,EP-10,tara.mehta@kestrel.example,2026-06-13,2026-06-16
-GH-451,Dark palette for admin tables,EP-11,mira.bose@kestrel.example,2026-05-15,2026-05-23
-GH-454,Cache customer profiles,EP-12,zoya.ito@kestrel.example,2026-04-22,2026-04-29
-GH-455,Invalidate profile cache on edit,EP-12,omar.berg@kestrel.example,2026-05-09,2026-05-15
-GH-457,Retry queue for outbound webhooks,EP-13,tara.mehta@kestrel.example,2026-03-29,2026-04-11
-GH-459,Dead letter queue,EP-13,zoya.ito@kestrel.example,2026-04-06,2026-04-20
-GH-460,Replay webhooks from admin,EP-13,dev.gupta@kestrel.example,2026-03-28,
-GH-464,Circuit breaker for outbound HTTP,EP-14,meera.khan@kestrel.example,2026-05-21,2026-06-03
-GH-465,Retry toolkit docs,EP-14,aarav.sharma@kestrel.example,2026-06-13,
-GH-466,Adopt toolkit in email sender,EP-14,samir.costa@kestrel.example,2026-06-07,
-GH-469,Export revenue to CSV,EP-15,chloe.weber@kestrel.example,2026-06-07,
-GH-470,Revenue dashboard permissions,EP-15,chloe.weber@kestrel.example,2026-05-24,
-GH-471,Go renderer skeleton,EP-16,ananya.rossi@kestrel.example,2026-07-07,2026-07-10
-GH-474,Golden file tests for PDFs,EP-16,isha.rao@kestrel.example,2026-07-26,
-GH-475,Shadow traffic to Go renderer,EP-16,priya.rao@kestrel.example,2026-08-01,
-GH-476,Card payment button on invoices,EP-17,tara.mehta@kestrel.example,2025-12-24,2026-01-09
-GH-479,Mark invoice paid on successful charge,EP-17,neha.moreau@kestrel.example,2026-01-29,2026-02-15
-GH-481,Reminder schedule settings,EP-18,karan.iyer@kestrel.example,2026-06-12,2026-06-21
-GH-482,Reminder email template,EP-18,nikhil.moreau@kestrel.example,2026-06-05,2026-06-13
-GH-484,Reminder opt-out link,EP-18,zoya.ito@kestrel.example,2026-06-24,2026-07-12
-GH-487,Queue status in chat,EP-19,meera.khan@kestrel.example,2026-03-08,2026-03-24
-GH-492,Stale flag report,EP-20,kabir.kapoor@kestrel.example,2026-07-16,
-GH-494,Shared invoice model module,EP-21,asha.lind@kestrel.example,2025-12-06,2025-12-20
-GH-496,Port invoice list screen,EP-21,ines.silva@kestrel.example,2025-12-02,2025-12-04
-GH-498,Crash reporting for new app,EP-21,hugo.sharma@kestrel.example,2025-12-14,2025-12-21
-GH-505,Two-plan pricing page design,EP-23,sara.mehta@kestrel.example,2026-10-01,2026-10-06
-GH-506,Plan comparison table,EP-23,maya.das@kestrel.example,2026-09-18,2026-09-21
-GH-507,Migrate legacy plan names,EP-23,maya.das@kestrel.example,2026-10-03,
-GH-508,Pricing page experiment,EP-23,ivan.rossi@kestrel.example,2026-10-02,
-GH-509,Template gallery UI,EP-24,theo.park@kestrel.example,2026-03-11,2026-03-13
-GH-514,Statement email,EP-25,neha.moreau@kestrel.example,2026-07-15,2026-07-26
-GH-515,Statement PDF layout,EP-25,neha.moreau@kestrel.example,2026-08-16,2026-08-24
-GH-519,German invoice templates,EP-26,maya.das@kestrel.example,2026-03-20,2026-03-27
-GH-522,Daily export of invoice events,EP-27,pooja.berg@kestrel.example,2026-06-11,2026-06-13
-GH-528,Admin 2FA support runbook,EP-28,kabir.kapoor@kestrel.example,2026-05-05,2026-05-21
-GH-529,Payment link in reminder email,EP-29,nikhil.moreau@kestrel.example,2026-05-18,2026-05-24
-GH-530,Track link clicks,EP-29,tara.mehta@kestrel.example,2026-06-09,
+GH-401,Cache GET /invoices responses,EP-1,isha.rao@kestrel.example,2026-02-25,2026-03-01
+GH-402,Invalidate cache on invoice update,EP-1,meera.khan@kestrel.example,2026-03-17,2026-04-03
+GH-405,Load test cached endpoints,EP-1,aarav.sharma@kestrel.example,2026-03-12,2026-03-23
+GH-406,Move PDF rendering onto the job queue,EP-2,aarav.sharma@kestrel.example,2025-12-20,2026-01-02
+GH-407,Show 'PDF generating' state in the UI,EP-2,vikram.gupta@kestrel.example,2025-12-28,2026-01-05
+GH-408,Retry failed renders,EP-2,rohan.nair@kestrel.example,2025-12-22,2025-12-24
+GH-413,Serve dashboard tiles from aggregates,EP-3,hana.nair@kestrel.example,2026-10-01,
+GH-414,Backfill twelve months of aggregates,EP-3,marco.weber@kestrel.example,2026-10-06,
+GH-415,Compare aggregates against live totals,EP-3,chloe.weber@kestrel.example,2026-10-12,
+GH-416,Annual plan in billing system,EP-4,ivan.rossi@kestrel.example,2026-10-12,
+GH-419,Annual plan invoices and receipts,EP-4,felix.novak@kestrel.example,2026-10-12,
+GH-420,Checklist component,EP-5,asha.lind@kestrel.example,2026-07-02,2026-07-15
+GH-422,Bank connection step,EP-5,leo.iyer@kestrel.example,2026-06-18,2026-06-30
+GH-424,Email nudge for unfinished checklists,EP-5,ravi.novak@kestrel.example,2026-07-09,2026-07-24
+GH-425,Cut signup form to three fields,EP-6,jonas.kapoor@kestrel.example,2026-02-16,2026-03-06
+GH-428,Fix password strength meter on mobile,EP-6,ivan.rossi@kestrel.example,2026-02-06,2026-02-10
+GH-430,Referral reward ledger,EP-7,nora.park@kestrel.example,2026-09-13,2026-09-19
+GH-431,Referral landing page,EP-7,ivan.rossi@kestrel.example,2026-10-12,
+GH-434,Provision Frankfurt region,EP-8,ananya.rossi@kestrel.example,2026-07-27,2026-08-05
+GH-438,Data processing addendum for EU customers,EP-8,vikram.gupta@kestrel.example,2026-08-22,2026-08-25
+GH-443,Add pool wait time metric,EP-9,ananya.rossi@kestrel.example,2026-08-29,2026-09-11
+GH-444,Tune idle connection timeout,EP-9,meera.khan@kestrel.example,2026-08-17,2026-08-30
+GH-445,Set up new provider domains,EP-10,neha.moreau@kestrel.example,2026-06-01,2026-06-10
+GH-446,Warm up sending IPs,EP-10,dev.gupta@kestrel.example,2026-05-26,2026-06-13
+GH-447,Dual-send during migration,EP-10,zoya.ito@kestrel.example,2026-05-12,2026-05-15
+GH-449,Remove old provider,EP-10,neha.moreau@kestrel.example,2026-05-28,2026-06-14
+GH-450,Theme tokens for admin panel,EP-11,ravi.novak@kestrel.example,2026-05-05,2026-05-08
+GH-453,Update admin icons,EP-11,yusuf.silva@kestrel.example,2026-05-24,
+GH-454,Cache customer profiles,EP-12,nikhil.moreau@kestrel.example,2026-05-06,2026-05-13
+GH-455,Invalidate profile cache on edit,EP-12,tara.mehta@kestrel.example,2026-04-19,2026-05-05
+GH-458,Exponential backoff with jitter,EP-13,neha.moreau@kestrel.example,2026-04-15,2026-05-02
+GH-460,Replay webhooks from admin,EP-13,karan.iyer@kestrel.example,2026-04-01,
+GH-461,Webhook retry dashboard,EP-13,nikhil.moreau@kestrel.example,2026-03-25,
+GH-463,Backoff policies config,EP-14,kabir.kapoor@kestrel.example,2026-05-19,2026-06-06
+GH-466,Adopt toolkit in email sender,EP-14,meera.khan@kestrel.example,2026-05-25,
+GH-471,Go renderer skeleton,EP-16,kabir.kapoor@kestrel.example,2026-07-11,2026-07-29
+GH-473,Font embedding in Go renderer,EP-16,priya.rao@kestrel.example,2026-07-26,2026-08-09
+GH-475,Shadow traffic to Go renderer,EP-16,priya.rao@kestrel.example,2026-07-22,
+GH-476,Card payment button on invoices,EP-17,karan.iyer@kestrel.example,2026-01-03,2026-01-11
+GH-477,Payment processor integration,EP-17,karan.iyer@kestrel.example,2025-12-29,2026-01-04
+GH-478,Card fee settings,EP-17,tara.mehta@kestrel.example,2025-12-29,2026-01-05
+GH-479,Mark invoice paid on successful charge,EP-17,neha.moreau@kestrel.example,2025-12-28,2025-12-30
+GH-480,Refunds for card payments,EP-17,dev.gupta@kestrel.example,2026-01-04,2026-01-07
+GH-482,Reminder email template,EP-18,karan.iyer@kestrel.example,2026-06-11,2026-06-20
+GH-484,Reminder opt-out link,EP-18,karan.iyer@kestrel.example,2026-07-01,2026-07-18
+GH-485,Enable merge queue on main,EP-19,vikram.gupta@kestrel.example,2026-03-08,2026-03-19
+GH-486,Parallelise test shards,EP-19,kabir.kapoor@kestrel.example,2026-03-15,2026-03-17
+GH-489,Feature flag service,EP-20,arjun.costa@kestrel.example,2026-06-30,2026-07-15
+GH-492,Stale flag report,EP-20,arjun.costa@kestrel.example,2026-07-29,
+GH-498,Crash reporting for new app,EP-21,ines.silva@kestrel.example,2026-01-10,2026-01-17
+GH-503,Offline indicator,EP-22,mira.bose@kestrel.example,2026-09-14,
+GH-504,Offline PDF preview,EP-22,ines.silva@kestrel.example,2026-09-29,
+GH-505,Two-plan pricing page design,EP-23,jonas.kapoor@kestrel.example,2026-09-21,2026-10-07
+GH-507,Migrate legacy plan names,EP-23,elif.bose@kestrel.example,2026-10-12,
+GH-508,Pricing page experiment,EP-23,elif.bose@kestrel.example,2026-10-05,
+GH-509,Template gallery UI,EP-24,theo.park@kestrel.example,2026-03-10,2026-03-28
+GH-511,Template preview,EP-24,nora.park@kestrel.example,2026-04-05,2026-04-18
+GH-513,Weekly statement generator,EP-25,tara.mehta@kestrel.example,2026-07-16,2026-07-21
+GH-515,Statement PDF layout,EP-25,karan.iyer@kestrel.example,2026-07-31,2026-08-08
+GH-517,Extract UI strings,EP-26,ivan.rossi@kestrel.example,2026-02-11,2026-02-13
+GH-519,German invoice templates,EP-26,ivan.rossi@kestrel.example,2026-03-18,2026-03-20
+GH-523,Port finance queries,EP-27,chloe.weber@kestrel.example,2026-06-15,2026-06-27
+GH-527,Enforce 2FA at login,EP-28,isha.rao@kestrel.example,2026-05-11,2026-05-13
+GH-528,Admin 2FA support runbook,EP-28,priya.rao@kestrel.example,2026-05-01,2026-05-04

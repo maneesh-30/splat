@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "Proposal for the Columnar analytics warehouse work: move analytics to a columnar warehouse. The infrastructure bill grew 12% in March.",
+  "ts": "1778145000.000000",
+  "thread_ts": "1778145000.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U040",
+  "user_name": "Hana Nair",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1778145060.000000",
+  "thread_ts": "1778145000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U037",
+  "user_name": "Arun Lind",
+  "text": "Not against it, but analysts must learn a new tool worries me more than people think.",
+  "ts": "1778145120.000000",
+  "thread_ts": "1778145000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "We tried something close to this two years ago. Different team, though, so maybe it lands differently now.",
+  "ts": "1778145180.000000",
+  "thread_ts": "1778145000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U037",
+  "user_name": "Arun Lind",
+  "text": "Sounds good. Please loop in support before launch.",
+  "ts": "1778145240.000000",
+  "thread_ts": "1778145000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U036",
+  "user_name": "Chloe Weber",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1778145300.000000",
+  "thread_ts": "1778145000.000000"
+ }
+]

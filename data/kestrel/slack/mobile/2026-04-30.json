@@ -3,7 +3,7 @@
   "type": "message",
   "user": "U031",
   "user_name": "Ravi Novak",
-  "text": "Login page throws a 500 when the email has a trailing space.",
+  "text": "Timezone bug: invoices dated in UTC show the previous day for customers in the Americas.",
   "ts": "1777540200.000000",
   "thread_ts": "1777540200.000000",
   "reply_count": 0

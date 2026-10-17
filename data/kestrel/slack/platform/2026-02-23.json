@@ -1,9 +1,9 @@
 [
  {
   "type": "message",
-  "user": "U002",
-  "user_name": "Meera Khan",
-  "text": "Left comments on the database connection pool tuning PR, mostly naming. Approve after those.",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "database connection pool tuning: staging deploy failed on a migration lock, retried and it passed.",
   "ts": "1771837800.000000",
   "thread_ts": "1771837800.000000",
   "reply_count": 0

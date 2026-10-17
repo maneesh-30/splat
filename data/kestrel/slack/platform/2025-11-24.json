@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "Proposal for the Async PDF rendering work: move pdf rendering to an async queue. Every invoice save renders a PDF synchronously before responding.",
+  "ts": "1763975400.000000",
+  "thread_ts": "1763975400.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "How sure are we this moves api p95 latency? Do we have numbers, or is this a hunch?",
+  "ts": "1763975460.000000",
+  "thread_ts": "1763975400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U011",
+  "user_name": "Samir Costa",
+  "text": "I can take the first ticket.",
+  "ts": "1763975520.000000",
+  "thread_ts": "1763975400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "Happy to review from our side.",
+  "ts": "1763975580.000000",
+  "thread_ts": "1763975400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U007",
+  "user_name": "Vikram Gupta",
+  "text": "Worried about users may download a PDF before it is ready. Can we roll it out to a few accounts first?",
+  "ts": "1763975640.000000",
+  "thread_ts": "1763975400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1763975700.000000",
+  "thread_ts": "1763975400.000000"
+ }
+]

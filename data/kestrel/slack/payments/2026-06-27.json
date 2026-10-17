@@ -1,0 +1,59 @@
+[
+ {
+  "type": "message",
+  "user": "U016",
+  "user_name": "Zoya Ito",
+  "text": "Proposal for the Weekly invoice statements work: batch small invoices into weekly statements. Customers with many small invoices write in asking for one statement.",
+  "ts": "1782551400.000000",
+  "thread_ts": "1782551400.000000",
+  "reply_count": 6
+ },
+ {
+  "type": "message",
+  "user": "U018",
+  "user_name": "Riya Das",
+  "text": "Can we get a rough estimate before committing?",
+  "ts": "1782551460.000000",
+  "thread_ts": "1782551400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Did we consider the other option, 'Let customers choose per client'?",
+  "ts": "1782551520.000000",
+  "thread_ts": "1782551400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Chiming in from the next team over: this affects us too, please keep us posted.",
+  "ts": "1782551580.000000",
+  "thread_ts": "1782551400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U013",
+  "user_name": "Karan Iyer",
+  "text": "Sounds good. Please loop in support before launch.",
+  "ts": "1782551640.000000",
+  "thread_ts": "1782551400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "How sure are we this moves support tickets per week? Do we have numbers, or is this a hunch?",
+  "ts": "1782551700.000000",
+  "thread_ts": "1782551400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1782551760.000000",
+  "thread_ts": "1782551400.000000"
+ }
+]

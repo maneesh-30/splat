@@ -1,0 +1,52 @@
+[
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Proposal for the Referral programme work: launch a referral programme. Word of mouth already drives a quarter of signups.",
+  "ts": "1788253800.000000",
+  "thread_ts": "1788253800.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "We looked at 'Partner with accounting firms' last quarter. Slower to ship, and it does not fix the root cause.",
+  "ts": "1788253860.000000",
+  "thread_ts": "1788253800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Chiming in from the next team over: this affects us too, please keep us posted.",
+  "ts": "1788253920.000000",
+  "thread_ts": "1788253800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "Worried about referral fraud. Can we roll it out to a few accounts first?",
+  "ts": "1788253980.000000",
+  "thread_ts": "1788253800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1788254040.000000",
+  "thread_ts": "1788253800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U024",
+  "user_name": "Sara Mehta",
+  "text": "Hotfix out for the CSV export encoding issue.",
+  "ts": "1788254400.000000",
+  "thread_ts": "1788254400.000000",
+  "reply_count": 0
+ }
+]

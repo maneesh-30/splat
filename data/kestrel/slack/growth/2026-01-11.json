@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U024",
+  "user_name": "Sara Mehta",
+  "text": "Proposal for the Signup flow redesign work: shorten the signup form to three fields. Half of visitors who start the signup form abandon it.",
+  "ts": "1768122600.000000",
+  "thread_ts": "1768122600.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Did we consider the other option, 'Sign in with Google only'?",
+  "ts": "1768122660.000000",
+  "thread_ts": "1768122600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Love it. This comes up in every customer call I'm on.",
+  "ts": "1768122720.000000",
+  "thread_ts": "1768122600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U014",
+  "user_name": "Tara Mehta",
+  "text": "Chiming in from the next team over: this affects us too, please keep us posted.",
+  "ts": "1768122780.000000",
+  "thread_ts": "1768122600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Is there a customer asking for this, or is it us?",
+  "ts": "1768122840.000000",
+  "thread_ts": "1768122600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1768122900.000000",
+  "thread_ts": "1768122600.000000"
+ }
+]

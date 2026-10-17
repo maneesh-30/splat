@@ -1,0 +1,59 @@
+[
+ {
+  "type": "message",
+  "user": "U024",
+  "user_name": "Sara Mehta",
+  "text": "Proposal for the Annual plan pricing work: offer a 20% annual plan discount. Monthly churn is 3.1%, well above the 2% goal.",
+  "ts": "1779959400.000000",
+  "thread_ts": "1779959400.000000",
+  "reply_count": 6
+ },
+ {
+  "type": "message",
+  "user": "U023",
+  "user_name": "Felix Novak",
+  "text": "Let's make sure the on-call runbook is updated with this.",
+  "ts": "1779959460.000000",
+  "thread_ts": "1779959400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U027",
+  "user_name": "Ivan Rossi",
+  "text": "I can take the first ticket.",
+  "ts": "1779959520.000000",
+  "thread_ts": "1779959400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U019",
+  "user_name": "Omar Berg",
+  "text": "Sharing context: we saw something similar on our side last month.",
+  "ts": "1779959580.000000",
+  "thread_ts": "1779959400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Ok if we keep the old path around for a month.",
+  "ts": "1779959640.000000",
+  "thread_ts": "1779959400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U027",
+  "user_name": "Ivan Rossi",
+  "text": "Not against it, but discounting trains customers to wait for deals worries me more than people think.",
+  "ts": "1779959700.000000",
+  "thread_ts": "1779959400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1779959760.000000",
+  "thread_ts": "1779959400.000000"
+ }
+]

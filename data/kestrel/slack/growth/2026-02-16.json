@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U023",
+  "user_name": "Felix Novak",
+  "text": "Proposal for the Invoice template gallery work: add an invoice template gallery. New accounts open the invoice editor and leave without saving.",
+  "ts": "1771233000.000000",
+  "thread_ts": "1771233000.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "+1, this has bitten us twice this quarter.",
+  "ts": "1771233060.000000",
+  "thread_ts": "1771233000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U017",
+  "user_name": "Dev Gupta",
+  "text": "Sharing context: we saw something similar on our side last month.",
+  "ts": "1771233120.000000",
+  "thread_ts": "1771233000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U024",
+  "user_name": "Sara Mehta",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1771233180.000000",
+  "thread_ts": "1771233000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1771233240.000000",
+  "thread_ts": "1771233000.000000"
+ }
+]

@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U023",
+  "user_name": "Felix Novak",
+  "text": "Timezone bug: invoices dated in UTC show the previous day for customers in the Americas.",
+  "ts": "1762074600.000000",
+  "thread_ts": "1762074600.000000",
+  "reply_count": 0
+ }
+]

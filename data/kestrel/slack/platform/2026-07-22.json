@@ -1,0 +1,59 @@
+[
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "Proposal for the Database connection pool tuning work: tune database connection pools. Latency spikes line up with connection pool saturation alerts.",
+  "ts": "1784711400.000000",
+  "thread_ts": "1784711400.000000",
+  "reply_count": 6
+ },
+ {
+  "type": "message",
+  "user": "U011",
+  "user_name": "Samir Costa",
+  "text": "We looked at 'Add a connection proxy' last quarter. Slower to ship, and it does not fix the root cause.",
+  "ts": "1784711460.000000",
+  "thread_ts": "1784711400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Sounds good. Please loop in support before launch.",
+  "ts": "1784711520.000000",
+  "thread_ts": "1784711400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U037",
+  "user_name": "Arun Lind",
+  "text": "Sharing context: we saw something similar on our side last month.",
+  "ts": "1784711580.000000",
+  "thread_ts": "1784711400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Did we consider the other option, 'Add a connection proxy'?",
+  "ts": "1784711640.000000",
+  "thread_ts": "1784711400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "This feels like the right call. The current setup is held together with tape.",
+  "ts": "1784711700.000000",
+  "thread_ts": "1784711400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1784711760.000000",
+  "thread_ts": "1784711400.000000"
+ }
+]

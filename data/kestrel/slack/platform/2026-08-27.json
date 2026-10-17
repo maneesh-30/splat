@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "Proposal: create a second on-call rotation. Platform engineers were paged 41 times in August.",
+  "ts": "1787821800.000000",
+  "thread_ts": "1787821800.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U007",
+  "user_name": "Vikram Gupta",
+  "text": "Who owns this once it ships? I don't want it to become nobody's problem.",
+  "ts": "1787821860.000000",
+  "thread_ts": "1787821800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "Chiming in from the next team over: this affects us too, please keep us posted.",
+  "ts": "1787821920.000000",
+  "thread_ts": "1787821800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "Not against it, but thin rotations burn people out faster worries me more than people think.",
+  "ts": "1787821980.000000",
+  "thread_ts": "1787821800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1787822040.000000",
+  "thread_ts": "1787821800.000000"
+ }
+]

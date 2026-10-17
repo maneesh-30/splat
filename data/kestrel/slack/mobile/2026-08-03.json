@@ -1,43 +1,51 @@
 [
  {
   "type": "message",
-  "user": "U032",
-  "user_name": "Mira Bose",
+  "user": "U031",
+  "user_name": "Ravi Novak",
   "text": "Proposal for the Offline invoices on mobile work: support offline invoices on mobile. Tradespeople create invoices on site with no signal.",
   "ts": "1785748200.000000",
   "thread_ts": "1785748200.000000",
-  "reply_count": 5
+  "reply_count": 6
  },
  {
   "type": "message",
-  "user": "U033",
-  "user_name": "Leo Iyer",
-  "text": "Did we consider the other option, 'Save drafts locally only'?",
+  "user": "U030",
+  "user_name": "Asha Lind",
+  "text": "Please write the decision down this time, we lost the reasoning on the last one.",
   "ts": "1785748260.000000",
   "thread_ts": "1785748200.000000"
  },
  {
   "type": "message",
-  "user": "U035",
-  "user_name": "Yusuf Silva",
-  "text": "Agree. Let's not over-design it.",
+  "user": "U034",
+  "user_name": "Ines Silva",
+  "text": "Not against it, but sync conflicts worries me more than people think.",
   "ts": "1785748320.000000",
   "thread_ts": "1785748200.000000"
  },
  {
   "type": "message",
-  "user": "U030",
-  "user_name": "Asha Lind",
-  "text": "Is this the most important thing for this quarter?",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "We depend on this path, so a heads-up before the rollout would help.",
   "ts": "1785748380.000000",
   "thread_ts": "1785748200.000000"
  },
  {
   "type": "message",
-  "user": "U030",
-  "user_name": "Asha Lind",
-  "text": "Can we write down what success looks like before we start?",
+  "user": "U034",
+  "user_name": "Ines Silva",
+  "text": "My gut says the target metric is driven by something else, but I don't have data either way.",
   "ts": "1785748440.000000",
+  "thread_ts": "1785748200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U033",
+  "user_name": "Leo Iyer",
+  "text": "Strong yes from me.",
+  "ts": "1785748500.000000",
   "thread_ts": "1785748200.000000"
  },
  {
@@ -45,7 +53,7 @@
   "user": "U029",
   "user_name": "Hugo Sharma",
   "text": "Going ahead. Decision record to follow.",
-  "ts": "1785748500.000000",
+  "ts": "1785748560.000000",
   "thread_ts": "1785748200.000000"
  }
 ]

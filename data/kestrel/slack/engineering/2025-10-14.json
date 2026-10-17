@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U027",
+  "user_name": "Ivan Rossi",
+  "text": "Does anyone know who owns the invoice numbering logic? Need to change the prefix format.",
+  "ts": "1760433000.000000",
+  "thread_ts": "1760433000.000000",
+  "reply_count": 0
+ }
+]

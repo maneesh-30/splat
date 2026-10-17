@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U004",
+  "user_name": "Priya Rao",
+  "text": "Proposal for the Merge queue for CI work: adopt a merge queue for ci. Pull requests sit for days and main breaks twice a week.",
+  "ts": "1771319400.000000",
+  "thread_ts": "1771319400.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "Worried about a slow queue blocks everyone. Can we roll it out to a few accounts first?",
+  "ts": "1771319460.000000",
+  "thread_ts": "1771319400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U009",
+  "user_name": "Arjun Costa",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1771319520.000000",
+  "thread_ts": "1771319400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "Chiming in from the next team over: this affects us too, please keep us posted.",
+  "ts": "1771319580.000000",
+  "thread_ts": "1771319400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "Did we consider the other option, 'Quarantine flaky tests'?",
+  "ts": "1771319640.000000",
+  "thread_ts": "1771319400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1771319700.000000",
+  "thread_ts": "1771319400.000000"
+ }
+]

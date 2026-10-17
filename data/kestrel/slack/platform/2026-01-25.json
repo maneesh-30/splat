@@ -1,0 +1,59 @@
+[
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "Proposal for the Invoice read cache work: cache invoice reads in redis. p95 latency on the invoice list has crept up to over 400 ms and is the top complaint from large accounts.",
+  "ts": "1769332200.000000",
+  "thread_ts": "1769332200.000000",
+  "reply_count": 6
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Let's make sure the on-call runbook is updated with this.",
+  "ts": "1769332260.000000",
+  "thread_ts": "1769332200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "Strong yes from me.",
+  "ts": "1769332320.000000",
+  "thread_ts": "1769332200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U037",
+  "user_name": "Arun Lind",
+  "text": "Happy to review from our side.",
+  "ts": "1769332380.000000",
+  "thread_ts": "1769332200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1769332440.000000",
+  "thread_ts": "1769332200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U011",
+  "user_name": "Samir Costa",
+  "text": "This feels like the right call. The current setup is held together with tape.",
+  "ts": "1769332500.000000",
+  "thread_ts": "1769332200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1769332560.000000",
+  "thread_ts": "1769332200.000000"
+ }
+]

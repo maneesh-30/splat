@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U016",
+  "user_name": "Zoya Ito",
+  "text": "Proposal for the Email delivery provider switch work: switch email delivery provider. About 2% of invoice emails never arrive, and customers notice.",
+  "ts": "1777194600.000000",
+  "thread_ts": "1777194600.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U017",
+  "user_name": "Dev Gupta",
+  "text": "Ok if we keep the old path around for a month.",
+  "ts": "1777194660.000000",
+  "thread_ts": "1777194600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "Chiming in from the next team over: this affects us too, please keep us posted.",
+  "ts": "1777194720.000000",
+  "thread_ts": "1777194600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Worried about sender reputation resets on a new provider. Can we roll it out to a few accounts first?",
+  "ts": "1777194780.000000",
+  "thread_ts": "1777194600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1777194840.000000",
+  "thread_ts": "1777194600.000000"
+ }
+]

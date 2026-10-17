@@ -3,7 +3,7 @@
   "type": "message",
   "user": "U025",
   "user_name": "Theo Park",
-  "text": "annual plan pricing: staging deploy failed on a migration lock, retried and it passed.",
+  "text": "Hotfix out for the CSV export encoding issue.",
   "ts": "1780045800.000000",
   "thread_ts": "1780045800.000000",
   "reply_count": 0

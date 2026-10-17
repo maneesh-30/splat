@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U004",
+  "user_name": "Priya Rao",
+  "text": "Customer reports invoice totals rounding differently in CSV export. Repro steps in the ticket.",
+  "ts": "1771405800.000000",
+  "thread_ts": "1771405800.000000",
+  "reply_count": 0
+ }
+]

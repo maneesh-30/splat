@@ -1,27 +1,35 @@
 [
  {
   "type": "message",
-  "user": "U014",
-  "user_name": "Tara Mehta",
+  "user": "U016",
+  "user_name": "Zoya Ito",
   "text": "Proposal for the Webhook retry library work: retry failed webhooks with exponential backoff. Support sees a wave of 'payment not recorded' tickets after every partner outage.",
   "ts": "1772788200.000000",
   "thread_ts": "1772788200.000000",
-  "reply_count": 3
+  "reply_count": 4
  },
  {
   "type": "message",
-  "user": "U017",
-  "user_name": "Dev Gupta",
-  "text": "Fine by me as long as we can turn it off quickly.",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Can we write down what success looks like before we start?",
   "ts": "1772788260.000000",
   "thread_ts": "1772788200.000000"
  },
  {
   "type": "message",
-  "user": "U017",
-  "user_name": "Dev Gupta",
-  "text": "Worried about retries could hammer a partner that is already down. Can we roll it out to a few accounts first?",
+  "user": "U026",
+  "user_name": "Nora Park",
+  "text": "Chiming in from the next team over: this affects us too, please keep us posted.",
   "ts": "1772788320.000000",
+  "thread_ts": "1772788200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Worried about retries could hammer a partner that is already down. Can we roll it out to a few accounts first?",
+  "ts": "1772788380.000000",
   "thread_ts": "1772788200.000000"
  },
  {
@@ -29,7 +37,7 @@
   "user": "U012",
   "user_name": "Neha Moreau",
   "text": "Going ahead. Decision record to follow.",
-  "ts": "1772788380.000000",
+  "ts": "1772788440.000000",
   "thread_ts": "1772788200.000000"
  }
 ]

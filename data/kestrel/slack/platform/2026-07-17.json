@@ -3,7 +3,7 @@
   "type": "message",
   "user": "U002",
   "user_name": "Meera Khan",
-  "text": "eu data residency: staging deploy failed on a migration lock, retried and it passed.",
+  "text": "eu data residency: flaky integration test again, quarantined it for now.",
   "ts": "1784279400.000000",
   "thread_ts": "1784279400.000000",
   "reply_count": 0

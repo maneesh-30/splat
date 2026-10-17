@@ -1,0 +1,59 @@
+[
+ {
+  "type": "message",
+  "user": "U004",
+  "user_name": "Priya Rao",
+  "text": "Proposal for the Feature flags for every release work: put every release behind a feature flag. Releases are batched because half-finished features cannot ship.",
+  "ts": "1781946600.000000",
+  "thread_ts": "1781946600.000000",
+  "reply_count": 6
+ },
+ {
+  "type": "message",
+  "user": "U008",
+  "user_name": "Isha Rao",
+  "text": "Worried about stale flags pile up. Can we roll it out to a few accounts first?",
+  "ts": "1781946660.000000",
+  "thread_ts": "1781946600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "Ok if we keep the old path around for a month.",
+  "ts": "1781946720.000000",
+  "thread_ts": "1781946600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "Chiming in from the next team over: this affects us too, please keep us posted.",
+  "ts": "1781946780.000000",
+  "thread_ts": "1781946600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U009",
+  "user_name": "Arjun Costa",
+  "text": "I can take the first ticket.",
+  "ts": "1781946840.000000",
+  "thread_ts": "1781946600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Did we consider the other option, 'Release branches per feature'?",
+  "ts": "1781946900.000000",
+  "thread_ts": "1781946600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1781946960.000000",
+  "thread_ts": "1781946600.000000"
+ }
+]

@@ -1,0 +1,35 @@
+[
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Proposal for the Automatic payment reminders work: send automatic payment reminders. Customers ask for a way to nudge late payers without writing emails themselves.",
+  "ts": "1779613800.000000",
+  "thread_ts": "1779613800.000000",
+  "reply_count": 3
+ },
+ {
+  "type": "message",
+  "user": "U018",
+  "user_name": "Riya Das",
+  "text": "Have we checked how 'Let customers schedule their own reminders' compares on cost?",
+  "ts": "1779613860.000000",
+  "thread_ts": "1779613800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "What happens if it doesn't work? Is there a clean rollback?",
+  "ts": "1779613920.000000",
+  "thread_ts": "1779613800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1779613980.000000",
+  "thread_ts": "1779613800.000000"
+ }
+]

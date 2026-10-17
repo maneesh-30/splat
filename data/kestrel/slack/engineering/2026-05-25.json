@@ -1,0 +1,20 @@
+[
+ {
+  "type": "message",
+  "user": "U026",
+  "user_name": "Nora Park",
+  "text": "Who can approve a new SaaS tool purchase?",
+  "ts": "1779700200.000000",
+  "thread_ts": "1779700200.000000",
+  "reply_count": 0
+ },
+ {
+  "type": "message",
+  "user": "U019",
+  "user_name": "Omar Berg",
+  "text": "What's the process for getting read access to production logs?",
+  "ts": "1779700800.000000",
+  "thread_ts": "1779700800.000000",
+  "reply_count": 0
+ }
+]

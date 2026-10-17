@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U023",
+  "user_name": "Felix Novak",
+  "text": "Proposal for the Two-plan pricing page work: simplify the pricing page to two plans. Four plans confuse new visitors, according to session recordings.",
+  "ts": "1787994600.000000",
+  "thread_ts": "1787994600.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U027",
+  "user_name": "Ivan Rossi",
+  "text": "+1, this has bitten us twice this quarter.",
+  "ts": "1787994660.000000",
+  "thread_ts": "1787994600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U014",
+  "user_name": "Tara Mehta",
+  "text": "Happy to review from our side.",
+  "ts": "1787994720.000000",
+  "thread_ts": "1787994600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U027",
+  "user_name": "Ivan Rossi",
+  "text": "My gut says new accounts sending an invoice in 7 days is driven by something else, but I don't have data either way.",
+  "ts": "1787994780.000000",
+  "thread_ts": "1787994600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1787994840.000000",
+  "thread_ts": "1787994600.000000"
+ }
+]

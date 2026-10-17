@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U016",
+  "user_name": "Zoya Ito",
+  "text": "Proposal for the Customer profile cache work: cache customer profile lookups. Customer profile lookups run on almost every invoice request.",
+  "ts": "1775207400.000000",
+  "thread_ts": "1775207400.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Not against it, but profiles change rarely but address changes must show immediately worries me more than people think.",
+  "ts": "1775207460.000000",
+  "thread_ts": "1775207400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U018",
+  "user_name": "Riya Das",
+  "text": "Let's make sure the on-call runbook is updated with this.",
+  "ts": "1775207520.000000",
+  "thread_ts": "1775207400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U023",
+  "user_name": "Felix Novak",
+  "text": "We depend on this path, so a heads-up before the rollout would help.",
+  "ts": "1775207580.000000",
+  "thread_ts": "1775207400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U017",
+  "user_name": "Dev Gupta",
+  "text": "Let's do it. Worst case we learn something.",
+  "ts": "1775207640.000000",
+  "thread_ts": "1775207400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1775207700.000000",
+  "thread_ts": "1775207400.000000"
+ }
+]

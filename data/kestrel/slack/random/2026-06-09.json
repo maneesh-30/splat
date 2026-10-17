@@ -1,0 +1,20 @@
+[
+ {
+  "type": "message",
+  "user": "U036",
+  "user_name": "Chloe Weber",
+  "text": "Book club this month: The Phoenix Project. Bring snacks.",
+  "ts": "1780996200.000000",
+  "thread_ts": "1780996200.000000",
+  "reply_count": 0
+ },
+ {
+  "type": "message",
+  "user": "U030",
+  "user_name": "Asha Lind",
+  "text": "Reminder that the office wifi is down for maintenance on Saturday.",
+  "ts": "1780996800.000000",
+  "thread_ts": "1780996800.000000",
+  "reply_count": 0
+ }
+]

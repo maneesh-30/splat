@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "precomputed dashboard aggregates: flaky integration test again, quarantined it for now.",
+  "ts": "1761124200.000000",
+  "thread_ts": "1761124200.000000",
+  "reply_count": 0
+ }
+]

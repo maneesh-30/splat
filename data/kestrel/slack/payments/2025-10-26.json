@@ -1,0 +1,59 @@
+[
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Proposal: send a weekly invoice digest email. Customers want a summary of unpaid invoices.",
+  "ts": "1761469800.000000",
+  "thread_ts": "1761469800.000000",
+  "reply_count": 6
+ },
+ {
+  "type": "message",
+  "user": "U014",
+  "user_name": "Tara Mehta",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1761469860.000000",
+  "thread_ts": "1761469800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Is there a customer asking for this, or is it us?",
+  "ts": "1761469920.000000",
+  "thread_ts": "1761469800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Sharing context: we saw something similar on our side last month.",
+  "ts": "1761469980.000000",
+  "thread_ts": "1761469800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U016",
+  "user_name": "Zoya Ito",
+  "text": "Ok if we keep the old path around for a month.",
+  "ts": "1761470040.000000",
+  "thread_ts": "1761469800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U018",
+  "user_name": "Riya Das",
+  "text": "Have we checked how 'A dashboard widget instead' compares on cost?",
+  "ts": "1761470100.000000",
+  "thread_ts": "1761469800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1761470160.000000",
+  "thread_ts": "1761469800.000000"
+ }
+]
