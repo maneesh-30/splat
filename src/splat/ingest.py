@@ -7,13 +7,11 @@ so the product never reads a half-imported graph.
 
 from __future__ import annotations
 
-import json
 import sys
-from pathlib import Path
 
 from falkordb.graph import Graph
 
-from splat import schema
+from splat import exports, schema
 from splat.db import Settings, connect
 
 BATCH = 300
@@ -112,9 +110,9 @@ def load(company: dict, graph: Graph) -> None:
         _run(graph, f"UNWIND $rows AS row {query}", rows(company))
 
 
-def main(path: str = "data/kestrel.json") -> None:
+def main(path: str = "data/kestrel") -> None:
     settings = Settings()
-    company = json.loads(Path(path).read_text(encoding="utf-8"))
+    company = exports.read(path)
     db = connect(settings)
     staging_name = f"{settings.graph}__loading"
     if staging_name in db.list_graphs():
