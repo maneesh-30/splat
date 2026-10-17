@@ -18,10 +18,14 @@ BASELINE_DAYS = 28
 OUTCOME_DAYS = 27
 WORKED_SHARE = 0.8   # reached at least 80% of the expected change
 PARTIAL_SHARE = 0.3  # moved the right way, but less than 80%
+SIMILAR_MIN_SHARE = 0.4  # drop matches far weaker than the best one
 
 
 STOPWORDS = {"a", "an", "the", "to", "of", "in", "on", "for", "and", "or", "is", "it", "we", "our",
-              "did", "does", "do", "be", "by", "with", "this", "that", "what", "why", "how", "should"}
+              "did", "does", "do", "be", "by", "with", "this", "that", "what", "why", "how", "should",
+              # words that frame a question rather than name the thing asked about
+              "plan", "plans", "planning", "thinking", "tried", "try", "before", "similar", "been", "has",
+              "have", "want", "considering", "idea", "anyone", "someone", "already", "something"}
 
 
 def search_terms(text: str) -> str:
@@ -198,8 +202,9 @@ class Tools:
         clean = search_terms(text)
         rows = self._q("similar_decisions", Q.SIMILAR_DECISIONS, text=clean) if clean else []
         seen, out = set(), []
+        top = max((r[2] for r in rows), default=0)
         for did, title, score in sorted(rows, key=lambda r: -r[2]):
-            if did in seen:
+            if did in seen or score < SIMILAR_MIN_SHARE * top:
                 continue
             seen.add(did)
             v = self.verdict(did)
@@ -231,7 +236,8 @@ class Tools:
         return [{"goal": {"id": r[0], "title": r[1], "cancelled_at": r[2]},
                  "initiative": {"id": r[3], "title": r[4], "status": r[5]},
                  "project": {"id": r[6], "title": r[7], "status": r[8]}, "tasks_after_cancel": r[9]}
-                for r in self._q("cancelled_goal_work", Q.CANCELLED_GOAL_WORK)]
+                for r in self._q("cancelled_goal_work", Q.CANCELLED_GOAL_WORK)
+                if r[8] == "active" or r[9] > 0]
 
     def unowned_metrics(self) -> list[dict]:
         return [{"id": r[0], "name": r[1], "former_owner": r[2], "owner_left_on": r[3], "goals": r[4]}
