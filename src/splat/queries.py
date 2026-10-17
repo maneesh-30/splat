@@ -3,6 +3,12 @@ choose one of the tools built on these fixed, parameterised, read-only queries."
 
 AS_OF = "MATCH (c:Company) RETURN c.as_of LIMIT 1"
 
+SOURCE = """
+MATCH (s:Source {id: $id})
+OPTIONAL MATCH (p:Person)-[:AUTHORED]->(s)
+RETURN s.id, s.kind, s.title, s.at, s.text, p.name
+"""
+
 FIND = """
 CALL db.idx.fulltext.queryNodes($label, $text) YIELD node, score
 RETURN node.id AS id, coalesce(node.title, node.statement) AS text, score
