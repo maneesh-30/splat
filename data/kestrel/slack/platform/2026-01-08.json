@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "Proposal for the EU data residency work: store eu customer data in frankfurt. Three EU prospects asked where their data would live.",
+  "ts": "1767863400.000000",
+  "thread_ts": "1767863400.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1767863460.000000",
+  "thread_ts": "1767863400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Did we consider the other option, 'Sign standard contractual clauses only'?",
+  "ts": "1767863520.000000",
+  "thread_ts": "1767863400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Worried about running a second region doubles on-call load. Can we roll it out to a few accounts first?",
+  "ts": "1767863580.000000",
+  "thread_ts": "1767863400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1767863640.000000",
+  "thread_ts": "1767863400.000000"
+ }
+]

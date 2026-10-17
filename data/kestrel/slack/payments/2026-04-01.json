@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U014",
+  "user_name": "Tara Mehta",
+  "text": "Proposal for the Customer profile cache work: cache customer profile lookups. Customer profile lookups run on almost every invoice request.",
+  "ts": "1775034600.000000",
+  "thread_ts": "1775034600.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1775034660.000000",
+  "thread_ts": "1775034600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1775034720.000000",
+  "thread_ts": "1775034600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U018",
+  "user_name": "Riya Das",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1775034780.000000",
+  "thread_ts": "1775034600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1775034840.000000",
+  "thread_ts": "1775034600.000000"
+ }
+]

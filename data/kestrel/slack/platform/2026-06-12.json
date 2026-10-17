@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U011",
+  "user_name": "Samir Costa",
+  "text": "Login page throws a 500 when the email has a trailing space.",
+  "ts": "1781255400.000000",
+  "thread_ts": "1781255400.000000",
+  "reply_count": 0
+ }
+]

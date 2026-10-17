@@ -1,0 +1,35 @@
+[
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Proposal: create a second on-call rotation. Platform engineers were paged 41 times in August.",
+  "ts": "1787562600.000000",
+  "thread_ts": "1787562600.000000",
+  "reply_count": 3
+ },
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "+1, this has bitten us twice this quarter.",
+  "ts": "1787562660.000000",
+  "thread_ts": "1787562600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U006",
+  "user_name": "Ananya Rossi",
+  "text": "We looked at 'Hire an SRE first' last quarter. Slower to ship, and it does not fix the root cause.",
+  "ts": "1787562720.000000",
+  "thread_ts": "1787562600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1787562780.000000",
+  "thread_ts": "1787562600.000000"
+ }
+]

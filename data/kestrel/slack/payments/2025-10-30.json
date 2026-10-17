@@ -1,0 +1,35 @@
+[
+ {
+  "type": "message",
+  "user": "U016",
+  "user_name": "Zoya Ito",
+  "text": "Proposal: send a weekly invoice digest email. Customers want a summary of unpaid invoices.",
+  "ts": "1761815400.000000",
+  "thread_ts": "1761815400.000000",
+  "reply_count": 3
+ },
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Did we consider the other option, 'A dashboard widget instead'?",
+  "ts": "1761815460.000000",
+  "thread_ts": "1761815400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "How sure are we this moves the target metric? Do we have numbers, or is this a hunch?",
+  "ts": "1761815520.000000",
+  "thread_ts": "1761815400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1761815580.000000",
+  "thread_ts": "1761815400.000000"
+ }
+]

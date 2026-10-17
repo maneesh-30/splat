@@ -1,0 +1,20 @@
+[
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Yesterday: reviewed PRs and fixed a flaky test. Today: pairing on weekly invoice statements. No blockers.",
+  "ts": "1789895400.000000",
+  "thread_ts": "1789895400.000000",
+  "reply_count": 0
+ },
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Still chasing the automatic payment reminders bug from Friday; will post findings.",
+  "ts": "1789896000.000000",
+  "thread_ts": "1789896000.000000",
+  "reply_count": 0
+ }
+]

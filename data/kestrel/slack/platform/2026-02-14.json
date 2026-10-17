@@ -1,0 +1,35 @@
+[
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "Proposal for the Merge queue for CI work: adopt a merge queue for ci. Pull requests sit for days and main breaks twice a week.",
+  "ts": "1771060200.000000",
+  "thread_ts": "1771060200.000000",
+  "reply_count": 3
+ },
+ {
+  "type": "message",
+  "user": "U006",
+  "user_name": "Ananya Rossi",
+  "text": "How sure are we this moves production deploys per week? Do we have numbers, or is this a hunch?",
+  "ts": "1771060260.000000",
+  "thread_ts": "1771060200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U009",
+  "user_name": "Arjun Costa",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1771060320.000000",
+  "thread_ts": "1771060200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1771060380.000000",
+  "thread_ts": "1771060200.000000"
+ }
+]

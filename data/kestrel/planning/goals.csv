@@ -1,0 +1,8 @@
+id,title,status,owner,metric,cancelled_at
+G-1,Cut API p95 latency below 300 ms,active,aarav.sharma@kestrel.example,api_p95_latency_ms,
+G-2,Reduce monthly churn to 2%,active,jonas.kapoor@kestrel.example,monthly_churn_pct,
+G-3,Grow self-serve signups by 40%,active,maya.das@kestrel.example,weekly_signups,
+G-4,Launch Kestrel in the EU,cancelled,sara.mehta@kestrel.example,eu_signups_weekly,2026-07-01
+G-5,Reach 99.9% invoice delivery,active,neha.moreau@kestrel.example,invoice_delivery_rate,
+G-6,Get customers paid within 14 days,active,karan.iyer@kestrel.example,days_to_paid,
+G-7,Ship to production twice as often,active,meera.khan@kestrel.example,deploys_weekly,

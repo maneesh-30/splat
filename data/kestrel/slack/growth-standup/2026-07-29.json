@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U027",
+  "user_name": "Ivan Rossi",
+  "text": "Yesterday: reviewed PRs and fixed a flaky test. Today: pairing on annual plan pricing. No blockers.",
+  "ts": "1785316200.000000",
+  "thread_ts": "1785316200.000000",
+  "reply_count": 0
+ }
+]

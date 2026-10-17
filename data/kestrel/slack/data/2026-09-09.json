@@ -1,0 +1,35 @@
+[
+ {
+  "type": "message",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "Proposal for the Precomputed dashboard aggregates work: precompute dashboard aggregates. Dashboard requests are slow and share the invoice API.",
+  "ts": "1788945000.000000",
+  "thread_ts": "1788945000.000000",
+  "reply_count": 3
+ },
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "Did we consider the other option, 'Move dashboards to the warehouse'?",
+  "ts": "1788945060.000000",
+  "thread_ts": "1788945000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U040",
+  "user_name": "Hana Nair",
+  "text": "How sure are we this moves api p95 latency? Do we have numbers, or is this a hunch?",
+  "ts": "1788945120.000000",
+  "thread_ts": "1788945000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U036",
+  "user_name": "Chloe Weber",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1788945180.000000",
+  "thread_ts": "1788945000.000000"
+ }
+]

@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Yesterday: reviewed PRs and fixed a flaky test. Today: pairing on invoice read cache. No blockers.",
+  "ts": "1789117800.000000",
+  "thread_ts": "1789117800.000000",
+  "reply_count": 0
+ }
+]

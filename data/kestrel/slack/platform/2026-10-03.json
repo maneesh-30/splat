@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "merge queue for ci: staging deploy failed on a migration lock, retried and it passed.",
+  "ts": "1791018600.000000",
+  "thread_ts": "1791018600.000000",
+  "reply_count": 0
+ }
+]

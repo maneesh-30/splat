@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U005",
+  "user_name": "Kabir Kapoor",
+  "text": "Proposal for the Async PDF rendering work: move pdf rendering to an async queue. Every invoice save renders a PDF synchronously before responding.",
+  "ts": "1763802600.000000",
+  "thread_ts": "1763802600.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1763802660.000000",
+  "thread_ts": "1763802600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U008",
+  "user_name": "Isha Rao",
+  "text": "How sure are we this moves api p95 latency? Do we have numbers, or is this a hunch?",
+  "ts": "1763802720.000000",
+  "thread_ts": "1763802600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1763802780.000000",
+  "thread_ts": "1763802600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1763802840.000000",
+  "thread_ts": "1763802600.000000"
+ }
+]

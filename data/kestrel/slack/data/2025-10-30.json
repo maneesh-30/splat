@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "Release notes: small fixes to precomputed dashboard aggregates, faster search in the admin panel.",
+  "ts": "1761815400.000000",
+  "thread_ts": "1761815400.000000",
+  "reply_count": 0
+ }
+]

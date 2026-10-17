@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Proposal for the Database connection pool tuning work: tune database connection pools. Latency spikes line up with connection pool saturation alerts.",
+  "ts": "1784452200.000000",
+  "thread_ts": "1784452200.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U004",
+  "user_name": "Priya Rao",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1784452260.000000",
+  "thread_ts": "1784452200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1784452320.000000",
+  "thread_ts": "1784452200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U011",
+  "user_name": "Samir Costa",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1784452380.000000",
+  "thread_ts": "1784452200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1784452440.000000",
+  "thread_ts": "1784452200.000000"
+ }
+]

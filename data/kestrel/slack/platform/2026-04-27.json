@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Cache hit rate on invoice reads is 94%, but p95 barely moved. Most slow requests are writes. Not sure the cache was the right lever.",
+  "ts": "1777281000.000000",
+  "thread_ts": "1777281000.000000",
+  "reply_count": 0
+ }
+]

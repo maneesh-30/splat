@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U013",
+  "user_name": "Karan Iyer",
+  "text": "Proposal for the Weekly invoice statements work: batch small invoices into weekly statements. Customers with many small invoices write in asking for one statement.",
+  "ts": "1783069800.000000",
+  "thread_ts": "1783069800.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U014",
+  "user_name": "Tara Mehta",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1783069860.000000",
+  "thread_ts": "1783069800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1783069920.000000",
+  "thread_ts": "1783069800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1783069980.000000",
+  "thread_ts": "1783069800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1783070040.000000",
+  "thread_ts": "1783069800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1783070100.000000",
+  "thread_ts": "1783069800.000000"
+ }
+]

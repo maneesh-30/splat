@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U024",
+  "user_name": "Sara Mehta",
+  "text": "Proposal for the Invoice template gallery work: add an invoice template gallery. New accounts open the invoice editor and leave without saving.",
+  "ts": "1771319400.000000",
+  "thread_ts": "1771319400.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1771319460.000000",
+  "thread_ts": "1771319400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1771319520.000000",
+  "thread_ts": "1771319400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "How sure are we this moves new accounts sending an invoice in 7 days? Do we have numbers, or is this a hunch?",
+  "ts": "1771319580.000000",
+  "thread_ts": "1771319400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1771319640.000000",
+  "thread_ts": "1771319400.000000"
+ }
+]

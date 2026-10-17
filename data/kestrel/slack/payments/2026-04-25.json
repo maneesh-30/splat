@@ -1,0 +1,35 @@
+[
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Proposal for the Email delivery provider switch work: switch email delivery provider. About 2% of invoice emails never arrive, and customers notice.",
+  "ts": "1777108200.000000",
+  "thread_ts": "1777108200.000000",
+  "reply_count": 3
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1777108260.000000",
+  "thread_ts": "1777108200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U013",
+  "user_name": "Karan Iyer",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1777108320.000000",
+  "thread_ts": "1777108200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1777108380.000000",
+  "thread_ts": "1777108200.000000"
+ }
+]

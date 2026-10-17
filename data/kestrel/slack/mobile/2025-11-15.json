@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U030",
+  "user_name": "Asha Lind",
+  "text": "Proposal for the Kotlin Multiplatform Android app work: rebuild the android app with kotlin multiplatform. Android crash-free sessions trail iOS by more than a point.",
+  "ts": "1763197800.000000",
+  "thread_ts": "1763197800.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U032",
+  "user_name": "Mira Bose",
+  "text": "We looked at 'Fix the top twenty crashes in place' last quarter. Slower to ship, and it does not fix the root cause.",
+  "ts": "1763197860.000000",
+  "thread_ts": "1763197800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U031",
+  "user_name": "Ravi Novak",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1763197920.000000",
+  "thread_ts": "1763197800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U034",
+  "user_name": "Ines Silva",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1763197980.000000",
+  "thread_ts": "1763197800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U034",
+  "user_name": "Ines Silva",
+  "text": "How sure are we this moves crash-free mobile sessions? Do we have numbers, or is this a hunch?",
+  "ts": "1763198040.000000",
+  "thread_ts": "1763197800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U029",
+  "user_name": "Hugo Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1763198100.000000",
+  "thread_ts": "1763197800.000000"
+ }
+]

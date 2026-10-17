@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "Left comments on the database connection pool tuning PR, mostly naming. Approve after those.",
+  "ts": "1771837800.000000",
+  "thread_ts": "1771837800.000000",
+  "reply_count": 0
+ }
+]

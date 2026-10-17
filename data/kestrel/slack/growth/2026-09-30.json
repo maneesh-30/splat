@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "Proposal for the Annual plan pricing work: retire the annual plan discount. The exit survey says price is not why customers leave.",
+  "ts": "1790759400.000000",
+  "thread_ts": "1790759400.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Did we consider the other option, 'Keep the discount for existing annual customers'?",
+  "ts": "1790759460.000000",
+  "thread_ts": "1790759400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U028",
+  "user_name": "Elif Bose",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1790759520.000000",
+  "thread_ts": "1790759400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U027",
+  "user_name": "Ivan Rossi",
+  "text": "Worried about annual signups dip. Can we roll it out to a few accounts first?",
+  "ts": "1790759580.000000",
+  "thread_ts": "1790759400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1790759640.000000",
+  "thread_ts": "1790759400.000000"
+ }
+]

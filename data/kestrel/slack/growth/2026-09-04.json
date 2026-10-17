@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U023",
+  "user_name": "Felix Novak",
+  "text": "Proposal for the Referral programme work: launch a referral programme. Word of mouth already drives a quarter of signups.",
+  "ts": "1788513000.000000",
+  "thread_ts": "1788513000.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Worried about referral fraud. Can we roll it out to a few accounts first?",
+  "ts": "1788513060.000000",
+  "thread_ts": "1788513000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U028",
+  "user_name": "Elif Bose",
+  "text": "Did we consider the other option, 'Partner with accounting firms'?",
+  "ts": "1788513120.000000",
+  "thread_ts": "1788513000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1788513180.000000",
+  "thread_ts": "1788513000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1788513240.000000",
+  "thread_ts": "1788513000.000000"
+ }
+]

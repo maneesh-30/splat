@@ -1,0 +1,74 @@
+key,type,summary,epic,assignee,created,resolved
+KES-101,Task,Cache GET /invoices responses,EP-1,samir.costa@kestrel.example,2026-03-07,2026-03-16
+KES-107,Task,Show 'PDF generating' state in the UI,EP-2,samir.costa@kestrel.example,2025-12-20,2026-01-07
+KES-108,Task,Retry failed renders,EP-2,meera.khan@kestrel.example,2025-12-15,2025-12-31
+KES-109,Task,Alert on queue depth,EP-2,priya.rao@kestrel.example,2025-12-13,2025-12-30
+KES-113,Task,Serve dashboard tiles from aggregates,EP-3,chloe.weber@kestrel.example,2026-10-12,
+KES-116,Task,Annual plan in billing system,EP-4,nora.park@kestrel.example,2026-10-07,
+KES-120,Task,Checklist component,EP-5,hugo.sharma@kestrel.example,2026-07-03,2026-07-09
+KES-121,Task,Track checklist completion events,EP-5,mira.bose@kestrel.example,2026-06-22,2026-07-06
+KES-126,Task,Move company details to onboarding,EP-6,ivan.rossi@kestrel.example,2026-02-19,2026-02-24
+KES-127,Task,A/B test old vs new form,EP-6,felix.novak@kestrel.example,2026-02-19,2026-03-07
+KES-128,Bug,Fix password strength meter on mobile,EP-6,ivan.rossi@kestrel.example,2026-01-31,2026-02-03
+KES-129,Task,Referral codes,EP-7,felix.novak@kestrel.example,2026-09-12,2026-09-25
+KES-132,Task,Fraud checks for self-referrals,EP-7,jonas.kapoor@kestrel.example,2026-10-08,
+KES-134,Task,Provision Frankfurt region,EP-8,priya.rao@kestrel.example,2026-09-23,2026-09-30
+KES-135,Task,Replicate customer tables to EU,EP-8,rohan.nair@kestrel.example,2026-09-22,2026-09-30
+KES-136,Task,Route EU accounts by region,EP-8,rohan.nair@kestrel.example,2026-07-11,2026-07-25
+KES-138,Task,Data processing addendum for EU customers,EP-8,ananya.rossi@kestrel.example,2026-09-15,2026-09-18
+KES-139,Task,Region switch in admin tools,EP-8,samir.costa@kestrel.example,2026-08-24,
+KES-141,Task,Measure pool saturation,EP-9,isha.rao@kestrel.example,2026-08-23,2026-09-06
+KES-144,Task,Tune idle connection timeout,EP-9,vikram.gupta@kestrel.example,2026-09-06,2026-09-13
+KES-146,Task,Warm up sending IPs,EP-10,lena.ito@kestrel.example,2026-05-31,2026-06-04
+KES-148,Task,Bounce webhook handling,EP-10,lena.ito@kestrel.example,2026-05-21,2026-06-02
+KES-149,Task,Remove old provider,EP-10,riya.das@kestrel.example,2026-05-25,2026-05-28
+KES-150,Task,Theme tokens for admin panel,EP-11,leo.iyer@kestrel.example,2026-05-12,2026-05-14
+KES-152,Task,Admin typography refresh,EP-11,ines.silva@kestrel.example,2026-05-30,
+KES-153,Task,Update admin icons,EP-11,leo.iyer@kestrel.example,2026-05-30,
+KES-156,Task,Profile cache metrics,EP-12,nikhil.moreau@kestrel.example,2026-04-27,2026-05-07
+KES-158,Task,Exponential backoff with jitter,EP-13,zoya.ito@kestrel.example,2026-04-07,2026-04-14
+KES-161,Task,Webhook retry dashboard,EP-13,karan.iyer@kestrel.example,2026-04-22,
+KES-162,Task,Generic retry helper,EP-14,ananya.rossi@kestrel.example,2026-05-20,2026-06-03
+KES-163,Task,Backoff policies config,EP-14,diya.khan@kestrel.example,2026-05-24,2026-06-07
+KES-167,Task,Revenue by plan chart,EP-15,arun.lind@kestrel.example,2026-05-24,2026-05-26
+KES-168,Task,MRR movement table,EP-15,marco.weber@kestrel.example,2026-05-17,2026-05-28
+KES-172,Task,Port invoice layout to Go templates,EP-16,arjun.costa@kestrel.example,2026-07-29,2026-08-03
+KES-173,Task,Font embedding in Go renderer,EP-16,diya.khan@kestrel.example,2026-07-28,2026-08-12
+KES-177,Task,Payment processor integration,EP-17,neha.moreau@kestrel.example,2026-01-05,2026-01-19
+KES-178,Task,Card fee settings,EP-17,omar.berg@kestrel.example,2025-12-26,2026-01-08
+KES-180,Task,Refunds for card payments,EP-17,riya.das@kestrel.example,2026-01-02,2026-01-05
+KES-183,Task,Stop reminders when paid,EP-18,riya.das@kestrel.example,2026-07-12,2026-07-30
+KES-185,Task,Enable merge queue on main,EP-19,aarav.sharma@kestrel.example,2026-02-26,2026-03-15
+KES-186,Task,Parallelise test shards,EP-19,isha.rao@kestrel.example,2026-03-23,2026-04-07
+KES-188,Task,Flaky test report,EP-19,meera.khan@kestrel.example,2026-03-23,2026-04-01
+KES-189,Task,Feature flag service,EP-20,kabir.kapoor@kestrel.example,2026-07-20,2026-07-30
+KES-190,Task,Flag SDK for backend,EP-20,arjun.costa@kestrel.example,2026-08-07,2026-08-22
+KES-191,Task,Flag SDK for web,EP-20,priya.rao@kestrel.example,2026-07-23,2026-08-03
+KES-193,Task,Flag audit log,EP-20,ananya.rossi@kestrel.example,2026-07-30,
+KES-195,Task,Kotlin networking layer,EP-21,leo.iyer@kestrel.example,2025-12-22,2026-01-08
+KES-197,Task,Port invoice editor,EP-21,mira.bose@kestrel.example,2025-12-20,2025-12-31
+KES-199,Task,Staged rollout to Android users,EP-21,asha.lind@kestrel.example,2025-12-21,2025-12-26
+KES-200,Task,Local invoice storage,EP-22,hugo.sharma@kestrel.example,2026-09-01,2026-09-07
+KES-201,Task,Sync queue for offline edits,EP-22,ines.silva@kestrel.example,2026-08-16,2026-08-22
+KES-202,Task,Conflict resolution rules,EP-22,hugo.sharma@kestrel.example,2026-08-20,2026-08-24
+KES-203,Task,Offline indicator,EP-22,yusuf.silva@kestrel.example,2026-09-14,
+KES-204,Task,Offline PDF preview,EP-22,yusuf.silva@kestrel.example,2026-09-29,
+KES-210,Task,Ten starter templates,EP-24,elif.bose@kestrel.example,2026-03-02,2026-03-15
+KES-211,Task,Template preview,EP-24,jonas.kapoor@kestrel.example,2026-03-21,2026-03-23
+KES-212,Task,Track template usage,EP-24,nora.park@kestrel.example,2026-04-03,2026-04-21
+KES-213,Task,Weekly statement generator,EP-25,nikhil.moreau@kestrel.example,2026-08-05,2026-08-08
+KES-216,Task,Opt-in setting,EP-25,omar.berg@kestrel.example,2026-07-18,2026-07-31
+KES-217,Task,Extract UI strings,EP-26,theo.park@kestrel.example,2026-02-20,2026-03-09
+KES-218,Task,German translations,EP-26,sara.mehta@kestrel.example,2026-02-23,2026-03-06
+KES-220,Task,Date and number formats,EP-26,nora.park@kestrel.example,2026-03-24,2026-03-29
+KES-221,Task,Warehouse cluster setup,EP-27,chloe.weber@kestrel.example,2026-05-17,2026-05-31
+KES-223,Task,Port finance queries,EP-27,hana.nair@kestrel.example,2026-06-04,2026-06-19
+KES-224,Task,Retire old analytics replica,EP-27,arun.lind@kestrel.example,2026-06-02,2026-06-16
+KES-225,Task,TOTP enrolment for admins,EP-28,diya.khan@kestrel.example,2026-05-12,2026-05-18
+KES-226,Task,Recovery codes,EP-28,arjun.costa@kestrel.example,2026-04-19,2026-05-02
+KES-227,Task,Enforce 2FA at login,EP-28,ananya.rossi@kestrel.example,2026-04-30,2026-05-16
+KES-231,Task,Link expiry rules,EP-29,lena.ito@kestrel.example,2026-05-21,
+KES-232,Task,Migrate CI runners to ARM,,ananya.rossi@kestrel.example,2026-08-13,
+KES-233,Task,Rebuild the internal status page,,arun.lind@kestrel.example,2026-08-23,
+KES-234,Task,Prototype a Slack bot for invoice lookups,,sara.mehta@kestrel.example,2026-08-19,
+KES-235,Task,Investigate slow admin search,,ines.silva@kestrel.example,2026-08-09,

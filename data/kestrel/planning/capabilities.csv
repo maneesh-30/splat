@@ -1,0 +1,5 @@
+id,name
+CAP-retry,Retry and backoff for outbound calls
+CAP-cache,Read caching
+CAP-reporting,Revenue reporting
+CAP-theme,UI theming

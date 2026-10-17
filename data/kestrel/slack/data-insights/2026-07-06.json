@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "Broke down June's bill by service. Analytics is 11% of it. Storage for invoice PDFs is 38% and egress is 22%. Moving analytics will not bend the curve.",
+  "ts": "1783329000.000000",
+  "thread_ts": "1783329000.000000",
+  "reply_count": 0
+ }
+]

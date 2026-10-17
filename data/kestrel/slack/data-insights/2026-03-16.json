@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U037",
+  "user_name": "Arun Lind",
+  "text": "Ran the numbers on invoice API traffic since the bulk import launch in January. Writes are now 58% of requests, up from 31% last year. It is not read-heavy any more, so caching reads will not move p95 much. Full breakdown in the notebook; happy to walk anyone through it.",
+  "ts": "1773652200.000000",
+  "thread_ts": "1773652200.000000",
+  "reply_count": 0
+ }
+]

@@ -1,0 +1,35 @@
+[
+ {
+  "type": "message",
+  "user": "U013",
+  "user_name": "Karan Iyer",
+  "text": "Proposal for the One-click card payments work: add one-click card payments to invoices. Invoices take 21 days to get paid on average; bank transfer is the only option.",
+  "ts": "1765357800.000000",
+  "thread_ts": "1765357800.000000",
+  "reply_count": 3
+ },
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Did we consider the other option, 'Partner with a payments aggregator'?",
+  "ts": "1765357860.000000",
+  "thread_ts": "1765357800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U017",
+  "user_name": "Dev Gupta",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1765357920.000000",
+  "thread_ts": "1765357800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1765357980.000000",
+  "thread_ts": "1765357800.000000"
+ }
+]

@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U036",
+  "user_name": "Chloe Weber",
+  "text": "revenue dashboard v2: staging deploy failed on a migration lock, retried and it passed.",
+  "ts": "1774084200.000000",
+  "thread_ts": "1774084200.000000",
+  "reply_count": 0
+ }
+]

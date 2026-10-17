@@ -1,0 +1,20 @@
+[
+ {
+  "type": "message",
+  "user": "U039",
+  "user_name": "Marco Weber",
+  "text": "Release notes: small fixes to precomputed dashboard aggregates, faster search in the admin panel.",
+  "ts": "1760951400.000000",
+  "thread_ts": "1760951400.000000",
+  "reply_count": 0
+ },
+ {
+  "type": "message",
+  "user": "U040",
+  "user_name": "Hana Nair",
+  "text": "Login page throws a 500 when the email has a trailing space.",
+  "ts": "1760952000.000000",
+  "thread_ts": "1760952000.000000",
+  "reply_count": 0
+ }
+]

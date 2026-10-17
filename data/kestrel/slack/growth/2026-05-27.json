@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U024",
+  "user_name": "Sara Mehta",
+  "text": "Proposal for the Annual plan pricing work: offer a 20% annual plan discount. Monthly churn is 3.1%, well above the 2% goal.",
+  "ts": "1779873000.000000",
+  "thread_ts": "1779873000.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1779873060.000000",
+  "thread_ts": "1779873000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U028",
+  "user_name": "Elif Bose",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1779873120.000000",
+  "thread_ts": "1779873000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1779873180.000000",
+  "thread_ts": "1779873000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1779873240.000000",
+  "thread_ts": "1779873000.000000"
+ }
+]

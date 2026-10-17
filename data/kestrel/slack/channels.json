@@ -1,0 +1,54 @@
+[
+ {
+  "id": "C001",
+  "name": "data"
+ },
+ {
+  "id": "C002",
+  "name": "data-insights"
+ },
+ {
+  "id": "C003",
+  "name": "data-standup"
+ },
+ {
+  "id": "C004",
+  "name": "engineering"
+ },
+ {
+  "id": "C005",
+  "name": "growth"
+ },
+ {
+  "id": "C006",
+  "name": "growth-standup"
+ },
+ {
+  "id": "C007",
+  "name": "mobile"
+ },
+ {
+  "id": "C008",
+  "name": "mobile-standup"
+ },
+ {
+  "id": "C009",
+  "name": "payments"
+ },
+ {
+  "id": "C010",
+  "name": "payments-standup"
+ },
+ {
+  "id": "C011",
+  "name": "platform"
+ },
+ {
+  "id": "C012",
+  "name": "platform-standup"
+ },
+ {
+  "id": "C013",
+  "name": "random"
+ }
+]

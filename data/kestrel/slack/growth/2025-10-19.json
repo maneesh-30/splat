@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U027",
+  "user_name": "Ivan Rossi",
+  "text": "annual plan pricing: staging deploy failed on a migration lock, retried and it passed.",
+  "ts": "1760865000.000000",
+  "thread_ts": "1760865000.000000",
+  "reply_count": 0
+ }
+]

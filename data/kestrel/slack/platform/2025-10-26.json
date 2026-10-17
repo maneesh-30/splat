@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U008",
+  "user_name": "Isha Rao",
+  "text": "Release notes: small fixes to admin two-factor authentication, faster search in the admin panel.",
+  "ts": "1761469800.000000",
+  "thread_ts": "1761469800.000000",
+  "reply_count": 0
+ }
+]

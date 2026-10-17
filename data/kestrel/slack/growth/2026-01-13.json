@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "Proposal for the Signup flow redesign work: shorten the signup form to three fields. Half of visitors who start the signup form abandon it.",
+  "ts": "1768295400.000000",
+  "thread_ts": "1768295400.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1768295460.000000",
+  "thread_ts": "1768295400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1768295520.000000",
+  "thread_ts": "1768295400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1768295580.000000",
+  "thread_ts": "1768295400.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1768295640.000000",
+  "thread_ts": "1768295400.000000"
+ }
+]

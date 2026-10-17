@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U015",
+  "user_name": "Nikhil Moreau",
+  "text": "Proposal for the Automatic payment reminders work: send automatic payment reminders. Customers ask for a way to nudge late payers without writing emails themselves.",
+  "ts": "1779873000.000000",
+  "thread_ts": "1779873000.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "How sure are we this moves average days until an invoice is paid? Do we have numbers, or is this a hunch?",
+  "ts": "1779873060.000000",
+  "thread_ts": "1779873000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1779873120.000000",
+  "thread_ts": "1779873000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U020",
+  "user_name": "Lena Ito",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1779873180.000000",
+  "thread_ts": "1779873000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1779873240.000000",
+  "thread_ts": "1779873000.000000"
+ }
+]

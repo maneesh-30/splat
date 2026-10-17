@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U025",
+  "user_name": "Theo Park",
+  "text": "Proposal for the Two-plan pricing page work: simplify the pricing page to two plans. Four plans confuse new visitors, according to session recordings.",
+  "ts": "1788081000.000000",
+  "thread_ts": "1788081000.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U024",
+  "user_name": "Sara Mehta",
+  "text": "+1, this has bitten us twice this quarter.",
+  "ts": "1788081060.000000",
+  "thread_ts": "1788081000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U023",
+  "user_name": "Felix Novak",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1788081120.000000",
+  "thread_ts": "1788081000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U022",
+  "user_name": "Maya Das",
+  "text": "We looked at 'Add a plan picker quiz' last quarter. Slower to ship, and it does not fix the root cause.",
+  "ts": "1788081180.000000",
+  "thread_ts": "1788081000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U021",
+  "user_name": "Jonas Kapoor",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1788081240.000000",
+  "thread_ts": "1788081000.000000"
+ }
+]

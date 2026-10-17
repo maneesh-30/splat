@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Proposal for the Feature flags for every release work: put every release behind a feature flag. Releases are batched because half-finished features cannot ship.",
+  "ts": "1782033000.000000",
+  "thread_ts": "1782033000.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "+1, this has bitten us twice this quarter.",
+  "ts": "1782033060.000000",
+  "thread_ts": "1782033000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Did we consider the other option, 'Release branches per feature'?",
+  "ts": "1782033120.000000",
+  "thread_ts": "1782033000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1782033180.000000",
+  "thread_ts": "1782033000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U006",
+  "user_name": "Ananya Rossi",
+  "text": "How sure are we this moves production deploys per week? Do we have numbers, or is this a hunch?",
+  "ts": "1782033240.000000",
+  "thread_ts": "1782033000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1782033300.000000",
+  "thread_ts": "1782033000.000000"
+ }
+]

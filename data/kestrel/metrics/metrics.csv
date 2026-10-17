@@ -1,0 +1,12 @@
+id,name,unit,better,owner
+api_p95_latency_ms,API p95 latency,ms,lower,aarav.sharma@kestrel.example
+monthly_churn_pct,Monthly churn,%,lower,jonas.kapoor@kestrel.example
+weekly_signups,Self-serve signups per week,signups,higher,maya.das@kestrel.example
+invoice_delivery_rate,Invoice delivery success,%,higher,neha.moreau@kestrel.example
+support_tickets_weekly,Support tickets per week,tickets,lower,tara.mehta@kestrel.example
+eu_signups_weekly,EU signups per week,signups,higher,sara.mehta@kestrel.example
+infra_cost_usd_monthly,Infrastructure cost per month,USD,lower,
+days_to_paid,Average days until an invoice is paid,days,lower,karan.iyer@kestrel.example
+deploys_weekly,Production deploys per week,deploys,higher,meera.khan@kestrel.example
+mobile_crash_free_pct,Crash-free mobile sessions,%,higher,hugo.sharma@kestrel.example
+activation_rate_pct,New accounts sending an invoice in 7 days,%,higher,felix.novak@kestrel.example

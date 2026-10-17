@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Proposal for the Admin two-factor authentication work: require two-factor authentication for admins. A customer's admin account was phished in March.",
+  "ts": "1775293800.000000",
+  "thread_ts": "1775293800.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U009",
+  "user_name": "Arjun Costa",
+  "text": "Did we consider the other option, 'Make it optional with a banner'?",
+  "ts": "1775293860.000000",
+  "thread_ts": "1775293800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U007",
+  "user_name": "Vikram Gupta",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1775293920.000000",
+  "thread_ts": "1775293800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "+1, this has bitten us twice this quarter.",
+  "ts": "1775293980.000000",
+  "thread_ts": "1775293800.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1775294040.000000",
+  "thread_ts": "1775293800.000000"
+ }
+]

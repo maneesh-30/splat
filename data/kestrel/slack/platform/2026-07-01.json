@@ -1,0 +1,43 @@
+[
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Proposal for the Invoice renderer rewrite in Go work: rewrite the invoice renderer in go. The renderer is the slowest service and hard to change.",
+  "ts": "1782897000.000000",
+  "thread_ts": "1782897000.000000",
+  "reply_count": 4
+ },
+ {
+  "type": "message",
+  "user": "U004",
+  "user_name": "Priya Rao",
+  "text": "Can we write down what success looks like before we start?",
+  "ts": "1782897060.000000",
+  "thread_ts": "1782897000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U008",
+  "user_name": "Isha Rao",
+  "text": "Is this the most important thing for this quarter?",
+  "ts": "1782897120.000000",
+  "thread_ts": "1782897000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "We looked at 'Optimise the existing renderer' last quarter. Slower to ship, and it does not fix the root cause.",
+  "ts": "1782897180.000000",
+  "thread_ts": "1782897000.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1782897240.000000",
+  "thread_ts": "1782897000.000000"
+ }
+]

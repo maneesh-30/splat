@@ -1,0 +1,51 @@
+[
+ {
+  "type": "message",
+  "user": "U002",
+  "user_name": "Meera Khan",
+  "text": "Proposal for the Invoice read cache work: cache invoice reads in redis. p95 latency on the invoice list has crept up to over 400 ms and is the top complaint from large accounts.",
+  "ts": "1769418600.000000",
+  "thread_ts": "1769418600.000000",
+  "reply_count": 5
+ },
+ {
+  "type": "message",
+  "user": "U010",
+  "user_name": "Diya Khan",
+  "text": "Agree. Let's not over-design it.",
+  "ts": "1769418660.000000",
+  "thread_ts": "1769418600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U003",
+  "user_name": "Rohan Nair",
+  "text": "Did we consider the other option, 'Add read replicas'?",
+  "ts": "1769418720.000000",
+  "thread_ts": "1769418600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U011",
+  "user_name": "Samir Costa",
+  "text": "Happy to pair on this, I touched that code last month.",
+  "ts": "1769418780.000000",
+  "thread_ts": "1769418600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "+1, this has bitten us twice this quarter.",
+  "ts": "1769418840.000000",
+  "thread_ts": "1769418600.000000"
+ },
+ {
+  "type": "message",
+  "user": "U001",
+  "user_name": "Aarav Sharma",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1769418900.000000",
+  "thread_ts": "1769418600.000000"
+ }
+]

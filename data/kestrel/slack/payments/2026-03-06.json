@@ -1,0 +1,35 @@
+[
+ {
+  "type": "message",
+  "user": "U014",
+  "user_name": "Tara Mehta",
+  "text": "Proposal for the Webhook retry library work: retry failed webhooks with exponential backoff. Support sees a wave of 'payment not recorded' tickets after every partner outage.",
+  "ts": "1772788200.000000",
+  "thread_ts": "1772788200.000000",
+  "reply_count": 3
+ },
+ {
+  "type": "message",
+  "user": "U017",
+  "user_name": "Dev Gupta",
+  "text": "Fine by me as long as we can turn it off quickly.",
+  "ts": "1772788260.000000",
+  "thread_ts": "1772788200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U017",
+  "user_name": "Dev Gupta",
+  "text": "Worried about retries could hammer a partner that is already down. Can we roll it out to a few accounts first?",
+  "ts": "1772788320.000000",
+  "thread_ts": "1772788200.000000"
+ },
+ {
+  "type": "message",
+  "user": "U012",
+  "user_name": "Neha Moreau",
+  "text": "Going ahead. Decision record to follow.",
+  "ts": "1772788380.000000",
+  "thread_ts": "1772788200.000000"
+ }
+]

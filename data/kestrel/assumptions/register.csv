@@ -1,0 +1,18 @@
+id,statement,status,evidence,changed_on
+A-1,"Invoice API traffic is read-heavy, so caching reads cuts latency",disproved,slack/data-insights/2026-03-16/1,2026-03-16
+A-2,PDF rendering is the largest share of API latency,supported,docs/notes/2025-11-17-latency-profile-of-the-invoice-api.md,
+A-3,Most failed invoice deliveries are bounces caused by the email provider,supported,slack/payments/2026-04-20/1,
+A-4,Price is the main reason customers churn,disproved,docs/notes/2026-09-21-churn-exit-survey-q3-summary.md,2026-09-21
+A-5,Customers churn because they never finish account setup,open,,
+A-6,A shorter signup form converts more visitors,open,,
+A-7,EU customers require their data to be stored in the EU,open,,
+A-8,Most support tickets come from failed webhook deliveries,open,,
+A-9,Connection pool exhaustion causes the latency spikes,open,,
+A-10,Customers pay late because paying is inconvenient,supported,docs/notes/2025-12-08-why-invoices-get-paid-late-30-customer-calls.md,
+A-11,Customers pay late because they forget,open,,
+A-12,Flaky tests are what slows down merging,disproved,docs/notes/2026-08-24-where-merge-time-actually-goes.md,2026-08-24
+A-13,Customers are annoyed by receiving many small invoices,open,,
+A-14,EU prospects stall because the product is only in English,open,,
+A-15,The old Android codebase causes most mobile crashes,open,,
+A-16,New accounts stall because they do not know how to design an invoice,open,,
+A-17,Analytics queries drive most of the infrastructure bill,disproved,slack/data-insights/2026-07-06/1,2026-07-06

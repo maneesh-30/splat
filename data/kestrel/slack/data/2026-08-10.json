@@ -1,0 +1,11 @@
+[
+ {
+  "type": "message",
+  "user": "U038",
+  "user_name": "Pooja Berg",
+  "text": "Release notes: small fixes to columnar analytics warehouse, faster search in the admin panel.",
+  "ts": "1786353000.000000",
+  "thread_ts": "1786353000.000000",
+  "reply_count": 0
+ }
+]
