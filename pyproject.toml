@@ -1,0 +1,19 @@
+[project]
+name = "splat"
+version = "0.1.0"
+description = "A company brain built on a FalkorDB knowledge graph"
+authors = [
+    { name = "maneesh-30", email = "nagamaneeshm@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "falkordb>=1.8.0",
+    "python-dotenv>=1.2.4",
+]
+
+[project.scripts]
+splat = "splat:main"
+
+[build-system]
+requires = ["uv_build>=0.10.7,<0.11.0"]
+build-backend = "uv_build"
