@@ -13,11 +13,12 @@ the same way they would be with real data.
 
 from __future__ import annotations
 
-import json
 import random
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
+
+from splat import exports
 
 SEED = 7
 AS_OF = date(2026, 10, 12)
@@ -68,11 +69,18 @@ class Company:
     names: dict[str, str] = field(default_factory=dict)
     _source_seq: int = 0
 
-    def source(self, kind: str, title: str, at: date, author: str, text: str, mentions=()) -> str:
+    def source(self, kind: str, title: str, at: date, author: str, text: str, mentions=(),
+               messages: list[tuple[str, str]] | None = None) -> str:
+        """Record a document or Slack thread. Slack threads keep their individual messages
+        so they can be exported in Slack's own format."""
         self._source_seq += 1
         sid = f"SRC-{self._source_seq:04d}"
+        if kind == "slack" and messages is None:
+            messages = [(author, text)]
         self.sources.append({"id": sid, "kind": kind, "title": title, "at": at.isoformat(),
-                             "author": author, "text": text, "mentions": [m for m in mentions if m]})
+                             "author": author, "text": text, "mentions": [m for m in mentions if m],
+                             "channel": title.split(":")[0].lstrip("#") if kind == "slack" else None,
+                             "messages": messages})
         return sid
 
     def lead(self, t: str) -> str:
@@ -206,35 +214,35 @@ def build_plan(c: Company) -> None:
     ]
     projects = [
         # id, title, team, initiative, status, capability
-        ("PR-1", "Invoice read cache", "platform", "I-1", "done", "CAP-cache"),
-        ("PR-2", "Async PDF rendering", "platform", "I-1", "done", None),
-        ("PR-3", "Precomputed dashboard aggregates", "data", "I-1", "active", "CAP-cache"),
-        ("PR-4", "Annual plan pricing", "growth", "I-2", "done", None),
-        ("PR-5", "Guided onboarding checklist", "mobile", "I-2", "done", None),
-        ("PR-6", "Signup flow redesign", "growth", "I-3", "done", None),
-        ("PR-7", "Referral programme", "growth", "I-3", "active", None),
-        ("PR-8", "EU data residency", "platform", "I-4", "active", None),
-        ("PR-9", "Database connection pool tuning", "platform", "I-1", "done", None),
-        ("PR-10", "Email delivery provider switch", "payments", "I-5", "done", None),
-        ("PR-11", "Admin panel theme refresh", "mobile", None, "active", "CAP-theme"),
-        ("PR-12", "Customer profile cache", "payments", "I-1", "done", "CAP-cache"),
-        ("PR-13", "Webhook retry library", "payments", "I-5", "active", "CAP-retry"),
-        ("PR-14", "Shared retry and backoff toolkit", "platform", "I-1", "active", "CAP-retry"),
-        ("PR-15", "Revenue dashboard v2", "data", None, "active", "CAP-reporting"),
-        ("PR-16", "Invoice renderer rewrite in Go", "platform", "I-1", "active", None),
-        ("PR-17", "One-click card payments", "payments", "I-6", "done", None),
-        ("PR-18", "Automatic payment reminders", "payments", "I-6", "done", None),
-        ("PR-19", "Merge queue for CI", "platform", "I-7", "done", None),
-        ("PR-20", "Feature flags for every release", "platform", "I-7", "active", None),
-        ("PR-21", "Kotlin Multiplatform Android app", "mobile", "I-8", "done", None),
-        ("PR-22", "Offline invoices on mobile", "mobile", "I-8", "active", None),
-        ("PR-23", "Two-plan pricing page", "growth", "I-3", "active", None),
-        ("PR-24", "Invoice template gallery", "growth", "I-3", "done", None),
-        ("PR-25", "Weekly invoice statements", "payments", "I-5", "done", None),
-        ("PR-26", "German localisation", "growth", "I-4", "done", None),
-        ("PR-27", "Columnar analytics warehouse", "data", None, "done", None),
-        ("PR-28", "Admin two-factor authentication", "platform", None, "done", None),
-        ("PR-29", "Payment links in reminder emails", "payments", "I-6", "active", None),
+        ("EP-1", "Invoice read cache", "platform", "I-1", "done", "CAP-cache"),
+        ("EP-2", "Async PDF rendering", "platform", "I-1", "done", None),
+        ("EP-3", "Precomputed dashboard aggregates", "data", "I-1", "active", "CAP-cache"),
+        ("EP-4", "Annual plan pricing", "growth", "I-2", "done", None),
+        ("EP-5", "Guided onboarding checklist", "mobile", "I-2", "done", None),
+        ("EP-6", "Signup flow redesign", "growth", "I-3", "done", None),
+        ("EP-7", "Referral programme", "growth", "I-3", "active", None),
+        ("EP-8", "EU data residency", "platform", "I-4", "active", None),
+        ("EP-9", "Database connection pool tuning", "platform", "I-1", "done", None),
+        ("EP-10", "Email delivery provider switch", "payments", "I-5", "done", None),
+        ("EP-11", "Admin panel theme refresh", "mobile", None, "active", "CAP-theme"),
+        ("EP-12", "Customer profile cache", "payments", "I-1", "done", "CAP-cache"),
+        ("EP-13", "Webhook retry library", "payments", "I-5", "active", "CAP-retry"),
+        ("EP-14", "Shared retry and backoff toolkit", "platform", "I-1", "active", "CAP-retry"),
+        ("EP-15", "Revenue dashboard v2", "data", None, "active", "CAP-reporting"),
+        ("EP-16", "Invoice renderer rewrite in Go", "platform", "I-1", "active", None),
+        ("EP-17", "One-click card payments", "payments", "I-6", "done", None),
+        ("EP-18", "Automatic payment reminders", "payments", "I-6", "done", None),
+        ("EP-19", "Merge queue for CI", "platform", "I-7", "done", None),
+        ("EP-20", "Feature flags for every release", "platform", "I-7", "active", None),
+        ("EP-21", "Kotlin Multiplatform Android app", "mobile", "I-8", "done", None),
+        ("EP-22", "Offline invoices on mobile", "mobile", "I-8", "active", None),
+        ("EP-23", "Two-plan pricing page", "growth", "I-3", "active", None),
+        ("EP-24", "Invoice template gallery", "growth", "I-3", "done", None),
+        ("EP-25", "Weekly invoice statements", "payments", "I-5", "done", None),
+        ("EP-26", "German localisation", "growth", "I-4", "done", None),
+        ("EP-27", "Columnar analytics warehouse", "data", None, "done", None),
+        ("EP-28", "Admin two-factor authentication", "platform", None, "done", None),
+        ("EP-29", "Payment links in reminder emails", "payments", "I-6", "active", None),
     ]
     for pid, title, t, ini, status, cap in projects:
         c.projects.append({"id": pid, "title": title, "team": t, "initiative": ini,
@@ -298,44 +306,44 @@ SUPPORTS = [
 def decision_specs() -> list[dict]:
     """Every decision: when, why, what it promised, and (hidden) what really happened."""
     return [
-        dict(id="D-101", title="Cache invoice reads in Redis", team="platform", project="PR-1",
+        dict(id="D-101", title="Cache invoice reads in Redis", team="platform", project="EP-1",
              decided="2026-02-02", shipped="2026-02-23", assumptions=["A-1"],
              expects=("api_p95_latency_ms", -0.30, "2026-04-20"), effect=-0.03,
              context="p95 latency on the invoice list has crept up to over 400 ms and is the top complaint from "
                      "large accounts.",
              alternatives=["Add read replicas", "Paginate the invoice list more aggressively"],
              risk="cache invalidation bugs could show stale invoice totals"),
-        dict(id="D-102", title="Cache customer profile lookups", team="payments", project="PR-12",
+        dict(id="D-102", title="Cache customer profile lookups", team="payments", project="EP-12",
              decided="2026-04-06", shipped="2026-04-27", assumptions=["A-1"],
              expects=("api_p95_latency_ms", -0.20, "2026-06-22"), effect=-0.02,
              context="Customer profile lookups run on almost every invoice request.",
              alternatives=["Denormalise profile fields onto invoices", "Do nothing until the Go rewrite"],
              risk="profiles change rarely but address changes must show immediately"),
-        dict(id="D-103", title="Precompute dashboard aggregates", team="data", project="PR-3",
+        dict(id="D-103", title="Precompute dashboard aggregates", team="data", project="EP-3",
              decided="2026-09-14", shipped="2026-10-05", assumptions=["A-1"],
              expects=("api_p95_latency_ms", -0.15, "2026-12-07"), effect=-0.01,
              context="Dashboard requests are slow and share the invoice API.",
              alternatives=["Move dashboards to the warehouse", "Cache the dashboard endpoint"],
              risk="aggregates may lag behind real-time invoice changes"),
-        dict(id="D-104", title="Move PDF rendering to an async queue", team="platform", project="PR-2",
+        dict(id="D-104", title="Move PDF rendering to an async queue", team="platform", project="EP-2",
              decided="2025-12-01", shipped="2025-12-22", assumptions=["A-2"],
              expects=("api_p95_latency_ms", -0.25, "2026-01-26"), effect=-0.28,
              context="Every invoice save renders a PDF synchronously before responding.",
              alternatives=["Buy a faster PDF library", "Render PDFs on the client"],
              risk="users may download a PDF before it is ready"),
-        dict(id="D-105", title="Switch email delivery provider", team="payments", project="PR-10",
+        dict(id="D-105", title="Switch email delivery provider", team="payments", project="EP-10",
              decided="2026-05-04", shipped="2026-05-25", assumptions=["A-3"],
              expects=("invoice_delivery_rate", 0.015, "2026-07-20"), effect=0.016,
              context="About 2% of invoice emails never arrive, and customers notice.",
              alternatives=["Negotiate higher limits with the current provider", "Send from two providers"],
              risk="sender reputation resets on a new provider"),
-        dict(id="D-106", title="Offer a 20% annual plan discount", team="growth", project="PR-4",
+        dict(id="D-106", title="Offer a 20% annual plan discount", team="growth", project="EP-4",
              decided="2026-06-01", shipped="2026-06-15", assumptions=["A-4"],
              expects=("monthly_churn_pct", -0.15, "2026-08-31"), effect=-0.06,
              context="Monthly churn is 3.1%, well above the 2% goal.",
              alternatives=["Lower the entry plan price", "Add a pause option instead of cancel"],
              risk="discounting trains customers to wait for deals"),
-        dict(id="D-107", title="Launch a guided onboarding checklist", team="mobile", project="PR-5",
+        dict(id="D-107", title="Launch a guided onboarding checklist", team="mobile", project="EP-5",
              decided="2026-06-08", shipped="2026-06-29", assumptions=["A-5"],
              expects=("monthly_churn_pct", -0.10, "2026-09-07"), effect=-0.14,
              context="Accounts that never connect a bank account churn at three times the average rate.",
@@ -345,35 +353,35 @@ def decision_specs() -> list[dict]:
              decided="2026-03-02", shipped="2026-04-06", assumptions=[], expects=None, effect=None,
              context="Dark mode is the most upvoted request on the mobile feedback board.",
              alternatives=["Follow the system theme only"], risk="every screen needs a second review"),
-        dict(id="D-109", title="Launch a referral programme", team="growth", project="PR-7",
+        dict(id="D-109", title="Launch a referral programme", team="growth", project="EP-7",
              decided="2026-09-07", shipped="2026-09-28", assumptions=[],
              expects=("weekly_signups", 0.15, "2026-12-14"), effect=0.03,
              context="Word of mouth already drives a quarter of signups.",
              alternatives=["Partner with accounting firms", "Paid search"], risk="referral fraud"),
-        dict(id="D-110", title="Rewrite the invoice renderer in Go", team="platform", project="PR-16",
+        dict(id="D-110", title="Rewrite the invoice renderer in Go", team="platform", project="EP-16",
              decided="2026-07-06", shipped=None, assumptions=["A-2"], expects=None, effect=None,
              context="The renderer is the slowest service and hard to change.",
              alternatives=["Optimise the existing renderer", "Use a hosted PDF service"],
              risk="a rewrite stalls feature work for a quarter"),
-        dict(id="D-111", title="Store EU customer data in Frankfurt", team="platform", project="PR-8",
+        dict(id="D-111", title="Store EU customer data in Frankfurt", team="platform", project="EP-8",
              decided="2026-01-12", shipped=None, assumptions=["A-7"],
              expects=("eu_signups_weekly", 1.0, "2026-09-28"), effect=None,
              context="Three EU prospects asked where their data would live.",
              alternatives=["Sign standard contractual clauses only", "Wait for a larger EU pipeline"],
              risk="running a second region doubles on-call load"),
         dict(id="D-112", title="Retry failed webhooks with exponential backoff", team="payments",
-             project="PR-13", decided="2026-03-09", shipped="2026-03-30", assumptions=["A-8"],
+             project="EP-13", decided="2026-03-09", shipped="2026-03-30", assumptions=["A-8"],
              expects=("support_tickets_weekly", -0.20, "2026-05-25"), effect=-0.22,
              context="Support sees a wave of 'payment not recorded' tickets after every partner outage.",
              alternatives=["Ask partners to poll instead", "Add a manual replay button"],
              risk="retries could hammer a partner that is already down"),
-        dict(id="D-113", title="Tune database connection pools", team="platform", project="PR-9",
+        dict(id="D-113", title="Tune database connection pools", team="platform", project="EP-9",
              decided="2026-07-27", shipped="2026-08-10", assumptions=["A-9"],
              expects=("api_p95_latency_ms", -0.10, "2026-09-21"), effect=-0.08,
              context="Latency spikes line up with connection pool saturation alerts.",
              alternatives=["Add a connection proxy", "Scale the database up"],
              risk="larger pools can overload the database"),
-        dict(id="D-114", title="Shorten the signup form to three fields", team="growth", project="PR-6",
+        dict(id="D-114", title="Shorten the signup form to three fields", team="growth", project="EP-6",
              decided="2026-01-19", shipped="2026-02-09", assumptions=["A-6"],
              expects=("weekly_signups", 0.20, "2026-04-06"), effect=0.09,
              context="Half of visitors who start the signup form abandon it.",
@@ -387,67 +395,67 @@ def decision_specs() -> list[dict]:
              decided="2026-02-16", shipped="2026-03-02", assumptions=[], expects=None, effect=None,
              supersedes="D-115", context="The weekly digest has a 4% open rate and drew complaints.",
              alternatives=["Kill the digest entirely"], risk="few people opt in"),
-        dict(id="D-117", title="Add one-click card payments to invoices", team="payments", project="PR-17",
+        dict(id="D-117", title="Add one-click card payments to invoices", team="payments", project="EP-17",
              decided="2025-12-15", shipped="2026-01-12", assumptions=["A-10"],
              expects=("days_to_paid", -0.20, "2026-03-09"), effect=-0.24,
              context="Invoices take 21 days to get paid on average; bank transfer is the only option.",
              alternatives=["Partner with a payments aggregator", "Offer early-payment discounts"],
              risk="card fees eat into small invoices"),
-        dict(id="D-118", title="Send automatic payment reminders", team="payments", project="PR-18",
+        dict(id="D-118", title="Send automatic payment reminders", team="payments", project="EP-18",
              decided="2026-06-01", shipped="2026-06-22", assumptions=["A-11"],
              expects=("days_to_paid", -0.10, "2026-08-17"), effect=-0.025,
              context="Customers ask for a way to nudge late payers without writing emails themselves.",
              alternatives=["Let customers schedule their own reminders"], risk="reminders feel pushy"),
-        dict(id="D-119", title="Adopt a merge queue for CI", team="platform", project="PR-19",
+        dict(id="D-119", title="Adopt a merge queue for CI", team="platform", project="EP-19",
              decided="2026-02-23", shipped="2026-03-16", assumptions=["A-12"],
              expects=("deploys_weekly", 0.30, "2026-05-11"), effect=0.36,
              context="Pull requests sit for days and main breaks twice a week.",
              alternatives=["Quarantine flaky tests", "Split the monorepo"],
              risk="a slow queue blocks everyone"),
-        dict(id="D-120", title="Put every release behind a feature flag", team="platform", project="PR-20",
+        dict(id="D-120", title="Put every release behind a feature flag", team="platform", project="EP-20",
              decided="2026-06-29", shipped="2026-07-13", assumptions=["A-12"],
              expects=("deploys_weekly", 0.15, "2026-09-07"), effect=0.07,
              context="Releases are batched because half-finished features cannot ship.",
              alternatives=["Release branches per feature"], risk="stale flags pile up"),
         dict(id="D-121", title="Rebuild the Android app with Kotlin Multiplatform", team="mobile",
-             project="PR-21", decided="2025-11-24", shipped="2026-03-30", assumptions=["A-15"],
+             project="EP-21", decided="2025-11-24", shipped="2026-03-30", assumptions=["A-15"],
              expects=("mobile_crash_free_pct", 0.006, "2026-05-25"), effect=0.0065,
              context="Android crash-free sessions trail iOS by more than a point.",
              alternatives=["Fix the top twenty crashes in place"], risk="a long rewrite with no visible wins"),
-        dict(id="D-122", title="Support offline invoices on mobile", team="mobile", project="PR-22",
+        dict(id="D-122", title="Support offline invoices on mobile", team="mobile", project="EP-22",
              decided="2026-08-10", shipped=None, assumptions=[], expects=None, effect=None,
              context="Tradespeople create invoices on site with no signal.",
              alternatives=["Save drafts locally only"], risk="sync conflicts"),
-        dict(id="D-123", title="Simplify the pricing page to two plans", team="growth", project="PR-23",
+        dict(id="D-123", title="Simplify the pricing page to two plans", team="growth", project="EP-23",
              decided="2026-09-07", shipped="2026-09-21", assumptions=[],
              expects=("activation_rate_pct", 0.10, "2026-11-30"), effect=0.02,
              context="Four plans confuse new visitors, according to session recordings.",
              alternatives=["Add a plan picker quiz"], risk="upsell paths get shorter"),
-        dict(id="D-124", title="Add an invoice template gallery", team="growth", project="PR-24",
+        dict(id="D-124", title="Add an invoice template gallery", team="growth", project="EP-24",
              decided="2026-02-23", shipped="2026-03-16", assumptions=["A-16"],
              expects=("activation_rate_pct", 0.08, "2026-05-11"), effect=0.09,
              context="New accounts open the invoice editor and leave without saving.",
              alternatives=["A design wizard", "Import invoices from a spreadsheet"],
              risk="templates look generic"),
-        dict(id="D-125", title="Require two-factor authentication for admins", team="platform", project="PR-28",
+        dict(id="D-125", title="Require two-factor authentication for admins", team="platform", project="EP-28",
              decided="2026-04-13", shipped="2026-05-04", assumptions=[], expects=None, effect=None,
              context="A customer's admin account was phished in March.",
              alternatives=["Make it optional with a banner"], risk="support load from locked-out admins"),
-        dict(id="D-126", title="Retire the annual plan discount", team="growth", project="PR-4",
+        dict(id="D-126", title="Retire the annual plan discount", team="growth", project="EP-4",
              decided="2026-10-05", shipped=None, assumptions=[], expects=None, effect=None,
              supersedes="D-106", context="The exit survey says price is not why customers leave.",
              alternatives=["Keep the discount for existing annual customers"], risk="annual signups dip"),
-        dict(id="D-127", title="Batch small invoices into weekly statements", team="payments", project="PR-25",
+        dict(id="D-127", title="Batch small invoices into weekly statements", team="payments", project="EP-25",
              decided="2026-07-06", shipped="2026-07-27", assumptions=["A-13"],
              expects=("support_tickets_weekly", -0.10, "2026-09-21"), effect=0.02,
              context="Customers with many small invoices write in asking for one statement.",
              alternatives=["Let customers choose per client"], risk="statements confuse accounting exports"),
-        dict(id="D-128", title="Translate the app into German", team="growth", project="PR-26",
+        dict(id="D-128", title="Translate the app into German", team="growth", project="EP-26",
              decided="2026-02-09", shipped="2026-04-13", assumptions=["A-14"],
              expects=("eu_signups_weekly", 0.50, "2026-06-08"), effect=0.08,
              context="German prospects make up most of the EU pipeline.",
              alternatives=["Hire a German-speaking salesperson first"], risk="support in German"),
-        dict(id="D-129", title="Move analytics to a columnar warehouse", team="data", project="PR-27",
+        dict(id="D-129", title="Move analytics to a columnar warehouse", team="data", project="EP-27",
              decided="2026-05-11", shipped="2026-06-01", assumptions=["A-17"],
              expects=("infra_cost_usd_monthly", -0.15, "2026-07-27"), effect=0.02,
              context="The infrastructure bill grew 12% in March.",
@@ -497,25 +505,28 @@ def build_decisions(c: Company) -> list[tuple[str, date, float]]:
         reasons = "; ".join(by_id[a]["statement"] for a in spec["assumptions"]) or "not written down"
 
         # The proposal thread: a few people, some agreement, some pushback.
-        lines = [f"{c.first(proposer)}: Proposal: {spec['title'].lower()}. {spec['context']}"]
+        project_title = next((p["title"] for p in c.projects if p["id"] == spec["project"]), None)
+        opener = f"Proposal for the {project_title} work: " if project_title else "Proposal: "
+        messages = [(proposer, f"{opener}{spec['title'].lower()}. {spec['context']}")]
         for reply in c.rng.sample(REPLIES, c.rng.randint(2, 4)):
             speaker = c.rng.choice([p for p in c.team[spec["team"]] if p != proposer])
-            lines.append(f"{c.first(speaker)}: " + reply.format(metric=metric_text, risk=spec["risk"],
-                                                               alt=spec["alternatives"][0]))
-        lines.append(f"{c.first(decider)}: Going ahead. Decision record to follow.")
+            messages.append((speaker, reply.format(metric=metric_text, risk=spec["risk"],
+                                                   alt=spec["alternatives"][0])))
+        messages.append((decider, "Going ahead. Decision record to follow."))
         thread = c.source("slack", f"#{spec['team']}: {spec['title'].lower()}",
                           d(spec["decided"]) - timedelta(days=c.rng.randint(3, 9)), proposer,
-                          "\n".join(lines), mentions=[spec["project"]])
+                          "\n".join(f"{c.first(who)}: {msg}" for who, msg in messages),
+                          mentions=[spec["project"]], messages=messages)
 
         doc = c.source(
             "doc", f"Decision record {spec['id']}: {spec['title']}", d(spec["decided"]), decider,
             f"Context: {spec['context']}\n"
             f"Decision: {spec['title']}.\n"
-            f"Why: {reasons}.\n"
+            + (f"Project: {project_title}.\n" if project_title else "")
+            + f"Why: {reasons}.\n"
             f"Options considered and not chosen: {'; '.join(spec['alternatives'])}.\n"
             f"Risks: {spec['risk']}.\n"
-            f"{success}\n"
-            f"Discussed in {thread}.",
+            f"{success}",
             mentions=[spec["project"]])
 
         c.decisions.append({
@@ -538,10 +549,10 @@ def build_decisions(c: Company) -> list[tuple[str, date, float]]:
     # Follow-ups people posted after results came in.
     c.source("slack", "#platform: async PDF results", d("2026-02-02"), c.lead("platform"),
              "Async PDF rendering has been live for six weeks. p95 on invoice saves is down by about a "
-             "quarter and the timeout alerts have stopped.", mentions=["PR-2"])
+             "quarter and the timeout alerts have stopped.", mentions=["EP-2"])
     c.source("slack", "#platform: invoice cache, eight weeks in", d("2026-04-27"), c.member("platform", 2),
              "Cache hit rate on invoice reads is 94%, but p95 barely moved. Most slow requests are writes. "
-             "Not sure the cache was the right lever.", mentions=["PR-1"])
+             "Not sure the cache was the right lever.", mentions=["EP-1"])
     return effects
 
 
@@ -550,57 +561,57 @@ def build_decisions(c: Company) -> list[tuple[str, date, float]]:
 # ---------------------------------------------------------------------------
 
 TASKS = {
-    "PR-1": ["Add Redis cluster to staging", "Cache GET /invoices responses", "Invalidate cache on invoice update",
+    "EP-1": ["Add Redis cluster to staging", "Cache GET /invoices responses", "Invalidate cache on invoice update",
              "Handle cache stampede on the invoice list", "Add cache hit rate panel", "Load test cached endpoints"],
-    "PR-2": ["Move PDF rendering onto the job queue", "Show 'PDF generating' state in the UI",
+    "EP-2": ["Move PDF rendering onto the job queue", "Show 'PDF generating' state in the UI",
              "Retry failed renders", "Alert on queue depth", "Remove synchronous render path"],
-    "PR-3": ["Design aggregate tables", "Nightly aggregate job", "Serve dashboard tiles from aggregates",
+    "EP-3": ["Design aggregate tables", "Nightly aggregate job", "Serve dashboard tiles from aggregates",
              "Backfill twelve months of aggregates", "Compare aggregates against live totals"],
-    "PR-4": ["Annual plan in billing system", "Discount banner on upgrade page", "Proration for mid-cycle switch",
+    "EP-4": ["Annual plan in billing system", "Discount banner on upgrade page", "Proration for mid-cycle switch",
              "Annual plan invoices and receipts"],
-    "PR-5": ["Checklist component", "Track checklist completion events", "Bank connection step",
+    "EP-5": ["Checklist component", "Track checklist completion events", "Bank connection step",
              "First invoice step", "Email nudge for unfinished checklists"],
-    "PR-6": ["Cut signup form to three fields", "Move company details to onboarding", "A/B test old vs new form",
+    "EP-6": ["Cut signup form to three fields", "Move company details to onboarding", "A/B test old vs new form",
              "Fix password strength meter on mobile"],
-    "PR-7": ["Referral codes", "Referral reward ledger", "Referral landing page", "Fraud checks for self-referrals",
+    "EP-7": ["Referral codes", "Referral reward ledger", "Referral landing page", "Fraud checks for self-referrals",
              "Share sheet on mobile"],
-    "PR-8": ["Provision Frankfurt region", "Replicate customer tables to EU", "Route EU accounts by region",
+    "EP-8": ["Provision Frankfurt region", "Replicate customer tables to EU", "Route EU accounts by region",
              "EU backups and restore drill", "Data processing addendum for EU customers",
              "Region switch in admin tools", "EU status page"],
-    "PR-9": ["Measure pool saturation", "Raise pool size on API nodes", "Add pool wait time metric",
+    "EP-9": ["Measure pool saturation", "Raise pool size on API nodes", "Add pool wait time metric",
              "Tune idle connection timeout"],
-    "PR-10": ["Set up new provider domains", "Warm up sending IPs", "Dual-send during migration",
+    "EP-10": ["Set up new provider domains", "Warm up sending IPs", "Dual-send during migration",
               "Bounce webhook handling", "Remove old provider"],
-    "PR-11": ["Theme tokens for admin panel", "Dark palette for admin tables", "Admin typography refresh",
+    "EP-11": ["Theme tokens for admin panel", "Dark palette for admin tables", "Admin typography refresh",
               "Update admin icons"],
-    "PR-12": ["Cache customer profiles", "Invalidate profile cache on edit", "Profile cache metrics"],
-    "PR-13": ["Retry queue for outbound webhooks", "Exponential backoff with jitter", "Dead letter queue",
+    "EP-12": ["Cache customer profiles", "Invalidate profile cache on edit", "Profile cache metrics"],
+    "EP-13": ["Retry queue for outbound webhooks", "Exponential backoff with jitter", "Dead letter queue",
               "Replay webhooks from admin", "Webhook retry dashboard"],
-    "PR-14": ["Generic retry helper", "Backoff policies config", "Circuit breaker for outbound HTTP",
+    "EP-14": ["Generic retry helper", "Backoff policies config", "Circuit breaker for outbound HTTP",
               "Retry toolkit docs", "Adopt toolkit in email sender"],
-    "PR-15": ["Revenue by plan chart", "MRR movement table", "Export revenue to CSV", "Revenue dashboard permissions"],
-    "PR-16": ["Go renderer skeleton", "Port invoice layout to Go templates", "Font embedding in Go renderer",
+    "EP-15": ["Revenue by plan chart", "MRR movement table", "Export revenue to CSV", "Revenue dashboard permissions"],
+    "EP-16": ["Go renderer skeleton", "Port invoice layout to Go templates", "Font embedding in Go renderer",
               "Golden file tests for PDFs", "Shadow traffic to Go renderer"],
-    "PR-17": ["Card payment button on invoices", "Payment processor integration", "Card fee settings",
+    "EP-17": ["Card payment button on invoices", "Payment processor integration", "Card fee settings",
               "Mark invoice paid on successful charge", "Refunds for card payments"],
-    "PR-18": ["Reminder schedule settings", "Reminder email template", "Stop reminders when paid",
+    "EP-18": ["Reminder schedule settings", "Reminder email template", "Stop reminders when paid",
               "Reminder opt-out link"],
-    "PR-19": ["Enable merge queue on main", "Parallelise test shards", "Queue status in chat", "Flaky test report"],
-    "PR-20": ["Feature flag service", "Flag SDK for backend", "Flag SDK for web", "Stale flag report",
+    "EP-19": ["Enable merge queue on main", "Parallelise test shards", "Queue status in chat", "Flaky test report"],
+    "EP-20": ["Feature flag service", "Flag SDK for backend", "Flag SDK for web", "Stale flag report",
               "Flag audit log"],
-    "PR-21": ["Shared invoice model module", "Kotlin networking layer", "Port invoice list screen",
+    "EP-21": ["Shared invoice model module", "Kotlin networking layer", "Port invoice list screen",
               "Port invoice editor", "Crash reporting for new app", "Staged rollout to Android users"],
-    "PR-22": ["Local invoice storage", "Sync queue for offline edits", "Conflict resolution rules",
+    "EP-22": ["Local invoice storage", "Sync queue for offline edits", "Conflict resolution rules",
               "Offline indicator", "Offline PDF preview"],
-    "PR-23": ["Two-plan pricing page design", "Plan comparison table", "Migrate legacy plan names",
+    "EP-23": ["Two-plan pricing page design", "Plan comparison table", "Migrate legacy plan names",
               "Pricing page experiment"],
-    "PR-24": ["Template gallery UI", "Ten starter templates", "Template preview", "Track template usage"],
-    "PR-25": ["Weekly statement generator", "Statement email", "Statement PDF layout", "Opt-in setting"],
-    "PR-26": ["Extract UI strings", "German translations", "German invoice templates", "Date and number formats"],
-    "PR-27": ["Warehouse cluster setup", "Daily export of invoice events", "Port finance queries",
+    "EP-24": ["Template gallery UI", "Ten starter templates", "Template preview", "Track template usage"],
+    "EP-25": ["Weekly statement generator", "Statement email", "Statement PDF layout", "Opt-in setting"],
+    "EP-26": ["Extract UI strings", "German translations", "German invoice templates", "Date and number formats"],
+    "EP-27": ["Warehouse cluster setup", "Daily export of invoice events", "Port finance queries",
               "Retire old analytics replica"],
-    "PR-28": ["TOTP enrolment for admins", "Recovery codes", "Enforce 2FA at login", "Admin 2FA support runbook"],
-    "PR-29": ["Payment link in reminder email", "Track link clicks", "Link expiry rules"],
+    "EP-28": ["TOTP enrolment for admins", "Recovery codes", "Enforce 2FA at login", "Admin 2FA support runbook"],
+    "EP-29": ["Payment link in reminder email", "Track link clicks", "Link expiry rules"],
 }
 
 STRAY_TASKS = [
@@ -637,7 +648,7 @@ def build_tasks(c: Company) -> None:
         for k, title in enumerate(titles):
             seq += 1
             created = start + timedelta(days=c.rng.randint(0, 35) + 4 * k)
-            if p["id"] == "PR-8":
+            if p["id"] == "EP-8":
                 # EU work keeps going after the EU goal was cancelled.
                 created = d("2026-07-01") + timedelta(days=c.rng.randint(5, 90))
             closed = created + timedelta(days=c.rng.randint(2, 18))
@@ -717,13 +728,13 @@ def to_json(c: Company) -> dict:
     }
 
 
-def main(out: str = "data/kestrel.json") -> None:
+def main(out: str = "data/kestrel") -> None:
     company = build()
-    path = Path(out)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(to_json(company), indent=1), encoding="utf-8")
-    print(f"Wrote {path}: {len(company.decisions)} decisions, {len(company.tasks)} tasks, "
-          f"{len(company.readings)} readings, {len(company.sources)} sources")
+    root = exports.write(to_json(company), out)
+    files = sum(1 for p in Path(root).rglob("*") if p.is_file())
+    print(f"Wrote {files} export files to {root}: {len(company.decisions)} decisions, {len(company.tasks)} "
+          f"tickets and pull requests, {len(company.readings)} metric readings, {len(company.sources)} "
+          "Slack threads and documents")
 
 
 if __name__ == "__main__":
