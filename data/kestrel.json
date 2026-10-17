@@ -1,0 +1,4421 @@
+{
+ "company": "Kestrel",
+ "as_of": "2026-10-12",
+ "seed": 7,
+ "teams": [
+  {
+   "id": "platform",
+   "name": "Platform"
+  },
+  {
+   "id": "payments",
+   "name": "Payments"
+  },
+  {
+   "id": "growth",
+   "name": "Growth"
+  },
+  {
+   "id": "mobile",
+   "name": "Mobile"
+  },
+  {
+   "id": "data",
+   "name": "Data"
+  }
+ ],
+ "people": [
+  {
+   "id": "P01",
+   "name": "Aarav Sharma",
+   "email": "aarav.sharma@kestrel.example"
+  },
+  {
+   "id": "P02",
+   "name": "Meera Khan",
+   "email": "meera.khan@kestrel.example"
+  },
+  {
+   "id": "P03",
+   "name": "Rohan Nair",
+   "email": "rohan.nair@kestrel.example"
+  },
+  {
+   "id": "P04",
+   "name": "Priya Rao",
+   "email": "priya.rao@kestrel.example"
+  },
+  {
+   "id": "P05",
+   "name": "Kabir Kapoor",
+   "email": "kabir.kapoor@kestrel.example"
+  },
+  {
+   "id": "P06",
+   "name": "Ananya Rossi",
+   "email": "ananya.rossi@kestrel.example"
+  },
+  {
+   "id": "P07",
+   "name": "Vikram Gupta",
+   "email": "vikram.gupta@kestrel.example"
+  },
+  {
+   "id": "P08",
+   "name": "Isha Rao",
+   "email": "isha.rao@kestrel.example"
+  },
+  {
+   "id": "P09",
+   "name": "Arjun Costa",
+   "email": "arjun.costa@kestrel.example"
+  },
+  {
+   "id": "P10",
+   "name": "Diya Khan",
+   "email": "diya.khan@kestrel.example"
+  },
+  {
+   "id": "P11",
+   "name": "Samir Costa",
+   "email": "samir.costa@kestrel.example"
+  },
+  {
+   "id": "P12",
+   "name": "Neha Moreau",
+   "email": "neha.moreau@kestrel.example"
+  },
+  {
+   "id": "P13",
+   "name": "Karan Iyer",
+   "email": "karan.iyer@kestrel.example"
+  },
+  {
+   "id": "P14",
+   "name": "Tara Mehta",
+   "email": "tara.mehta@kestrel.example"
+  },
+  {
+   "id": "P15",
+   "name": "Nikhil Moreau",
+   "email": "nikhil.moreau@kestrel.example"
+  },
+  {
+   "id": "P16",
+   "name": "Zoya Ito",
+   "email": "zoya.ito@kestrel.example"
+  },
+  {
+   "id": "P17",
+   "name": "Dev Gupta",
+   "email": "dev.gupta@kestrel.example"
+  },
+  {
+   "id": "P18",
+   "name": "Riya Das",
+   "email": "riya.das@kestrel.example"
+  },
+  {
+   "id": "P19",
+   "name": "Omar Berg",
+   "email": "omar.berg@kestrel.example"
+  },
+  {
+   "id": "P20",
+   "name": "Lena Ito",
+   "email": "lena.ito@kestrel.example"
+  },
+  {
+   "id": "P21",
+   "name": "Jonas Kapoor",
+   "email": "jonas.kapoor@kestrel.example"
+  },
+  {
+   "id": "P22",
+   "name": "Maya Das",
+   "email": "maya.das@kestrel.example"
+  },
+  {
+   "id": "P23",
+   "name": "Felix Novak",
+   "email": "felix.novak@kestrel.example"
+  },
+  {
+   "id": "P24",
+   "name": "Sara Mehta",
+   "email": "sara.mehta@kestrel.example"
+  },
+  {
+   "id": "P25",
+   "name": "Theo Park",
+   "email": "theo.park@kestrel.example"
+  },
+  {
+   "id": "P26",
+   "name": "Nora Park",
+   "email": "nora.park@kestrel.example"
+  },
+  {
+   "id": "P27",
+   "name": "Ivan Rossi",
+   "email": "ivan.rossi@kestrel.example"
+  },
+  {
+   "id": "P28",
+   "name": "Elif Bose",
+   "email": "elif.bose@kestrel.example"
+  },
+  {
+   "id": "P29",
+   "name": "Hugo Sharma",
+   "email": "hugo.sharma@kestrel.example"
+  },
+  {
+   "id": "P30",
+   "name": "Asha Lind",
+   "email": "asha.lind@kestrel.example"
+  },
+  {
+   "id": "P31",
+   "name": "Ravi Novak",
+   "email": "ravi.novak@kestrel.example"
+  },
+  {
+   "id": "P32",
+   "name": "Mira Bose",
+   "email": "mira.bose@kestrel.example"
+  },
+  {
+   "id": "P33",
+   "name": "Leo Iyer",
+   "email": "leo.iyer@kestrel.example"
+  },
+  {
+   "id": "P34",
+   "name": "Ines Silva",
+   "email": "ines.silva@kestrel.example"
+  },
+  {
+   "id": "P35",
+   "name": "Yusuf Silva",
+   "email": "yusuf.silva@kestrel.example"
+  },
+  {
+   "id": "P36",
+   "name": "Chloe Weber",
+   "email": "chloe.weber@kestrel.example"
+  },
+  {
+   "id": "P37",
+   "name": "Arun Lind",
+   "email": "arun.lind@kestrel.example"
+  },
+  {
+   "id": "P38",
+   "name": "Pooja Berg",
+   "email": "pooja.berg@kestrel.example"
+  },
+  {
+   "id": "P39",
+   "name": "Marco Weber",
+   "email": "marco.weber@kestrel.example"
+  },
+  {
+   "id": "P40",
+   "name": "Hana Nair",
+   "email": "hana.nair@kestrel.example"
+  }
+ ],
+ "memberships": [
+  {
+   "person": "P01",
+   "team": "platform",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P02",
+   "team": "payments",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P03",
+   "team": "growth",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P04",
+   "team": "mobile",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P05",
+   "team": "data",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P06",
+   "team": "platform",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P07",
+   "team": "payments",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P08",
+   "team": "growth",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P09",
+   "team": "mobile",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P10",
+   "team": "data",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P11",
+   "team": "platform",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P12",
+   "team": "payments",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P13",
+   "team": "growth",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P14",
+   "team": "mobile",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P15",
+   "team": "data",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P16",
+   "team": "platform",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P17",
+   "team": "payments",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P18",
+   "team": "growth",
+   "since": "2025-10-13",
+   "until": "2026-05-29"
+  },
+  {
+   "person": "P19",
+   "team": "mobile",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P20",
+   "team": "data",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P21",
+   "team": "platform",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P22",
+   "team": "payments",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P23",
+   "team": "growth",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P24",
+   "team": "mobile",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P25",
+   "team": "data",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P26",
+   "team": "platform",
+   "since": "2025-10-13",
+   "until": "2026-08-14"
+  },
+  {
+   "person": "P27",
+   "team": "payments",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P28",
+   "team": "growth",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P29",
+   "team": "mobile",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P30",
+   "team": "data",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P31",
+   "team": "platform",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P32",
+   "team": "payments",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P33",
+   "team": "growth",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P34",
+   "team": "mobile",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P35",
+   "team": "data",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P36",
+   "team": "platform",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P37",
+   "team": "payments",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P38",
+   "team": "growth",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P39",
+   "team": "mobile",
+   "since": "2025-10-13",
+   "until": null
+  },
+  {
+   "person": "P40",
+   "team": "data",
+   "since": "2025-10-13",
+   "until": null
+  }
+ ],
+ "goals": [
+  {
+   "id": "G-1",
+   "title": "Cut API p95 latency below 300 ms",
+   "status": "active",
+   "owner": "P01",
+   "metric": "api_p95_latency_ms",
+   "cancelled_at": null
+  },
+  {
+   "id": "G-2",
+   "title": "Reduce monthly churn to 2%",
+   "status": "active",
+   "owner": "P03",
+   "metric": "monthly_churn_pct",
+   "cancelled_at": null
+  },
+  {
+   "id": "G-3",
+   "title": "Grow self-serve signups by 40%",
+   "status": "active",
+   "owner": "P08",
+   "metric": "weekly_signups",
+   "cancelled_at": null
+  },
+  {
+   "id": "G-4",
+   "title": "Launch Kestrel in the EU",
+   "status": "cancelled",
+   "owner": "P18",
+   "metric": "eu_signups_weekly",
+   "cancelled_at": "2026-07-01"
+  },
+  {
+   "id": "G-5",
+   "title": "Reach 99.9% invoice delivery",
+   "status": "active",
+   "owner": "P02",
+   "metric": "invoice_delivery_rate",
+   "cancelled_at": null
+  }
+ ],
+ "initiatives": [
+  {
+   "id": "I-1",
+   "title": "Latency programme",
+   "goal": "G-1",
+   "status": "active"
+  },
+  {
+   "id": "I-2",
+   "title": "Retention programme",
+   "goal": "G-2",
+   "status": "active"
+  },
+  {
+   "id": "I-3",
+   "title": "Growth loops",
+   "goal": "G-3",
+   "status": "active"
+  },
+  {
+   "id": "I-4",
+   "title": "EU expansion",
+   "goal": "G-4",
+   "status": "active"
+  },
+  {
+   "id": "I-5",
+   "title": "Delivery reliability",
+   "goal": "G-5",
+   "status": "active"
+  }
+ ],
+ "projects": [
+  {
+   "id": "PR-1",
+   "title": "Invoice read cache",
+   "team": "platform",
+   "initiative": "I-1",
+   "status": "done",
+   "capability": "CAP-cache",
+   "owner": "P01"
+  },
+  {
+   "id": "PR-2",
+   "title": "Async PDF rendering",
+   "team": "platform",
+   "initiative": "I-1",
+   "status": "done",
+   "capability": null,
+   "owner": "P01"
+  },
+  {
+   "id": "PR-3",
+   "title": "Precomputed dashboard aggregates",
+   "team": "data",
+   "initiative": "I-1",
+   "status": "active",
+   "capability": "CAP-cache",
+   "owner": "P05"
+  },
+  {
+   "id": "PR-4",
+   "title": "Annual plan pricing",
+   "team": "growth",
+   "initiative": "I-2",
+   "status": "done",
+   "capability": null,
+   "owner": "P03"
+  },
+  {
+   "id": "PR-5",
+   "title": "Guided onboarding checklist",
+   "team": "mobile",
+   "initiative": "I-2",
+   "status": "done",
+   "capability": null,
+   "owner": "P04"
+  },
+  {
+   "id": "PR-6",
+   "title": "Signup flow redesign",
+   "team": "growth",
+   "initiative": "I-3",
+   "status": "done",
+   "capability": null,
+   "owner": "P03"
+  },
+  {
+   "id": "PR-7",
+   "title": "Referral programme",
+   "team": "growth",
+   "initiative": "I-3",
+   "status": "active",
+   "capability": null,
+   "owner": "P03"
+  },
+  {
+   "id": "PR-8",
+   "title": "EU data residency",
+   "team": "platform",
+   "initiative": "I-4",
+   "status": "active",
+   "capability": null,
+   "owner": "P01"
+  },
+  {
+   "id": "PR-9",
+   "title": "Database connection pool tuning",
+   "team": "platform",
+   "initiative": "I-1",
+   "status": "done",
+   "capability": null,
+   "owner": "P01"
+  },
+  {
+   "id": "PR-10",
+   "title": "Email delivery provider switch",
+   "team": "payments",
+   "initiative": "I-5",
+   "status": "done",
+   "capability": null,
+   "owner": "P02"
+  },
+  {
+   "id": "PR-11",
+   "title": "Admin panel theme refresh",
+   "team": "mobile",
+   "initiative": null,
+   "status": "active",
+   "capability": "CAP-theme",
+   "owner": "P04"
+  },
+  {
+   "id": "PR-12",
+   "title": "Customer profile cache",
+   "team": "payments",
+   "initiative": "I-1",
+   "status": "done",
+   "capability": "CAP-cache",
+   "owner": "P02"
+  },
+  {
+   "id": "PR-13",
+   "title": "Webhook retry library",
+   "team": "payments",
+   "initiative": "I-5",
+   "status": "active",
+   "capability": "CAP-retry",
+   "owner": "P02"
+  },
+  {
+   "id": "PR-14",
+   "title": "Shared retry and backoff toolkit",
+   "team": "platform",
+   "initiative": "I-1",
+   "status": "active",
+   "capability": "CAP-retry",
+   "owner": "P01"
+  },
+  {
+   "id": "PR-15",
+   "title": "Revenue dashboard v2",
+   "team": "data",
+   "initiative": null,
+   "status": "active",
+   "capability": "CAP-reporting",
+   "owner": "P05"
+  },
+  {
+   "id": "PR-16",
+   "title": "Invoice renderer rewrite in Go",
+   "team": "platform",
+   "initiative": "I-1",
+   "status": "active",
+   "capability": null,
+   "owner": "P01"
+  }
+ ],
+ "capabilities": [
+  {
+   "id": "CAP-retry",
+   "name": "Retry and backoff for outbound calls"
+  },
+  {
+   "id": "CAP-cache",
+   "name": "Read caching"
+  },
+  {
+   "id": "CAP-reporting",
+   "name": "Revenue reporting"
+  },
+  {
+   "id": "CAP-theme",
+   "name": "UI theming"
+  }
+ ],
+ "tasks": [
+  {
+   "id": "T-001",
+   "kind": "ticket",
+   "title": "Implement invoice read cache",
+   "project": "PR-1",
+   "assignee": "P31",
+   "created_at": "2026-03-01",
+   "closed_at": "2026-03-05"
+  },
+  {
+   "id": "T-002",
+   "kind": "pr",
+   "title": "Fix edge case in invoice read cache",
+   "project": "PR-1",
+   "assignee": "P16",
+   "created_at": "2026-03-06",
+   "closed_at": "2026-03-18"
+  },
+  {
+   "id": "T-003",
+   "kind": "pr",
+   "title": "Add tests for invoice read cache",
+   "project": "PR-1",
+   "assignee": "P11",
+   "created_at": "2026-02-20",
+   "closed_at": "2026-02-22"
+  },
+  {
+   "id": "T-004",
+   "kind": "ticket",
+   "title": "Instrument invoice read cache",
+   "project": "PR-1",
+   "assignee": "P26",
+   "created_at": "2026-02-19",
+   "closed_at": "2026-02-28"
+  },
+  {
+   "id": "T-005",
+   "kind": "pr",
+   "title": "Add tests for invoice read cache",
+   "project": "PR-1",
+   "assignee": "P01",
+   "created_at": "2026-02-23",
+   "closed_at": "2026-03-05"
+  },
+  {
+   "id": "T-006",
+   "kind": "pr",
+   "title": "Add tests for invoice read cache",
+   "project": "PR-1",
+   "assignee": "P01",
+   "created_at": "2026-02-21",
+   "closed_at": "2026-02-26"
+  },
+  {
+   "id": "T-007",
+   "kind": "ticket",
+   "title": "Document invoice read cache",
+   "project": "PR-1",
+   "assignee": "P21",
+   "created_at": "2026-02-23",
+   "closed_at": "2026-03-03"
+  },
+  {
+   "id": "T-008",
+   "kind": "ticket",
+   "title": "Implement async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P21",
+   "created_at": "2025-12-13",
+   "closed_at": "2025-12-18"
+  },
+  {
+   "id": "T-009",
+   "kind": "pr",
+   "title": "Fix edge case in async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P01",
+   "created_at": "2025-12-06",
+   "closed_at": "2025-12-10"
+  },
+  {
+   "id": "T-010",
+   "kind": "pr",
+   "title": "Instrument async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P16",
+   "created_at": "2025-12-26",
+   "closed_at": "2025-12-28"
+  },
+  {
+   "id": "T-011",
+   "kind": "ticket",
+   "title": "Review async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P31",
+   "created_at": "2025-12-06",
+   "closed_at": "2025-12-17"
+  },
+  {
+   "id": "T-012",
+   "kind": "pr",
+   "title": "Add tests for async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P21",
+   "created_at": "2025-12-21",
+   "closed_at": "2026-01-03"
+  },
+  {
+   "id": "T-013",
+   "kind": "ticket",
+   "title": "Implement async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P31",
+   "created_at": "2026-01-09",
+   "closed_at": "2026-01-21"
+  },
+  {
+   "id": "T-014",
+   "kind": "ticket",
+   "title": "Roll out async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P16",
+   "created_at": "2026-01-02",
+   "closed_at": "2026-01-06"
+  },
+  {
+   "id": "T-015",
+   "kind": "ticket",
+   "title": "Add tests for async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P26",
+   "created_at": "2025-12-06",
+   "closed_at": "2025-12-08"
+  },
+  {
+   "id": "T-016",
+   "kind": "pr",
+   "title": "Fix edge case in async pdf rendering",
+   "project": "PR-2",
+   "assignee": "P01",
+   "created_at": "2025-12-07",
+   "closed_at": "2025-12-15"
+  },
+  {
+   "id": "T-017",
+   "kind": "ticket",
+   "title": "Document precomputed dashboard aggregates",
+   "project": "PR-3",
+   "assignee": "P25",
+   "created_at": "2026-10-24",
+   "closed_at": null
+  },
+  {
+   "id": "T-018",
+   "kind": "ticket",
+   "title": "Review precomputed dashboard aggregates",
+   "project": "PR-3",
+   "assignee": "P10",
+   "created_at": "2026-09-14",
+   "closed_at": "2026-09-23"
+  },
+  {
+   "id": "T-019",
+   "kind": "pr",
+   "title": "Instrument precomputed dashboard aggregates",
+   "project": "PR-3",
+   "assignee": "P10",
+   "created_at": "2026-10-17",
+   "closed_at": null
+  },
+  {
+   "id": "T-020",
+   "kind": "ticket",
+   "title": "Add tests for precomputed dashboard aggregates",
+   "project": "PR-3",
+   "assignee": "P40",
+   "created_at": "2026-09-30",
+   "closed_at": null
+  },
+  {
+   "id": "T-021",
+   "kind": "pr",
+   "title": "Implement precomputed dashboard aggregates",
+   "project": "PR-3",
+   "assignee": "P40",
+   "created_at": "2026-10-15",
+   "closed_at": null
+  },
+  {
+   "id": "T-022",
+   "kind": "ticket",
+   "title": "Implement annual plan pricing",
+   "project": "PR-4",
+   "assignee": "P13",
+   "created_at": "2026-06-03",
+   "closed_at": "2026-06-14"
+  },
+  {
+   "id": "T-023",
+   "kind": "pr",
+   "title": "Fix edge case in annual plan pricing",
+   "project": "PR-4",
+   "assignee": "P13",
+   "created_at": "2026-06-22",
+   "closed_at": "2026-06-28"
+  },
+  {
+   "id": "T-024",
+   "kind": "ticket",
+   "title": "Document annual plan pricing",
+   "project": "PR-4",
+   "assignee": "P23",
+   "created_at": "2026-06-01",
+   "closed_at": "2026-06-10"
+  },
+  {
+   "id": "T-025",
+   "kind": "ticket",
+   "title": "Review annual plan pricing",
+   "project": "PR-4",
+   "assignee": "P38",
+   "created_at": "2026-06-07",
+   "closed_at": "2026-06-20"
+  },
+  {
+   "id": "T-026",
+   "kind": "pr",
+   "title": "Document annual plan pricing",
+   "project": "PR-4",
+   "assignee": "P38",
+   "created_at": "2026-06-19",
+   "closed_at": "2026-07-02"
+  },
+  {
+   "id": "T-027",
+   "kind": "ticket",
+   "title": "Fix edge case in annual plan pricing",
+   "project": "PR-4",
+   "assignee": "P18",
+   "created_at": "2026-06-30",
+   "closed_at": "2026-07-14"
+  },
+  {
+   "id": "T-028",
+   "kind": "pr",
+   "title": "Implement annual plan pricing",
+   "project": "PR-4",
+   "assignee": "P23",
+   "created_at": "2026-06-20",
+   "closed_at": "2026-06-23"
+  },
+  {
+   "id": "T-029",
+   "kind": "pr",
+   "title": "Instrument guided onboarding checklist",
+   "project": "PR-5",
+   "assignee": "P34",
+   "created_at": "2026-06-12",
+   "closed_at": "2026-06-27"
+  },
+  {
+   "id": "T-030",
+   "kind": "ticket",
+   "title": "Fix edge case in guided onboarding checklist",
+   "project": "PR-5",
+   "assignee": "P09",
+   "created_at": "2026-06-21",
+   "closed_at": "2026-06-26"
+  },
+  {
+   "id": "T-031",
+   "kind": "pr",
+   "title": "Instrument guided onboarding checklist",
+   "project": "PR-5",
+   "assignee": "P14",
+   "created_at": "2026-06-17",
+   "closed_at": "2026-06-30"
+  },
+  {
+   "id": "T-032",
+   "kind": "pr",
+   "title": "Implement guided onboarding checklist",
+   "project": "PR-5",
+   "assignee": "P29",
+   "created_at": "2026-07-16",
+   "closed_at": "2026-07-31"
+  },
+  {
+   "id": "T-033",
+   "kind": "pr",
+   "title": "Document guided onboarding checklist",
+   "project": "PR-5",
+   "assignee": "P04",
+   "created_at": "2026-06-22",
+   "closed_at": "2026-07-01"
+  },
+  {
+   "id": "T-034",
+   "kind": "pr",
+   "title": "Review guided onboarding checklist",
+   "project": "PR-5",
+   "assignee": "P39",
+   "created_at": "2026-06-18",
+   "closed_at": "2026-06-20"
+  },
+  {
+   "id": "T-035",
+   "kind": "ticket",
+   "title": "Document guided onboarding checklist",
+   "project": "PR-5",
+   "assignee": "P29",
+   "created_at": "2026-07-03",
+   "closed_at": "2026-07-09"
+  },
+  {
+   "id": "T-036",
+   "kind": "ticket",
+   "title": "Roll out guided onboarding checklist",
+   "project": "PR-5",
+   "assignee": "P29",
+   "created_at": "2026-07-02",
+   "closed_at": "2026-07-09"
+  },
+  {
+   "id": "T-037",
+   "kind": "pr",
+   "title": "Roll out signup flow redesign",
+   "project": "PR-6",
+   "assignee": "P33",
+   "created_at": "2026-02-08",
+   "closed_at": "2026-02-22"
+  },
+  {
+   "id": "T-038",
+   "kind": "ticket",
+   "title": "Review signup flow redesign",
+   "project": "PR-6",
+   "assignee": "P23",
+   "created_at": "2026-01-26",
+   "closed_at": "2026-01-31"
+  },
+  {
+   "id": "T-039",
+   "kind": "ticket",
+   "title": "Document signup flow redesign",
+   "project": "PR-6",
+   "assignee": "P33",
+   "created_at": "2026-02-04",
+   "closed_at": "2026-02-11"
+  },
+  {
+   "id": "T-040",
+   "kind": "pr",
+   "title": "Document signup flow redesign",
+   "project": "PR-6",
+   "assignee": "P23",
+   "created_at": "2026-02-25",
+   "closed_at": "2026-02-28"
+  },
+  {
+   "id": "T-041",
+   "kind": "ticket",
+   "title": "Implement signup flow redesign",
+   "project": "PR-6",
+   "assignee": "P23",
+   "created_at": "2026-01-22",
+   "closed_at": "2026-01-28"
+  },
+  {
+   "id": "T-042",
+   "kind": "pr",
+   "title": "Fix edge case in referral programme",
+   "project": "PR-7",
+   "assignee": "P28",
+   "created_at": "2026-09-22",
+   "closed_at": "2026-09-28"
+  },
+  {
+   "id": "T-043",
+   "kind": "pr",
+   "title": "Roll out referral programme",
+   "project": "PR-7",
+   "assignee": "P33",
+   "created_at": "2026-09-19",
+   "closed_at": "2026-10-03"
+  },
+  {
+   "id": "T-044",
+   "kind": "pr",
+   "title": "Fix edge case in referral programme",
+   "project": "PR-7",
+   "assignee": "P18",
+   "created_at": "2026-09-08",
+   "closed_at": "2026-09-22"
+  },
+  {
+   "id": "T-045",
+   "kind": "pr",
+   "title": "Document referral programme",
+   "project": "PR-7",
+   "assignee": "P13",
+   "created_at": "2026-09-12",
+   "closed_at": null
+  },
+  {
+   "id": "T-046",
+   "kind": "ticket",
+   "title": "Fix edge case in referral programme",
+   "project": "PR-7",
+   "assignee": "P13",
+   "created_at": "2026-09-25",
+   "closed_at": null
+  },
+  {
+   "id": "T-047",
+   "kind": "pr",
+   "title": "Instrument referral programme",
+   "project": "PR-7",
+   "assignee": "P23",
+   "created_at": "2026-09-17",
+   "closed_at": null
+  },
+  {
+   "id": "T-048",
+   "kind": "pr",
+   "title": "Review eu data residency",
+   "project": "PR-8",
+   "assignee": "P16",
+   "created_at": "2026-09-27",
+   "closed_at": "2026-10-03"
+  },
+  {
+   "id": "T-049",
+   "kind": "pr",
+   "title": "Implement eu data residency",
+   "project": "PR-8",
+   "assignee": "P11",
+   "created_at": "2026-09-05",
+   "closed_at": "2026-09-15"
+  },
+  {
+   "id": "T-050",
+   "kind": "pr",
+   "title": "Fix edge case in eu data residency",
+   "project": "PR-8",
+   "assignee": "P16",
+   "created_at": "2026-07-15",
+   "closed_at": "2026-07-20"
+  },
+  {
+   "id": "T-051",
+   "kind": "pr",
+   "title": "Document eu data residency",
+   "project": "PR-8",
+   "assignee": "P11",
+   "created_at": "2026-08-17",
+   "closed_at": "2026-08-31"
+  },
+  {
+   "id": "T-052",
+   "kind": "ticket",
+   "title": "Add tests for eu data residency",
+   "project": "PR-8",
+   "assignee": "P26",
+   "created_at": "2026-07-30",
+   "closed_at": null
+  },
+  {
+   "id": "T-053",
+   "kind": "ticket",
+   "title": "Instrument eu data residency",
+   "project": "PR-8",
+   "assignee": "P21",
+   "created_at": "2026-07-17",
+   "closed_at": null
+  },
+  {
+   "id": "T-054",
+   "kind": "pr",
+   "title": "Document eu data residency",
+   "project": "PR-8",
+   "assignee": "P31",
+   "created_at": "2026-07-31",
+   "closed_at": null
+  },
+  {
+   "id": "T-055",
+   "kind": "pr",
+   "title": "Instrument database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P01",
+   "created_at": "2026-08-09",
+   "closed_at": "2026-08-17"
+  },
+  {
+   "id": "T-056",
+   "kind": "pr",
+   "title": "Add tests for database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P16",
+   "created_at": "2026-08-27",
+   "closed_at": "2026-09-02"
+  },
+  {
+   "id": "T-057",
+   "kind": "ticket",
+   "title": "Document database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P31",
+   "created_at": "2026-08-01",
+   "closed_at": "2026-08-07"
+  },
+  {
+   "id": "T-058",
+   "kind": "pr",
+   "title": "Roll out database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P01",
+   "created_at": "2026-08-24",
+   "closed_at": "2026-09-01"
+  },
+  {
+   "id": "T-059",
+   "kind": "pr",
+   "title": "Review database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P36",
+   "created_at": "2026-08-04",
+   "closed_at": "2026-08-06"
+  },
+  {
+   "id": "T-060",
+   "kind": "ticket",
+   "title": "Implement database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P31",
+   "created_at": "2026-09-02",
+   "closed_at": "2026-09-11"
+  },
+  {
+   "id": "T-061",
+   "kind": "pr",
+   "title": "Document database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P16",
+   "created_at": "2026-08-29",
+   "closed_at": "2026-09-13"
+  },
+  {
+   "id": "T-062",
+   "kind": "ticket",
+   "title": "Add tests for database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P06",
+   "created_at": "2026-08-02",
+   "closed_at": "2026-08-07"
+  },
+  {
+   "id": "T-063",
+   "kind": "ticket",
+   "title": "Implement database connection pool tuning",
+   "project": "PR-9",
+   "assignee": "P11",
+   "created_at": "2026-08-25",
+   "closed_at": "2026-08-28"
+  },
+  {
+   "id": "T-064",
+   "kind": "pr",
+   "title": "Add tests for email delivery provider switch",
+   "project": "PR-10",
+   "assignee": "P22",
+   "created_at": "2026-06-09",
+   "closed_at": "2026-06-11"
+  },
+  {
+   "id": "T-065",
+   "kind": "pr",
+   "title": "Review email delivery provider switch",
+   "project": "PR-10",
+   "assignee": "P07",
+   "created_at": "2026-06-06",
+   "closed_at": "2026-06-18"
+  },
+  {
+   "id": "T-066",
+   "kind": "pr",
+   "title": "Fix edge case in email delivery provider switch",
+   "project": "PR-10",
+   "assignee": "P17",
+   "created_at": "2026-05-10",
+   "closed_at": "2026-05-13"
+  },
+  {
+   "id": "T-067",
+   "kind": "ticket",
+   "title": "Roll out email delivery provider switch",
+   "project": "PR-10",
+   "assignee": "P02",
+   "created_at": "2026-05-28",
+   "closed_at": "2026-06-03"
+  },
+  {
+   "id": "T-068",
+   "kind": "pr",
+   "title": "Document email delivery provider switch",
+   "project": "PR-10",
+   "assignee": "P22",
+   "created_at": "2026-05-04",
+   "closed_at": "2026-05-14"
+  },
+  {
+   "id": "T-069",
+   "kind": "ticket",
+   "title": "Document email delivery provider switch",
+   "project": "PR-10",
+   "assignee": "P17",
+   "created_at": "2026-05-24",
+   "closed_at": "2026-06-05"
+  },
+  {
+   "id": "T-070",
+   "kind": "pr",
+   "title": "Review admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P24",
+   "created_at": "2026-05-19",
+   "closed_at": "2026-05-21"
+  },
+  {
+   "id": "T-071",
+   "kind": "ticket",
+   "title": "Document admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P34",
+   "created_at": "2026-05-07",
+   "closed_at": "2026-05-09"
+  },
+  {
+   "id": "T-072",
+   "kind": "ticket",
+   "title": "Review admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P34",
+   "created_at": "2026-05-09",
+   "closed_at": "2026-05-15"
+  },
+  {
+   "id": "T-073",
+   "kind": "pr",
+   "title": "Implement admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P29",
+   "created_at": "2026-05-27",
+   "closed_at": "2026-06-01"
+  },
+  {
+   "id": "T-074",
+   "kind": "pr",
+   "title": "Add tests for admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P04",
+   "created_at": "2026-05-30",
+   "closed_at": "2026-06-06"
+  },
+  {
+   "id": "T-075",
+   "kind": "ticket",
+   "title": "Add tests for admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P39",
+   "created_at": "2026-05-22",
+   "closed_at": "2026-06-04"
+  },
+  {
+   "id": "T-076",
+   "kind": "ticket",
+   "title": "Add tests for admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P39",
+   "created_at": "2026-05-16",
+   "closed_at": null
+  },
+  {
+   "id": "T-077",
+   "kind": "pr",
+   "title": "Implement admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P39",
+   "created_at": "2026-05-18",
+   "closed_at": null
+  },
+  {
+   "id": "T-078",
+   "kind": "ticket",
+   "title": "Document admin panel theme refresh",
+   "project": "PR-11",
+   "assignee": "P34",
+   "created_at": "2026-06-12",
+   "closed_at": null
+  },
+  {
+   "id": "T-079",
+   "kind": "pr",
+   "title": "Implement customer profile cache",
+   "project": "PR-12",
+   "assignee": "P17",
+   "created_at": "2026-05-14",
+   "closed_at": "2026-05-18"
+  },
+  {
+   "id": "T-080",
+   "kind": "ticket",
+   "title": "Document customer profile cache",
+   "project": "PR-12",
+   "assignee": "P02",
+   "created_at": "2026-04-07",
+   "closed_at": "2026-04-18"
+  },
+  {
+   "id": "T-081",
+   "kind": "pr",
+   "title": "Document customer profile cache",
+   "project": "PR-12",
+   "assignee": "P27",
+   "created_at": "2026-04-09",
+   "closed_at": "2026-04-13"
+  },
+  {
+   "id": "T-082",
+   "kind": "ticket",
+   "title": "Instrument customer profile cache",
+   "project": "PR-12",
+   "assignee": "P17",
+   "created_at": "2026-04-13",
+   "closed_at": "2026-04-16"
+  },
+  {
+   "id": "T-083",
+   "kind": "pr",
+   "title": "Implement customer profile cache",
+   "project": "PR-12",
+   "assignee": "P22",
+   "created_at": "2026-04-17",
+   "closed_at": "2026-04-29"
+  },
+  {
+   "id": "T-084",
+   "kind": "pr",
+   "title": "Add tests for webhook retry library",
+   "project": "PR-13",
+   "assignee": "P07",
+   "created_at": "2026-04-01",
+   "closed_at": "2026-04-08"
+  },
+  {
+   "id": "T-085",
+   "kind": "pr",
+   "title": "Implement webhook retry library",
+   "project": "PR-13",
+   "assignee": "P27",
+   "created_at": "2026-03-09",
+   "closed_at": "2026-03-12"
+  },
+  {
+   "id": "T-086",
+   "kind": "ticket",
+   "title": "Document webhook retry library",
+   "project": "PR-13",
+   "assignee": "P27",
+   "created_at": "2026-04-04",
+   "closed_at": "2026-04-07"
+  },
+  {
+   "id": "T-087",
+   "kind": "pr",
+   "title": "Implement webhook retry library",
+   "project": "PR-13",
+   "assignee": "P02",
+   "created_at": "2026-03-28",
+   "closed_at": "2026-04-12"
+  },
+  {
+   "id": "T-088",
+   "kind": "pr",
+   "title": "Fix edge case in webhook retry library",
+   "project": "PR-13",
+   "assignee": "P37",
+   "created_at": "2026-04-08",
+   "closed_at": "2026-04-13"
+  },
+  {
+   "id": "T-089",
+   "kind": "pr",
+   "title": "Review webhook retry library",
+   "project": "PR-13",
+   "assignee": "P37",
+   "created_at": "2026-03-21",
+   "closed_at": null
+  },
+  {
+   "id": "T-090",
+   "kind": "pr",
+   "title": "Add tests for webhook retry library",
+   "project": "PR-13",
+   "assignee": "P32",
+   "created_at": "2026-03-10",
+   "closed_at": null
+  },
+  {
+   "id": "T-091",
+   "kind": "ticket",
+   "title": "Document webhook retry library",
+   "project": "PR-13",
+   "assignee": "P07",
+   "created_at": "2026-03-11",
+   "closed_at": null
+  },
+  {
+   "id": "T-092",
+   "kind": "ticket",
+   "title": "Fix edge case in shared retry and backoff toolkit",
+   "project": "PR-14",
+   "assignee": "P26",
+   "created_at": "2026-05-20",
+   "closed_at": "2026-05-25"
+  },
+  {
+   "id": "T-093",
+   "kind": "pr",
+   "title": "Fix edge case in shared retry and backoff toolkit",
+   "project": "PR-14",
+   "assignee": "P01",
+   "created_at": "2026-05-27",
+   "closed_at": "2026-06-02"
+  },
+  {
+   "id": "T-094",
+   "kind": "pr",
+   "title": "Instrument shared retry and backoff toolkit",
+   "project": "PR-14",
+   "assignee": "P21",
+   "created_at": "2026-05-20",
+   "closed_at": null
+  },
+  {
+   "id": "T-095",
+   "kind": "ticket",
+   "title": "Implement shared retry and backoff toolkit",
+   "project": "PR-14",
+   "assignee": "P16",
+   "created_at": "2026-05-04",
+   "closed_at": null
+  },
+  {
+   "id": "T-096",
+   "kind": "pr",
+   "title": "Roll out shared retry and backoff toolkit",
+   "project": "PR-14",
+   "assignee": "P31",
+   "created_at": "2026-05-10",
+   "closed_at": null
+  },
+  {
+   "id": "T-097",
+   "kind": "pr",
+   "title": "Add tests for revenue dashboard v2",
+   "project": "PR-15",
+   "assignee": "P40",
+   "created_at": "2026-05-31",
+   "closed_at": "2026-06-15"
+  },
+  {
+   "id": "T-098",
+   "kind": "pr",
+   "title": "Roll out revenue dashboard v2",
+   "project": "PR-15",
+   "assignee": "P15",
+   "created_at": "2026-05-15",
+   "closed_at": "2026-05-17"
+  },
+  {
+   "id": "T-099",
+   "kind": "pr",
+   "title": "Roll out revenue dashboard v2",
+   "project": "PR-15",
+   "assignee": "P30",
+   "created_at": "2026-06-11",
+   "closed_at": "2026-06-16"
+  },
+  {
+   "id": "T-100",
+   "kind": "ticket",
+   "title": "Fix edge case in revenue dashboard v2",
+   "project": "PR-15",
+   "assignee": "P20",
+   "created_at": "2026-06-02",
+   "closed_at": "2026-06-09"
+  },
+  {
+   "id": "T-101",
+   "kind": "ticket",
+   "title": "Add tests for revenue dashboard v2",
+   "project": "PR-15",
+   "assignee": "P35",
+   "created_at": "2026-05-29",
+   "closed_at": null
+  },
+  {
+   "id": "T-102",
+   "kind": "ticket",
+   "title": "Document revenue dashboard v2",
+   "project": "PR-15",
+   "assignee": "P30",
+   "created_at": "2026-05-08",
+   "closed_at": null
+  },
+  {
+   "id": "T-103",
+   "kind": "ticket",
+   "title": "Implement revenue dashboard v2",
+   "project": "PR-15",
+   "assignee": "P25",
+   "created_at": "2026-05-14",
+   "closed_at": null
+  },
+  {
+   "id": "T-104",
+   "kind": "ticket",
+   "title": "Document invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P36",
+   "created_at": "2026-07-11",
+   "closed_at": "2026-07-16"
+  },
+  {
+   "id": "T-105",
+   "kind": "ticket",
+   "title": "Add tests for invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P31",
+   "created_at": "2026-08-03",
+   "closed_at": "2026-08-07"
+  },
+  {
+   "id": "T-106",
+   "kind": "ticket",
+   "title": "Review invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P06",
+   "created_at": "2026-08-04",
+   "closed_at": "2026-08-15"
+  },
+  {
+   "id": "T-107",
+   "kind": "pr",
+   "title": "Fix edge case in invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P21",
+   "created_at": "2026-07-24",
+   "closed_at": "2026-07-30"
+  },
+  {
+   "id": "T-108",
+   "kind": "pr",
+   "title": "Add tests for invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P36",
+   "created_at": "2026-07-29",
+   "closed_at": "2026-08-04"
+  },
+  {
+   "id": "T-109",
+   "kind": "ticket",
+   "title": "Add tests for invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P11",
+   "created_at": "2026-07-21",
+   "closed_at": "2026-07-25"
+  },
+  {
+   "id": "T-110",
+   "kind": "ticket",
+   "title": "Instrument invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P06",
+   "created_at": "2026-07-24",
+   "closed_at": null
+  },
+  {
+   "id": "T-111",
+   "kind": "ticket",
+   "title": "Fix edge case in invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P16",
+   "created_at": "2026-07-31",
+   "closed_at": null
+  },
+  {
+   "id": "T-112",
+   "kind": "pr",
+   "title": "Implement invoice renderer rewrite in go",
+   "project": "PR-16",
+   "assignee": "P06",
+   "created_at": "2026-07-12",
+   "closed_at": null
+  },
+  {
+   "id": "T-113",
+   "kind": "ticket",
+   "title": "Migrate CI runners to ARM",
+   "project": null,
+   "assignee": "P36",
+   "created_at": "2026-08-03",
+   "closed_at": null
+  },
+  {
+   "id": "T-114",
+   "kind": "ticket",
+   "title": "Rebuild the internal status page",
+   "project": null,
+   "assignee": "P40",
+   "created_at": "2026-08-17",
+   "closed_at": null
+  },
+  {
+   "id": "T-115",
+   "kind": "ticket",
+   "title": "Prototype a Slack bot for invoice lookups",
+   "project": null,
+   "assignee": "P03",
+   "created_at": "2026-08-26",
+   "closed_at": null
+  }
+ ],
+ "metrics": [
+  {
+   "id": "api_p95_latency_ms",
+   "name": "API p95 latency",
+   "unit": "ms",
+   "better": "lower",
+   "owner": "P01"
+  },
+  {
+   "id": "monthly_churn_pct",
+   "name": "Monthly churn",
+   "unit": "%",
+   "better": "lower",
+   "owner": "P03"
+  },
+  {
+   "id": "weekly_signups",
+   "name": "Self-serve signups per week",
+   "unit": "signups",
+   "better": "higher",
+   "owner": "P08"
+  },
+  {
+   "id": "invoice_delivery_rate",
+   "name": "Invoice delivery success",
+   "unit": "%",
+   "better": "higher",
+   "owner": "P02"
+  },
+  {
+   "id": "support_tickets_weekly",
+   "name": "Support tickets per week",
+   "unit": "tickets",
+   "better": "lower",
+   "owner": "P12"
+  },
+  {
+   "id": "eu_signups_weekly",
+   "name": "EU signups per week",
+   "unit": "signups",
+   "better": "higher",
+   "owner": "P18"
+  },
+  {
+   "id": "infra_cost_usd_monthly",
+   "name": "Infrastructure cost per month",
+   "unit": "USD",
+   "better": "lower",
+   "owner": null
+  }
+ ],
+ "readings": [
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-10-13",
+   "value": 425.231
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-10-20",
+   "value": 423.956
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-10-27",
+   "value": 420.868
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-11-03",
+   "value": 422.11
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-11-10",
+   "value": 418.468
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-11-17",
+   "value": 413.686
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-11-24",
+   "value": 415.671
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-12-01",
+   "value": 415.986
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-12-08",
+   "value": 411.439
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-12-15",
+   "value": 418.271
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-12-22",
+   "value": 351.602
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2025-12-29",
+   "value": 304.164
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-01-05",
+   "value": 300.631
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-01-12",
+   "value": 304.496
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-01-19",
+   "value": 305.096
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-01-26",
+   "value": 308.108
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-02-02",
+   "value": 305.07
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-02-09",
+   "value": 303.908
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-02-16",
+   "value": 299.073
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-02-23",
+   "value": 297.965
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-03-02",
+   "value": 288.752
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-03-09",
+   "value": 294.852
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-03-16",
+   "value": 297.106
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-03-23",
+   "value": 295.199
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-03-30",
+   "value": 294.968
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-04-06",
+   "value": 296.1
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-04-13",
+   "value": 296.693
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-04-20",
+   "value": 291.828
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-04-27",
+   "value": 291.756
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-05-04",
+   "value": 287.134
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-05-11",
+   "value": 281.776
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-05-18",
+   "value": 285.29
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-05-25",
+   "value": 288.771
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-06-01",
+   "value": 284.602
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-06-08",
+   "value": 285.082
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-06-15",
+   "value": 290.729
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-06-22",
+   "value": 287.84
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-06-29",
+   "value": 286.215
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-07-06",
+   "value": 289.738
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-07-13",
+   "value": 288.979
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-07-20",
+   "value": 287.048
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-07-27",
+   "value": 286.266
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-08-03",
+   "value": 287.111
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-08-10",
+   "value": 273.132
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-08-17",
+   "value": 271.94
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-08-24",
+   "value": 285.806
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-08-31",
+   "value": 283.09
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-09-07",
+   "value": 278.067
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-09-14",
+   "value": 266.562
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-09-21",
+   "value": 262.432
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-09-28",
+   "value": 267.109
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-10-05",
+   "value": 261.941
+  },
+  {
+   "metric": "api_p95_latency_ms",
+   "at": "2026-10-12",
+   "value": 258.887
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-10-13",
+   "value": 3.065
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-10-20",
+   "value": 3.108
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-10-27",
+   "value": 3.138
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-11-03",
+   "value": 3.097
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-11-10",
+   "value": 3.053
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-11-17",
+   "value": 3.147
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-11-24",
+   "value": 3.073
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-12-01",
+   "value": 3.124
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-12-08",
+   "value": 3.141
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-12-15",
+   "value": 3.096
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-12-22",
+   "value": 3.125
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2025-12-29",
+   "value": 3.047
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-01-05",
+   "value": 3.125
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-01-12",
+   "value": 3.063
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-01-19",
+   "value": 2.969
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-01-26",
+   "value": 3.081
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-02-02",
+   "value": 3.059
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-02-09",
+   "value": 3.102
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-02-16",
+   "value": 3.119
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-02-23",
+   "value": 3.14
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-03-02",
+   "value": 3.155
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-03-09",
+   "value": 3.187
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-03-16",
+   "value": 3.107
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-03-23",
+   "value": 3.116
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-03-30",
+   "value": 3.134
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-04-06",
+   "value": 3.135
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-04-13",
+   "value": 3.146
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-04-20",
+   "value": 3.069
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-04-27",
+   "value": 3.074
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-05-04",
+   "value": 3.165
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-05-11",
+   "value": 3.165
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-05-18",
+   "value": 3.165
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-05-25",
+   "value": 3.079
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-06-01",
+   "value": 3.097
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-06-08",
+   "value": 3.049
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-06-15",
+   "value": 3.084
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-06-22",
+   "value": 2.836
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-06-29",
+   "value": 2.688
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-07-06",
+   "value": 2.462
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-07-13",
+   "value": 2.476
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-07-20",
+   "value": 2.529
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-07-27",
+   "value": 2.468
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-08-03",
+   "value": 2.51
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-08-10",
+   "value": 2.546
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-08-17",
+   "value": 2.607
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-08-24",
+   "value": 2.489
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-08-31",
+   "value": 2.513
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-09-07",
+   "value": 2.492
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-09-14",
+   "value": 2.496
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-09-21",
+   "value": 2.463
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-09-28",
+   "value": 2.487
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-10-05",
+   "value": 2.555
+  },
+  {
+   "metric": "monthly_churn_pct",
+   "at": "2026-10-12",
+   "value": 2.49
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-10-13",
+   "value": 182.222
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-10-20",
+   "value": 181.051
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-10-27",
+   "value": 176.361
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-11-03",
+   "value": 183.583
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-11-10",
+   "value": 184.698
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-11-17",
+   "value": 178.65
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-11-24",
+   "value": 178.241
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-12-01",
+   "value": 180.288
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-12-08",
+   "value": 170.092
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-12-15",
+   "value": 180.744
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-12-22",
+   "value": 176.911
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2025-12-29",
+   "value": 180.382
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-01-05",
+   "value": 183.698
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-01-12",
+   "value": 184.714
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-01-19",
+   "value": 179.751
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-01-26",
+   "value": 175.899
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-02-02",
+   "value": 178.455
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-02-09",
+   "value": 183.863
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-02-16",
+   "value": 198.886
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-02-23",
+   "value": 205.491
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-03-02",
+   "value": 192.321
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-03-09",
+   "value": 200.785
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-03-16",
+   "value": 201.873
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-03-23",
+   "value": 192.804
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-03-30",
+   "value": 194.524
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-04-06",
+   "value": 201.576
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-04-13",
+   "value": 202.577
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-04-20",
+   "value": 200.304
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-04-27",
+   "value": 187.68
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-05-04",
+   "value": 199.115
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-05-11",
+   "value": 202.262
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-05-18",
+   "value": 206.33
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-05-25",
+   "value": 199.388
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-06-01",
+   "value": 202.802
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-06-08",
+   "value": 200.367
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-06-15",
+   "value": 199.795
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-06-22",
+   "value": 205.691
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-06-29",
+   "value": 197.369
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-07-06",
+   "value": 205.068
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-07-13",
+   "value": 206.889
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-07-20",
+   "value": 198.075
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-07-27",
+   "value": 208.348
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-08-03",
+   "value": 205.52
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-08-10",
+   "value": 208.57
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-08-17",
+   "value": 202.58
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-08-24",
+   "value": 191.803
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-08-31",
+   "value": 205.199
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-09-07",
+   "value": 199.58
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-09-14",
+   "value": 205.977
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-09-21",
+   "value": 209.266
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-09-28",
+   "value": 202.903
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-10-05",
+   "value": 216.51
+  },
+  {
+   "metric": "weekly_signups",
+   "at": "2026-10-12",
+   "value": 209.514
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-10-13",
+   "value": 97.711
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-10-20",
+   "value": 97.84
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-10-27",
+   "value": 97.794
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-11-03",
+   "value": 97.888
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-11-10",
+   "value": 97.866
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-11-17",
+   "value": 97.741
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-11-24",
+   "value": 97.896
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-12-01",
+   "value": 97.934
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-12-08",
+   "value": 97.788
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-12-15",
+   "value": 98.014
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-12-22",
+   "value": 97.803
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2025-12-29",
+   "value": 97.722
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-01-05",
+   "value": 97.917
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-01-12",
+   "value": 97.825
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-01-19",
+   "value": 97.757
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-01-26",
+   "value": 97.682
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-02-02",
+   "value": 97.899
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-02-09",
+   "value": 97.864
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-02-16",
+   "value": 97.995
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-02-23",
+   "value": 97.673
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-03-02",
+   "value": 97.856
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-03-09",
+   "value": 98.002
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-03-16",
+   "value": 97.923
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-03-23",
+   "value": 97.781
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-03-30",
+   "value": 97.693
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-04-06",
+   "value": 97.798
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-04-13",
+   "value": 97.759
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-04-20",
+   "value": 97.967
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-04-27",
+   "value": 98.059
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-05-04",
+   "value": 97.929
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-05-11",
+   "value": 97.823
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-05-18",
+   "value": 97.661
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-05-25",
+   "value": 98.613
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-06-01",
+   "value": 99.263
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-06-08",
+   "value": 99.279
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-06-15",
+   "value": 99.134
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-06-22",
+   "value": 99.402
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-06-29",
+   "value": 99.435
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-07-06",
+   "value": 99.469
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-07-13",
+   "value": 99.541
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-07-20",
+   "value": 99.389
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-07-27",
+   "value": 99.358
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-08-03",
+   "value": 99.319
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-08-10",
+   "value": 99.365
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-08-17",
+   "value": 99.31
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-08-24",
+   "value": 99.43
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-08-31",
+   "value": 99.359
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-09-07",
+   "value": 99.381
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-09-14",
+   "value": 99.348
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-09-21",
+   "value": 99.392
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-09-28",
+   "value": 99.479
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-10-05",
+   "value": 99.372
+  },
+  {
+   "metric": "invoice_delivery_rate",
+   "at": "2026-10-12",
+   "value": 99.277
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-10-13",
+   "value": 250.522
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-10-20",
+   "value": 257.288
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-10-27",
+   "value": 267.917
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-11-03",
+   "value": 263.187
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-11-10",
+   "value": 266.135
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-11-17",
+   "value": 255.406
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-11-24",
+   "value": 262.492
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-12-01",
+   "value": 254.245
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-12-08",
+   "value": 264.971
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-12-15",
+   "value": 250.559
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-12-22",
+   "value": 262.032
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2025-12-29",
+   "value": 262.185
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-01-05",
+   "value": 249.463
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-01-12",
+   "value": 259.301
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-01-19",
+   "value": 261.181
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-01-26",
+   "value": 252.977
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-02-02",
+   "value": 260.483
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-02-09",
+   "value": 257.077
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-02-16",
+   "value": 264.551
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-02-23",
+   "value": 265.612
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-03-02",
+   "value": 261.351
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-03-09",
+   "value": 261.274
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-03-16",
+   "value": 257.362
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-03-23",
+   "value": 254.173
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-03-30",
+   "value": 223.437
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-04-06",
+   "value": 203.571
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-04-13",
+   "value": 203.83
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-04-20",
+   "value": 201.871
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-04-27",
+   "value": 203.229
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-05-04",
+   "value": 203.911
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-05-11",
+   "value": 206.437
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-05-18",
+   "value": 205.364
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-05-25",
+   "value": 211.262
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-06-01",
+   "value": 204.297
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-06-08",
+   "value": 206.119
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-06-15",
+   "value": 204.196
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-06-22",
+   "value": 208.259
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-06-29",
+   "value": 201.878
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-07-06",
+   "value": 203.822
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-07-13",
+   "value": 205.904
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-07-20",
+   "value": 195.448
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-07-27",
+   "value": 202.423
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-08-03",
+   "value": 199.744
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-08-10",
+   "value": 202.651
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-08-17",
+   "value": 194.601
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-08-24",
+   "value": 201.596
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-08-31",
+   "value": 211.051
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-09-07",
+   "value": 198.777
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-09-14",
+   "value": 204.933
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-09-21",
+   "value": 201.097
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-09-28",
+   "value": 198.816
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-10-05",
+   "value": 204.163
+  },
+  {
+   "metric": "support_tickets_weekly",
+   "at": "2026-10-12",
+   "value": 200.043
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-10-13",
+   "value": 6.164
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-10-20",
+   "value": 5.849
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-10-27",
+   "value": 5.721
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-11-03",
+   "value": 6.059
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-11-10",
+   "value": 6.248
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-11-17",
+   "value": 6.374
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-11-24",
+   "value": 6.361
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-12-01",
+   "value": 6.4
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-12-08",
+   "value": 5.84
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-12-15",
+   "value": 5.847
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-12-22",
+   "value": 6.171
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2025-12-29",
+   "value": 6.219
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-01-05",
+   "value": 6.256
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-01-12",
+   "value": 5.997
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-01-19",
+   "value": 5.867
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-01-26",
+   "value": 6.134
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-02-02",
+   "value": 5.882
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-02-09",
+   "value": 5.895
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-02-16",
+   "value": 5.814
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-02-23",
+   "value": 5.74
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-03-02",
+   "value": 5.075
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-03-09",
+   "value": 5.742
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-03-16",
+   "value": 6.178
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-03-23",
+   "value": 5.918
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-03-30",
+   "value": 6.103
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-04-06",
+   "value": 5.819
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-04-13",
+   "value": 6.203
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-04-20",
+   "value": 5.548
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-04-27",
+   "value": 6.12
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-05-04",
+   "value": 5.729
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-05-11",
+   "value": 6.241
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-05-18",
+   "value": 5.785
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-05-25",
+   "value": 6.733
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-06-01",
+   "value": 6.51
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-06-08",
+   "value": 6.437
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-06-15",
+   "value": 6.082
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-06-22",
+   "value": 6.608
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-06-29",
+   "value": 6.206
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-07-06",
+   "value": 6.12
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-07-13",
+   "value": 6.158
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-07-20",
+   "value": 5.894
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-07-27",
+   "value": 6.02
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-08-03",
+   "value": 5.445
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-08-10",
+   "value": 6.264
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-08-17",
+   "value": 5.635
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-08-24",
+   "value": 6.289
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-08-31",
+   "value": 5.898
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-09-07",
+   "value": 5.649
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-09-14",
+   "value": 5.918
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-09-21",
+   "value": 5.733
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-09-28",
+   "value": 6.009
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-10-05",
+   "value": 5.902
+  },
+  {
+   "metric": "eu_signups_weekly",
+   "at": "2026-10-12",
+   "value": 6.529
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-10-13",
+   "value": 48414.69
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-10-20",
+   "value": 48931.576
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-10-27",
+   "value": 47989.509
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-11-03",
+   "value": 48087.818
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-11-10",
+   "value": 48316.681
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-11-17",
+   "value": 48196.992
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-11-24",
+   "value": 47735.2
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-12-01",
+   "value": 47785.998
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-12-08",
+   "value": 47977.829
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-12-15",
+   "value": 48243.502
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-12-22",
+   "value": 49539.172
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2025-12-29",
+   "value": 48111.86
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-01-05",
+   "value": 47072.409
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-01-12",
+   "value": 48527.08
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-01-19",
+   "value": 47897.056
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-01-26",
+   "value": 47901.235
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-02-02",
+   "value": 47715.201
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-02-09",
+   "value": 46904.036
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-02-16",
+   "value": 48367.096
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-02-23",
+   "value": 47928.089
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-03-02",
+   "value": 51374.956
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-03-09",
+   "value": 54892.468
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-03-16",
+   "value": 53303.068
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-03-23",
+   "value": 53281.487
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-03-30",
+   "value": 53919.856
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-04-06",
+   "value": 54321.691
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-04-13",
+   "value": 53559.384
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-04-20",
+   "value": 53383.067
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-04-27",
+   "value": 54333.868
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-05-04",
+   "value": 52123.525
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-05-11",
+   "value": 53860.923
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-05-18",
+   "value": 53783.86
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-05-25",
+   "value": 52275.164
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-06-01",
+   "value": 53707.229
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-06-08",
+   "value": 53357.921
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-06-15",
+   "value": 53723.942
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-06-22",
+   "value": 53015.327
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-06-29",
+   "value": 54017.284
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-07-06",
+   "value": 53298.469
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-07-13",
+   "value": 53123.866
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-07-20",
+   "value": 52679.948
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-07-27",
+   "value": 53439.536
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-08-03",
+   "value": 54213.12
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-08-10",
+   "value": 53674.484
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-08-17",
+   "value": 53844.266
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-08-24",
+   "value": 54139.011
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-08-31",
+   "value": 54112.524
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-09-07",
+   "value": 54813.879
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-09-14",
+   "value": 53720.91
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-09-21",
+   "value": 53467.66
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-09-28",
+   "value": 55279.271
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-10-05",
+   "value": 53659.029
+  },
+  {
+   "metric": "infra_cost_usd_monthly",
+   "at": "2026-10-12",
+   "value": 53807.349
+  }
+ ],
+ "incidents": [
+  {
+   "id": "INC-42",
+   "title": "Degraded storage volume",
+   "at": "2026-08-17",
+   "until": "2026-09-07",
+   "metric": "api_p95_latency_ms",
+   "source": "SRC-0037"
+  }
+ ],
+ "assumptions": [
+  {
+   "id": "A-1",
+   "statement": "Invoice API traffic is read-heavy, so caching reads cuts latency",
+   "contradicted_by": "SRC-0001",
+   "contradicted_at": "2026-03-16"
+  },
+  {
+   "id": "A-2",
+   "statement": "PDF rendering is the largest share of API latency",
+   "supported_by": "SRC-0003"
+  },
+  {
+   "id": "A-3",
+   "statement": "Most failed invoice deliveries are bounces caused by the email provider",
+   "supported_by": "SRC-0004"
+  },
+  {
+   "id": "A-4",
+   "statement": "Price is the main reason customers churn",
+   "contradicted_by": "SRC-0002",
+   "contradicted_at": "2026-09-21"
+  },
+  {
+   "id": "A-5",
+   "statement": "Customers churn because they never finish account setup"
+  },
+  {
+   "id": "A-6",
+   "statement": "A shorter signup form converts more visitors"
+  },
+  {
+   "id": "A-7",
+   "statement": "EU customers require data stored in the EU"
+  },
+  {
+   "id": "A-8",
+   "statement": "Most support tickets come from failed webhook deliveries"
+  },
+  {
+   "id": "A-9",
+   "statement": "Connection pool exhaustion causes the latency spikes"
+  }
+ ],
+ "decisions": [
+  {
+   "id": "D-101",
+   "title": "Cache invoice reads in Redis",
+   "team": "platform",
+   "decider": "P01",
+   "project": "PR-1",
+   "decided_at": "2026-02-02",
+   "shipped_at": "2026-02-23",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-1"
+   ],
+   "decided_in": "SRC-0005",
+   "discussed_in": "SRC-0006",
+   "expects": {
+    "metric": "api_p95_latency_ms",
+    "change": -0.3,
+    "judge_by": "2026-04-20",
+    "source": "SRC-0005"
+   }
+  },
+  {
+   "id": "D-102",
+   "title": "Cache customer profile lookups",
+   "team": "payments",
+   "decider": "P02",
+   "project": "PR-12",
+   "decided_at": "2026-04-06",
+   "shipped_at": "2026-04-27",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-1"
+   ],
+   "decided_in": "SRC-0007",
+   "discussed_in": "SRC-0008",
+   "expects": {
+    "metric": "api_p95_latency_ms",
+    "change": -0.2,
+    "judge_by": "2026-06-22",
+    "source": "SRC-0007"
+   }
+  },
+  {
+   "id": "D-103",
+   "title": "Precompute dashboard aggregates",
+   "team": "data",
+   "decider": "P05",
+   "project": "PR-3",
+   "decided_at": "2026-09-14",
+   "shipped_at": "2026-10-05",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-1"
+   ],
+   "decided_in": "SRC-0009",
+   "discussed_in": "SRC-0010",
+   "expects": {
+    "metric": "api_p95_latency_ms",
+    "change": -0.15,
+    "judge_by": "2026-12-07",
+    "source": "SRC-0009"
+   }
+  },
+  {
+   "id": "D-104",
+   "title": "Move PDF rendering to an async queue",
+   "team": "platform",
+   "decider": "P01",
+   "project": "PR-2",
+   "decided_at": "2025-12-01",
+   "shipped_at": "2025-12-22",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-2"
+   ],
+   "decided_in": "SRC-0011",
+   "discussed_in": "SRC-0012",
+   "expects": {
+    "metric": "api_p95_latency_ms",
+    "change": -0.25,
+    "judge_by": "2026-01-26",
+    "source": "SRC-0011"
+   }
+  },
+  {
+   "id": "D-105",
+   "title": "Switch email delivery provider",
+   "team": "payments",
+   "decider": "P02",
+   "project": "PR-10",
+   "decided_at": "2026-05-04",
+   "shipped_at": "2026-05-25",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-3"
+   ],
+   "decided_in": "SRC-0013",
+   "discussed_in": "SRC-0014",
+   "expects": {
+    "metric": "invoice_delivery_rate",
+    "change": 0.015,
+    "judge_by": "2026-07-20",
+    "source": "SRC-0013"
+   }
+  },
+  {
+   "id": "D-106",
+   "title": "Offer a 20% annual plan discount",
+   "team": "growth",
+   "decider": "P03",
+   "project": "PR-4",
+   "decided_at": "2026-06-01",
+   "shipped_at": "2026-06-15",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-4"
+   ],
+   "decided_in": "SRC-0015",
+   "discussed_in": "SRC-0016",
+   "expects": {
+    "metric": "monthly_churn_pct",
+    "change": -0.15,
+    "judge_by": "2026-08-31",
+    "source": "SRC-0015"
+   }
+  },
+  {
+   "id": "D-107",
+   "title": "Launch a guided onboarding checklist",
+   "team": "mobile",
+   "decider": "P04",
+   "project": "PR-5",
+   "decided_at": "2026-06-08",
+   "shipped_at": "2026-06-29",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-5"
+   ],
+   "decided_in": "SRC-0017",
+   "discussed_in": "SRC-0018",
+   "expects": {
+    "metric": "monthly_churn_pct",
+    "change": -0.1,
+    "judge_by": "2026-09-07",
+    "source": "SRC-0017"
+   }
+  },
+  {
+   "id": "D-108",
+   "title": "Ship dark mode in the mobile app",
+   "team": "mobile",
+   "decider": "P04",
+   "project": null,
+   "decided_at": "2026-03-02",
+   "shipped_at": "2026-04-06",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [],
+   "decided_in": "SRC-0019",
+   "discussed_in": "SRC-0020",
+   "expects": null
+  },
+  {
+   "id": "D-109",
+   "title": "Launch a referral programme",
+   "team": "growth",
+   "decider": "P03",
+   "project": "PR-7",
+   "decided_at": "2026-09-07",
+   "shipped_at": "2026-09-28",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [],
+   "decided_in": "SRC-0021",
+   "discussed_in": "SRC-0022",
+   "expects": {
+    "metric": "weekly_signups",
+    "change": 0.15,
+    "judge_by": "2026-12-14",
+    "source": "SRC-0021"
+   }
+  },
+  {
+   "id": "D-110",
+   "title": "Rewrite the invoice renderer in Go",
+   "team": "platform",
+   "decider": "P01",
+   "project": "PR-16",
+   "decided_at": "2026-07-06",
+   "shipped_at": null,
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-2"
+   ],
+   "decided_in": "SRC-0023",
+   "discussed_in": "SRC-0024",
+   "expects": null
+  },
+  {
+   "id": "D-111",
+   "title": "Store EU customer data in Frankfurt",
+   "team": "platform",
+   "decider": "P01",
+   "project": "PR-8",
+   "decided_at": "2026-01-12",
+   "shipped_at": null,
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-7"
+   ],
+   "decided_in": "SRC-0025",
+   "discussed_in": "SRC-0026",
+   "expects": {
+    "metric": "eu_signups_weekly",
+    "change": 1.0,
+    "judge_by": "2026-09-28",
+    "source": "SRC-0025"
+   }
+  },
+  {
+   "id": "D-112",
+   "title": "Retry failed webhooks with exponential backoff",
+   "team": "payments",
+   "decider": "P02",
+   "project": "PR-13",
+   "decided_at": "2026-03-09",
+   "shipped_at": "2026-03-30",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-8"
+   ],
+   "decided_in": "SRC-0027",
+   "discussed_in": "SRC-0028",
+   "expects": {
+    "metric": "support_tickets_weekly",
+    "change": -0.2,
+    "judge_by": "2026-05-25",
+    "source": "SRC-0027"
+   }
+  },
+  {
+   "id": "D-113",
+   "title": "Tune database connection pools",
+   "team": "platform",
+   "decider": "P01",
+   "project": "PR-9",
+   "decided_at": "2026-07-27",
+   "shipped_at": "2026-08-10",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-9"
+   ],
+   "decided_in": "SRC-0029",
+   "discussed_in": "SRC-0030",
+   "expects": {
+    "metric": "api_p95_latency_ms",
+    "change": -0.1,
+    "judge_by": "2026-09-21",
+    "source": "SRC-0029"
+   }
+  },
+  {
+   "id": "D-114",
+   "title": "Shorten the signup form to three fields",
+   "team": "growth",
+   "decider": "P03",
+   "project": "PR-6",
+   "decided_at": "2026-01-19",
+   "shipped_at": "2026-02-09",
+   "status": "active",
+   "supersedes": null,
+   "assumptions": [
+    "A-6"
+   ],
+   "decided_in": "SRC-0031",
+   "discussed_in": "SRC-0032",
+   "expects": {
+    "metric": "weekly_signups",
+    "change": 0.2,
+    "judge_by": "2026-04-06",
+    "source": "SRC-0031"
+   }
+  },
+  {
+   "id": "D-115",
+   "title": "Send a weekly invoice digest email",
+   "team": "payments",
+   "decider": "P02",
+   "project": null,
+   "decided_at": "2025-11-03",
+   "shipped_at": "2025-11-17",
+   "status": "superseded",
+   "supersedes": null,
+   "assumptions": [],
+   "decided_in": "SRC-0033",
+   "discussed_in": "SRC-0034",
+   "expects": null
+  },
+  {
+   "id": "D-116",
+   "title": "Make the invoice digest daily and opt-in",
+   "team": "payments",
+   "decider": "P02",
+   "project": null,
+   "decided_at": "2026-02-16",
+   "shipped_at": "2026-03-02",
+   "status": "active",
+   "supersedes": "D-115",
+   "assumptions": [],
+   "decided_in": "SRC-0035",
+   "discussed_in": "SRC-0036",
+   "expects": null
+  }
+ ],
+ "sources": [
+  {
+   "id": "SRC-0001",
+   "kind": "slack",
+   "title": "#data-insights: invoice API traffic mix",
+   "at": "2026-03-16",
+   "author": "P10",
+   "text": "Ran the numbers on invoice API traffic since the bulk import launch. Writes are now 58% of requests, so it is no longer read-heavy. Caching reads will not move p95 much.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0002",
+   "kind": "doc",
+   "title": "Churn exit survey, Q3 summary",
+   "at": "2026-09-21",
+   "author": "P13",
+   "text": "Exit survey, 212 responses. Price is the top reason for only 14% of churned accounts; missing integrations (41%) and setup friction (27%) rank higher.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0003",
+   "kind": "doc",
+   "title": "Latency profile of the invoice API",
+   "at": "2025-11-17",
+   "author": "P11",
+   "text": "Profiling shows synchronous PDF rendering accounts for 61% of p95 latency.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0004",
+   "kind": "slack",
+   "title": "#payments: delivery failure breakdown",
+   "at": "2026-04-20",
+   "author": "P07",
+   "text": "Of last month's failed deliveries, 83% are provider-side bounces.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0005",
+   "kind": "doc",
+   "title": "Decision record D-101: Cache invoice reads in Redis",
+   "at": "2026-02-02",
+   "author": "P01",
+   "text": "Decision: Cache invoice reads in Redis. We are doing this because: Invoice API traffic is read-heavy, so caching reads cuts latency. Success means API p95 latency changes by -30% from its pre-launch level by 2026-04-20.",
+   "mentions": [
+    "PR-1"
+   ]
+  },
+  {
+   "id": "SRC-0006",
+   "kind": "slack",
+   "title": "#platform: cache invoice reads in redis",
+   "at": "2026-01-29",
+   "author": "P06",
+   "text": "Proposal thread for 'Cache invoice reads in Redis'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-1"
+   ]
+  },
+  {
+   "id": "SRC-0007",
+   "kind": "doc",
+   "title": "Decision record D-102: Cache customer profile lookups",
+   "at": "2026-04-06",
+   "author": "P02",
+   "text": "Decision: Cache customer profile lookups. We are doing this because: Invoice API traffic is read-heavy, so caching reads cuts latency. Success means API p95 latency changes by -20% from its pre-launch level by 2026-06-22.",
+   "mentions": [
+    "PR-12"
+   ]
+  },
+  {
+   "id": "SRC-0008",
+   "kind": "slack",
+   "title": "#payments: cache customer profile lookups",
+   "at": "2026-04-02",
+   "author": "P07",
+   "text": "Proposal thread for 'Cache customer profile lookups'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-12"
+   ]
+  },
+  {
+   "id": "SRC-0009",
+   "kind": "doc",
+   "title": "Decision record D-103: Precompute dashboard aggregates",
+   "at": "2026-09-14",
+   "author": "P05",
+   "text": "Decision: Precompute dashboard aggregates. We are doing this because: Invoice API traffic is read-heavy, so caching reads cuts latency. Success means API p95 latency changes by -15% from its pre-launch level by 2026-12-07.",
+   "mentions": [
+    "PR-3"
+   ]
+  },
+  {
+   "id": "SRC-0010",
+   "kind": "slack",
+   "title": "#data: precompute dashboard aggregates",
+   "at": "2026-09-10",
+   "author": "P10",
+   "text": "Proposal thread for 'Precompute dashboard aggregates'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-3"
+   ]
+  },
+  {
+   "id": "SRC-0011",
+   "kind": "doc",
+   "title": "Decision record D-104: Move PDF rendering to an async queue",
+   "at": "2025-12-01",
+   "author": "P01",
+   "text": "Decision: Move PDF rendering to an async queue. We are doing this because: PDF rendering is the largest share of API latency. Success means API p95 latency changes by -25% from its pre-launch level by 2026-01-26.",
+   "mentions": [
+    "PR-2"
+   ]
+  },
+  {
+   "id": "SRC-0012",
+   "kind": "slack",
+   "title": "#platform: move pdf rendering to an async queue",
+   "at": "2025-11-27",
+   "author": "P06",
+   "text": "Proposal thread for 'Move PDF rendering to an async queue'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-2"
+   ]
+  },
+  {
+   "id": "SRC-0013",
+   "kind": "doc",
+   "title": "Decision record D-105: Switch email delivery provider",
+   "at": "2026-05-04",
+   "author": "P02",
+   "text": "Decision: Switch email delivery provider. We are doing this because: Most failed invoice deliveries are bounces caused by the email provider. Success means Invoice delivery success changes by +2% from its pre-launch level by 2026-07-20.",
+   "mentions": [
+    "PR-10"
+   ]
+  },
+  {
+   "id": "SRC-0014",
+   "kind": "slack",
+   "title": "#payments: switch email delivery provider",
+   "at": "2026-04-30",
+   "author": "P07",
+   "text": "Proposal thread for 'Switch email delivery provider'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-10"
+   ]
+  },
+  {
+   "id": "SRC-0015",
+   "kind": "doc",
+   "title": "Decision record D-106: Offer a 20% annual plan discount",
+   "at": "2026-06-01",
+   "author": "P03",
+   "text": "Decision: Offer a 20% annual plan discount. We are doing this because: Price is the main reason customers churn. Success means Monthly churn changes by -15% from its pre-launch level by 2026-08-31.",
+   "mentions": [
+    "PR-4"
+   ]
+  },
+  {
+   "id": "SRC-0016",
+   "kind": "slack",
+   "title": "#growth: offer a 20% annual plan discount",
+   "at": "2026-05-28",
+   "author": "P08",
+   "text": "Proposal thread for 'Offer a 20% annual plan discount'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-4"
+   ]
+  },
+  {
+   "id": "SRC-0017",
+   "kind": "doc",
+   "title": "Decision record D-107: Launch a guided onboarding checklist",
+   "at": "2026-06-08",
+   "author": "P04",
+   "text": "Decision: Launch a guided onboarding checklist. We are doing this because: Customers churn because they never finish account setup. Success means Monthly churn changes by -10% from its pre-launch level by 2026-09-07.",
+   "mentions": [
+    "PR-5"
+   ]
+  },
+  {
+   "id": "SRC-0018",
+   "kind": "slack",
+   "title": "#mobile: launch a guided onboarding checklist",
+   "at": "2026-06-04",
+   "author": "P09",
+   "text": "Proposal thread for 'Launch a guided onboarding checklist'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-5"
+   ]
+  },
+  {
+   "id": "SRC-0019",
+   "kind": "doc",
+   "title": "Decision record D-108: Ship dark mode in the mobile app",
+   "at": "2026-03-02",
+   "author": "P04",
+   "text": "Decision: Ship dark mode in the mobile app. No success metric was set.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0020",
+   "kind": "slack",
+   "title": "#mobile: ship dark mode in the mobile app",
+   "at": "2026-02-26",
+   "author": "P09",
+   "text": "Proposal thread for 'Ship dark mode in the mobile app'. Agreed to go ahead; decision record to follow.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0021",
+   "kind": "doc",
+   "title": "Decision record D-109: Launch a referral programme",
+   "at": "2026-09-07",
+   "author": "P03",
+   "text": "Decision: Launch a referral programme. Success means Self-serve signups per week changes by +15% from its pre-launch level by 2026-12-14.",
+   "mentions": [
+    "PR-7"
+   ]
+  },
+  {
+   "id": "SRC-0022",
+   "kind": "slack",
+   "title": "#growth: launch a referral programme",
+   "at": "2026-09-03",
+   "author": "P08",
+   "text": "Proposal thread for 'Launch a referral programme'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-7"
+   ]
+  },
+  {
+   "id": "SRC-0023",
+   "kind": "doc",
+   "title": "Decision record D-110: Rewrite the invoice renderer in Go",
+   "at": "2026-07-06",
+   "author": "P01",
+   "text": "Decision: Rewrite the invoice renderer in Go. We are doing this because: PDF rendering is the largest share of API latency. No success metric was set.",
+   "mentions": [
+    "PR-16"
+   ]
+  },
+  {
+   "id": "SRC-0024",
+   "kind": "slack",
+   "title": "#platform: rewrite the invoice renderer in go",
+   "at": "2026-07-02",
+   "author": "P06",
+   "text": "Proposal thread for 'Rewrite the invoice renderer in Go'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-16"
+   ]
+  },
+  {
+   "id": "SRC-0025",
+   "kind": "doc",
+   "title": "Decision record D-111: Store EU customer data in Frankfurt",
+   "at": "2026-01-12",
+   "author": "P01",
+   "text": "Decision: Store EU customer data in Frankfurt. We are doing this because: EU customers require data stored in the EU. Success means EU signups per week changes by +100% from its pre-launch level by 2026-09-28.",
+   "mentions": [
+    "PR-8"
+   ]
+  },
+  {
+   "id": "SRC-0026",
+   "kind": "slack",
+   "title": "#platform: store eu customer data in frankfurt",
+   "at": "2026-01-08",
+   "author": "P06",
+   "text": "Proposal thread for 'Store EU customer data in Frankfurt'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-8"
+   ]
+  },
+  {
+   "id": "SRC-0027",
+   "kind": "doc",
+   "title": "Decision record D-112: Retry failed webhooks with exponential backoff",
+   "at": "2026-03-09",
+   "author": "P02",
+   "text": "Decision: Retry failed webhooks with exponential backoff. We are doing this because: Most support tickets come from failed webhook deliveries. Success means Support tickets per week changes by -20% from its pre-launch level by 2026-05-25.",
+   "mentions": [
+    "PR-13"
+   ]
+  },
+  {
+   "id": "SRC-0028",
+   "kind": "slack",
+   "title": "#payments: retry failed webhooks with exponential backoff",
+   "at": "2026-03-05",
+   "author": "P07",
+   "text": "Proposal thread for 'Retry failed webhooks with exponential backoff'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-13"
+   ]
+  },
+  {
+   "id": "SRC-0029",
+   "kind": "doc",
+   "title": "Decision record D-113: Tune database connection pools",
+   "at": "2026-07-27",
+   "author": "P01",
+   "text": "Decision: Tune database connection pools. We are doing this because: Connection pool exhaustion causes the latency spikes. Success means API p95 latency changes by -10% from its pre-launch level by 2026-09-21.",
+   "mentions": [
+    "PR-9"
+   ]
+  },
+  {
+   "id": "SRC-0030",
+   "kind": "slack",
+   "title": "#platform: tune database connection pools",
+   "at": "2026-07-23",
+   "author": "P06",
+   "text": "Proposal thread for 'Tune database connection pools'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-9"
+   ]
+  },
+  {
+   "id": "SRC-0031",
+   "kind": "doc",
+   "title": "Decision record D-114: Shorten the signup form to three fields",
+   "at": "2026-01-19",
+   "author": "P03",
+   "text": "Decision: Shorten the signup form to three fields. We are doing this because: A shorter signup form converts more visitors. Success means Self-serve signups per week changes by +20% from its pre-launch level by 2026-04-06.",
+   "mentions": [
+    "PR-6"
+   ]
+  },
+  {
+   "id": "SRC-0032",
+   "kind": "slack",
+   "title": "#growth: shorten the signup form to three fields",
+   "at": "2026-01-15",
+   "author": "P08",
+   "text": "Proposal thread for 'Shorten the signup form to three fields'. Agreed to go ahead; decision record to follow.",
+   "mentions": [
+    "PR-6"
+   ]
+  },
+  {
+   "id": "SRC-0033",
+   "kind": "doc",
+   "title": "Decision record D-115: Send a weekly invoice digest email",
+   "at": "2025-11-03",
+   "author": "P02",
+   "text": "Decision: Send a weekly invoice digest email. No success metric was set.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0034",
+   "kind": "slack",
+   "title": "#payments: send a weekly invoice digest email",
+   "at": "2025-10-30",
+   "author": "P07",
+   "text": "Proposal thread for 'Send a weekly invoice digest email'. Agreed to go ahead; decision record to follow.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0035",
+   "kind": "doc",
+   "title": "Decision record D-116: Make the invoice digest daily and opt-in",
+   "at": "2026-02-16",
+   "author": "P02",
+   "text": "Decision: Make the invoice digest daily and opt-in. No success metric was set.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0036",
+   "kind": "slack",
+   "title": "#payments: make the invoice digest daily and opt-in",
+   "at": "2026-02-12",
+   "author": "P07",
+   "text": "Proposal thread for 'Make the invoice digest daily and opt-in'. Agreed to go ahead; decision record to follow.",
+   "mentions": []
+  },
+  {
+   "id": "SRC-0037",
+   "kind": "doc",
+   "title": "Incident INC-42: degraded storage volume",
+   "at": "2026-08-17",
+   "author": "P16",
+   "text": "A degraded storage volume raised API latency for three weeks until it was replaced.",
+   "mentions": []
+  }
+ ]
+}
