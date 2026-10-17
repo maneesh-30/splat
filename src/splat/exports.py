@@ -105,9 +105,10 @@ def write(company: dict, root: str | Path) -> Path:
                 for g in company["goals"]])
     _write_csv(root / "planning/initiatives.csv", ["id", "title", "goal", "status"],
                [[i["id"], i["title"], i["goal"], i["status"]] for i in company["initiatives"]])
-    _write_csv(root / "planning/epics.csv", ["id", "title", "team", "initiative", "status", "capability"],
-               [[p["id"], p["title"], p["team"], p["initiative"], p["status"], p["capability"]]
-                for p in company["projects"]])
+    _write_csv(root / "planning/epics.csv",
+               ["id", "title", "team", "initiative", "status", "capability", "depends_on"],
+               [[p["id"], p["title"], p["team"], p["initiative"], p["status"], p["capability"],
+                 ";".join(p["depends_on"])] for p in company["projects"]])
     _write_csv(root / "planning/capabilities.csv", ["id", "name"],
                [[k["id"], k["name"]] for k in company["capabilities"]])
 
@@ -174,7 +175,8 @@ def write(company: dict, root: str | Path) -> Path:
         _write_markdown(root / exported_id[x["decided_in"]], {
             "id": x["id"], "team": x["team"], "decider": email[x["decider"]], "decided": x["decided_at"],
             "shipped": x["shipped_at"], "status": x["status"], "epic": x["project"],
-            "supersedes": x["supersedes"], "assumptions": x["assumptions"] or None,
+            "supersedes": x["supersedes"], "builds_on": x["builds_on"] or None,
+            "assumptions": x["assumptions"] or None,
             "expects_metric": e.get("metric"), "expects_change": e.get("change"), "judge_by": e.get("judge_by"),
             "discussed_in": exported_id[x["discussed_in"]],
         }, x["title"], doc["text"])
@@ -233,7 +235,8 @@ def read(root: str | Path, name: str = "Kestrel", as_of: str | None = None) -> d
             text = "\n".join(f"{user_names[m['user']].split()[0]}: {m['text']}" for m in msgs)
             sources.append({"id": f"slack/{channel}/{day}/{position}", "kind": "slack",
                             "title": f"#{channel}: {msgs[0]['text'][:60]}", "at": day,
-                            "author": users[msgs[0]["user"]], "text": text, "mentions": mentions(text)})
+                            "author": users[msgs[0]["user"]], "text": text, "mentions": mentions(text),
+                            "participants": sorted({users[m["user"]] for m in msgs})})
 
     # Markdown documents.
     decisions, incidents = [], []
@@ -245,7 +248,8 @@ def read(root: str | Path, name: str = "Kestrel", as_of: str | None = None) -> d
         decisions.append({
             "id": m["id"], "title": title, "team": m["team"], "decider": m["decider"], "project": m.get("epic"),
             "decided_at": m["decided"], "shipped_at": m.get("shipped"), "status": m.get("status") or "active",
-            "supersedes": m.get("supersedes"), "assumptions": m.get("assumptions") or [],
+            "supersedes": m.get("supersedes"), "builds_on": m.get("builds_on") or [],
+            "assumptions": m.get("assumptions") or [],
             "decided_in": sid, "discussed_in": m["discussed_in"],
             "expects": None if not m.get("expects_metric") else {
                 "metric": m["expects_metric"], "change": float(m["expects_change"]),
@@ -287,7 +291,8 @@ def read(root: str | Path, name: str = "Kestrel", as_of: str | None = None) -> d
                         for m in _read_csv(root / "org/memberships.csv")],
         "goals": _read_csv(root / "planning/goals.csv"),
         "initiatives": _read_csv(root / "planning/initiatives.csv"),
-        "projects": [{**e, "owner": None} for e in epics],
+        "projects": [{**e, "owner": None, "depends_on": (e["depends_on"] or "").split(";") if e["depends_on"] else []}
+                     for e in epics],
         "capabilities": _read_csv(root / "planning/capabilities.csv"),
         "tasks": tasks,
         "metrics": _read_csv(root / "metrics/metrics.csv"),
