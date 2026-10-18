@@ -105,19 +105,23 @@ function renderAnswer(a) {
   const path = a.path && a.path.length ? `<div class="section-k">Graph path</div><div class="path">${esc(a.path.join("\n"))}</div>` : "";
   const sources = a.sources && a.sources.length
     ? `<div class="section-k">Sources</div><div class="sources">${[...new Set(a.sources)].map((s) => `<button class="source-btn" data-source="${esc(s)}">${esc(s)}</button>`).join("")}</div>` : "";
-  const trace = graphButton(a) + renderTrace(a.trace, a.ms, a.tool);
+  const trace = graphButton(a) + renderTrace(a.trace, a.ms, a.tool, a.router);
+  const summary = a.summary
+    ? `<div class="summary"><p>${esc(a.summary)}</p><div class="summary-note">Written by a language model from the graph's answer below.
+        Every id and number in it was checked against the graph${a.summary_dropped ? `; ${a.summary_dropped} sentence${a.summary_dropped === 1 ? " that failed the check was" : "s that failed the check were"} removed` : ""}.</div></div>` : "";
 
   // The badge already states the verdict, so drop the same words from the title.
   const title = badge ? a.title.replace(/^[^:]+:\s*/, "") : a.title;
   return `<div class="card answer fade-up">
     <div class="title">${badge}<h3>${esc(title)}</h3></div>
-    ${facts}${body}${path}${sources}${trace}
+    ${summary}${facts}${body}${path}${sources}${trace}
   </div>`;
 }
 
-function renderTrace(queries, ms, tool) {
+function renderTrace(queries, ms, tool, router) {
   if (!queries || !queries.length) return "";
-  return `<details class="trace"><summary>How this was answered: ${queries.length} read-only graph quer${queries.length === 1 ? "y" : "ies"}${tool ? " via " + esc(tool) : ""}, ${ms} ms</summary>
+  const how = router === "llm" ? ", tool chosen by the language model" : router ? ", tool chosen by keyword rules" : "";
+  return `<details class="trace"><summary>How this was answered: ${queries.length} read-only graph quer${queries.length === 1 ? "y" : "ies"}${tool ? " via " + esc(tool) : ""}${how}, ${ms} ms</summary>
     ${queries.map((q) => `<div class="q"><div class="qh">${esc(q.name)} · ${q.rows} row${q.rows === 1 ? "" : "s"} · ${q.ms} ms</div><div class="path">${esc(q.cypher)}</div></div>`).join("")}
   </details>`;
 }

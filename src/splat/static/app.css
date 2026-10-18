@@ -112,6 +112,12 @@ details.trace summary { cursor: pointer; color: var(--muted); font-size: 13px; }
 details.trace .q { margin-top: 10px; }
 details.trace .q .qh { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
 
+/* ---------- model summary ---------- */
+.summary { margin-top: 14px; padding: 14px 16px; border-radius: 10px; background: rgba(143,180,255,.06);
+  border: 1px solid rgba(143,180,255,.2); }
+.summary p { margin: 0; font-size: 15px; line-height: 1.6; color: #eef0f3; }
+.summary-note { margin-top: 8px; font-size: 12px; color: var(--muted); }
+
 /* ---------- tree ---------- */
 .tree { list-style: none; margin: 0; padding: 0 0 0 4px; }
 .tree ul { list-style: none; margin: 0; padding-left: 22px; border-left: 1px dashed #3a3d44; }
