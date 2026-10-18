@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Splat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg>
+    </span>
+    <span class="name">Splat</span>
+  </div>
+  <div class="meta">
+    <span id="company" class="muted"></span>
+    <span id="status" class="chip chip-muted"><span class="dot"></span><span id="status-text">Connecting</span></span>
+  </div>
+</header>
+
+<div id="down" class="down" hidden>
+  The graph database is not reachable, so nothing can be answered right now. Start FalkorDB and reload.
+</div>
+
+<main>
+  <!-- Ask -->
+  <section class="view" data-view="ask">
+    <div class="hero fade-up">
+      <h1 class="display">Did it work, and why are we doing it?</h1>
+      <p class="muted">Ask about any decision, assumption or piece of work. Every answer comes from the graph, with its sources and the queries that produced it.</p>
+    </div>
+    <form id="ask-form" class="search" autocomplete="off">
+      <svg class="search-icon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="text" placeholder="Did caching invoice reads work?" aria-label="Question">
+      <button class="kbd" type="submit"><span>Ask</span><span class="kbd-key">↵</span></button>
+    </form>
+    <div class="chips" id="suggestions"></div>
+    <div id="answer"></div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <!-- Outcomes -->
+  <section class="view" data-view="outcomes" hidden>
+    <div class="head">
+      <h2 class="display">Outcomes</h2>
+      <p class="muted">Every decision judged against the result it promised. A result is ambiguous when another change hit the same metric in the same window.</p>
+    </div>
+    <div class="stack" id="stack"></div>
+    <div class="legend" id="legend"></div>
+    <div class="label">Decisions</div>
+    <div class="rows" id="decisions"></div>
+  </section>
+
+  <!-- Assumptions -->
+  <section class="view" data-view="assumptions" hidden>
+    <div class="head">
+      <h2 class="display">Assumptions</h2>
+      <p class="muted">What the company believed, which beliefs turned out false, and what still rests on them.</p>
+    </div>
+    <div class="label">Turned out false</div>
+    <div id="disproved"></div>
+    <div class="label">Verify first <span class="muted lower">untested, ranked by PageRank over everything that relies on them</span></div>
+    <div class="rows" id="verify"></div>
+    <div id="blast"></div>
+  </section>
+
+  <!-- Alignment -->
+  <section class="view" data-view="alignment" hidden>
+    <div class="head">
+      <h2 class="display">Why are we doing this?</h2>
+      <p class="muted">Work, goals and metrics that have lost their connection to each other.</p>
+    </div>
+    <div class="grid" id="alignment"></div>
+  </section>
+</main>
+
+<nav class="dock" id="dock" aria-label="Views">
+  <button data-go="ask" class="active" title="Ask">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></svg><span>Ask</span>
+  </button>
+  <button data-go="outcomes" title="Outcomes">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg><span>Outcomes</span>
+  </button>
+  <button data-go="assumptions" title="Assumptions">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v5"/><path d="M12 17.5v.5"/></svg><span>Assumptions</span>
+  </button>
+  <button data-go="alignment" title="Alignment">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Alignment</span>
+  </button>
+</nav>
+
+<aside class="drawer" id="drawer" hidden>
+  <div class="drawer-panel">
+    <button class="close" id="drawer-close" aria-label="Close">×</button>
+    <div id="drawer-body"></div>
+  </div>
+</aside>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
