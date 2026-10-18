@@ -147,6 +147,9 @@ def main(path: str = "data/kestrel") -> None:
         db.select_graph(settings.graph).delete()
     staging.copy(settings.graph)
     staging.delete()
+    # Persist now rather than at the next periodic snapshot, so a Docker restart
+    # right after a load cannot bring back an older graph.
+    db.connection.save()
 
     live = db.select_graph(settings.graph)
     nodes = live.ro_query("MATCH (n) RETURN count(n)").result_set[0][0]
