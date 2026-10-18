@@ -1,0 +1,15 @@
+# The live demo runs on a free plan that sleeps after about 15 idle minutes.
+# A light health check every 10 minutes keeps it awake for visitors.
+name: keep the live demo awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the health endpoint
+        run: curl --silent --show-error --max-time 120 --retry 2 https://splat-i2jd.onrender.com/api/health
