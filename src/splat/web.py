@@ -9,6 +9,7 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from splat import actions
 from splat.agent import Agent
 from splat.db import DatabaseUnavailable, Settings, connect, get_graph
 from splat.tools import Tools
@@ -73,6 +74,32 @@ def source(source_id: str) -> dict:
     if not found:
         raise HTTPException(404, "No such source in the graph.")
     return found
+
+
+@app.get("/api/actions")
+def list_actions() -> list[dict]:
+    return [asdict(a) for a in actions.propose(tools())]
+
+
+def _action(action_id: str) -> actions.Action:
+    found = actions.find(tools(), action_id)
+    if not found:
+        raise HTTPException(404, "No such action is proposed right now; the problem may already be fixed.")
+    return found
+
+
+@app.post("/api/actions/{action_id}/dry-run")
+def dry_run_action(action_id: str) -> dict:
+    """Try the action on a throwaway copy of the graph. The real graph is not touched."""
+    settings = Settings()
+    return actions.dry_run(connect(settings), settings, _action(action_id))
+
+
+@app.post("/api/actions/{action_id}/apply")
+def apply_action(action_id: str) -> dict:
+    """Apply an action a person approved, then verify the problem is gone."""
+    settings = Settings()
+    return actions.apply(connect(settings), settings, _action(action_id))
 
 
 @app.get("/api/graph")
