@@ -13,7 +13,7 @@ from dataclasses import asdict, dataclass
 
 from falkordb import FalkorDB
 
-from splat.db import Settings
+from splat.db import Settings, copy_graph
 from splat.tools import Tools
 
 
@@ -163,7 +163,7 @@ def dry_run(db: FalkorDB, settings: Settings, action: Action) -> dict:
     if sandbox_name in db.list_graphs():
         db.select_graph(sandbox_name).delete()
     start = time.perf_counter()
-    live.copy(sandbox_name)
+    copy_graph(db, settings.graph, sandbox_name)
     copy_ms = round((time.perf_counter() - start) * 1000, 2)
     sandbox = db.select_graph(sandbox_name)
     try:

@@ -12,7 +12,7 @@ import sys
 from falkordb.graph import Graph
 
 from splat import exports, schema
-from splat.db import Settings, connect
+from splat.db import Settings, connect, copy_graph
 
 BATCH = 300
 
@@ -145,7 +145,7 @@ def main(path: str = "data/kestrel") -> None:
     # Swap the finished import in only now, so readers never see a partial graph.
     if settings.graph in db.list_graphs():
         db.select_graph(settings.graph).delete()
-    staging.copy(settings.graph)
+    copy_graph(db, staging_name, settings.graph)
     staging.delete()
     # Persist now rather than at the next periodic snapshot, so a Docker restart
     # right after a load cannot bring back an older graph.
