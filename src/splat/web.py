@@ -8,8 +8,9 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, Field
 
-from splat import actions
+from splat import actions, learn
 from splat.agent import Agent
 from splat.db import DatabaseUnavailable, Settings, connect, get_graph
 from splat.tools import Tools
@@ -85,7 +86,9 @@ def overview() -> dict:
 @app.get("/api/source/{source_id:path}")
 def source(source_id: str) -> dict:
     # Source ids are file paths such as docs/decisions/D-101.md, hence the :path converter.
-    found = tools().source(source_id)
+    t = tools()
+    # Structured facts are cited as an export row, e.g. planning/epics.csv#EP-11.
+    found = t.record(source_id) if "#" in source_id else t.source(source_id)
     if not found:
         raise HTTPException(404, "No such source in the graph.")
     return found
@@ -115,6 +118,36 @@ def apply_action(action_id: str) -> dict:
     """Apply an action a person approved, then verify the problem is gone."""
     settings = Settings()
     return actions.apply(connect(settings), settings, _action(action_id))
+
+
+class NewInformation(BaseModel):
+    text: str = Field(min_length=10, max_length=2000)
+    author: str = Field(default="", max_length=200)
+    channel: str = Field(default="general", max_length=60)
+
+
+@app.get("/api/people")
+def people() -> list[dict]:
+    return sorted((p for p in tools()._people().values() if p["team"]), key=lambda p: p["name"])
+
+
+@app.post("/api/learn")
+def learn_read(body: NewInformation) -> dict:
+    """Read a new message, work out what it changes, and try that on a sandbox copy."""
+    settings = Settings()
+    t = tools()
+    proposal = learn.read(t, body.text, body.author, body.channel)
+    return learn.dry_run(connect(settings), settings, proposal)
+
+
+@app.post("/api/learn/{proposal_id}/apply")
+def learn_apply(proposal_id: str) -> dict:
+    """Add an approved message and what it changes to the real graph."""
+    proposal = learn.PROPOSALS.get(proposal_id)
+    if not proposal:
+        raise HTTPException(404, "That proposal is no longer pending; read the message again.")
+    settings = Settings()
+    return learn.apply(connect(settings), settings, proposal)
 
 
 @app.get("/api/graph")
