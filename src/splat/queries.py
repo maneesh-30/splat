@@ -9,6 +9,11 @@ OPTIONAL MATCH (p:Person)-[:AUTHORED]->(s)
 RETURN s.id, s.kind, s.title, s.at, s.text, p.name
 """
 
+CATALOGUE = """
+MATCH (n) WHERE n:Decision OR n:Assumption OR n:Project OR n:Goal
+RETURN n.id, coalesce(n.title, n.statement) ORDER BY n.id
+"""
+
 FIND = """
 CALL db.idx.fulltext.queryNodes($label, $text) YIELD node, score
 RETURN node.id AS id, coalesce(node.title, node.statement) AS text, score

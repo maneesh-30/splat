@@ -1,16 +1,20 @@
 """Question answering: route a plain-language question to one graph tool, then
 turn its rows into an answer that cites sources and shows the path it followed.
 
-Routing is deterministic keyword matching, so the product works with no API key.
-Answers are composed from tool rows only; nothing in an answer comes from
-anywhere but the graph.
+With a language model configured, it picks the tool and its subject from the
+question's meaning; otherwise, or if the model fails, deterministic keyword
+matching does. Either way the answer itself is composed from tool rows only.
+An optional model-written summary is checked against those rows, and any
+sentence mentioning an id or number they do not contain is dropped.
 """
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, field
 
+from splat import llm
 from splat.tools import Tools, search_terms
 
 VERDICT_LABEL = {
@@ -36,6 +40,9 @@ class Answer:
     path: list[str] = field(default_factory=list)
     trace: list[dict] = field(default_factory=list)
     ms: float = 0.0
+    router: str = "keywords"
+    summary: str | None = None
+    summary_dropped: int = 0
 
     def text(self) -> str:
         return "\n".join([self.title, *self.lines])
@@ -72,17 +79,45 @@ def route(question: str) -> str:
     return "verdict"
 
 
+# Tools that are about one specific item, which the model may name by id.
+SUBJECT_TOOLS = {"verdict", "blast_radius", "why", "cascade"}
+
+
 class Agent:
-    def __init__(self, tools: Tools):
+    _catalogue: str | None = None
+
+    def __init__(self, tools: Tools, use_llm: bool = True):
         self.tools = tools
+        self.use_llm = use_llm and llm.available()
 
     def ask(self, question: str) -> Answer:
         self.tools.reset_trace()
-        tool = route(question)
-        answer = getattr(self, f"_{tool}")(question)
+        tool, subject, router = None, None, "keywords"
+        if self.use_llm:
+            choice = llm.route(question, self.catalogue())
+            if choice:
+                (tool, subject), router = choice, "llm"
+        tool = tool or route(question)
+        argument = question
+        if subject and tool in SUBJECT_TOOLS and ID_PATTERN.fullmatch(subject.strip()):
+            argument = subject.strip().upper()
+        answer = getattr(self, f"_{tool}")(argument)
         trace = self.tools.reset_trace()
-        answer.trace, answer.ms = trace.queries, trace.total_ms
+        answer.trace, answer.ms, answer.router = trace.queries, trace.total_ms, router
+        if self.use_llm and answer.data is not None:
+            text = llm.summarize(question, answer.title, answer.lines)
+            if text:
+                evidence = " ".join([answer.title, *answer.lines, json.dumps(answer.data, default=str)])
+                answer.summary, answer.summary_dropped = llm.verify(text, evidence)
+                answer.summary = answer.summary or None
         return answer
+
+    def catalogue(self) -> str:
+        """The ids and names the model may refer to, read from the graph once."""
+        if Agent._catalogue is None:
+            rows = self.tools.catalogue()
+            Agent._catalogue = "\n".join(f"{r['id']}: {r['text']}" for r in rows)
+        return Agent._catalogue
 
     # -- helpers ------------------------------------------------------------------
 

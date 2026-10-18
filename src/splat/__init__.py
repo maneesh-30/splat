@@ -5,6 +5,8 @@ from splat.db import DatabaseUnavailable, get_graph, health_check
 
 
 def main() -> None:
+    # Windows consoles default to a legacy code page; answers can contain characters it lacks.
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(prog="splat", description="Ask the company graph.")
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("health", help="check the FalkorDB connection (default)")
@@ -30,12 +32,14 @@ def main() -> None:
             from splat.agent import Agent
             from splat.tools import Tools
             answer = Agent(Tools(get_graph())).ask(" ".join(args.question))
+            if answer.summary:
+                print(f"Summary (checked against the graph): {answer.summary}\n")
             print(answer.text())
             for p in answer.path:
                 print(f"  path: {p}")
             if answer.sources:
                 print(f"  sources: {', '.join(dict.fromkeys(answer.sources))}")
-            print(f"  {len(answer.trace)} graph queries via {answer.tool}, {answer.ms} ms")
+            print(f"  {len(answer.trace)} graph queries via {answer.tool} (routed by {answer.router}), {answer.ms} ms")
             if args.trace:
                 for q in answer.trace:
                     print(f"    [{q['ms']} ms, {q['rows']} rows] {q['cypher']}")

@@ -78,6 +78,10 @@ class Tools:
         rows = self._q("find", Q.FIND, label=label, text=clean, limit=limit)
         return [{"id": r[0], "text": r[1], "score": round(r[2], 3)} for r in rows]
 
+    def catalogue(self) -> list[dict]:
+        rows = self._q("catalogue", Q.CATALOGUE)
+        return [{"id": r[0], "text": r[1]} for r in rows]
+
     def source(self, source_id: str) -> dict | None:
         rows = self._q("source", Q.SOURCE, id=source_id)
         if not rows:
