@@ -15,6 +15,9 @@ Ask it, for example:
 | *Which assumptions should we verify first?* | Untested beliefs ranked by PageRank over everything that relies on them. |
 | *Are we wasting effort anywhere?* | 4 epics and 4 tickets with no path to a live goal, including EU work that continued for months after the EU launch was cancelled. |
 | *Are two teams building the same thing?* | Payments and Platform are both building retry tooling, and they sit in separate conversation islands: no chain of people who have talked connects them. |
+| *Who knows the most about webhook retries?* | People ranked by evidence: Neha Moreau decided D-112, wrote its record, worked ticket KES-148 and led the epic; every item is cited. |
+| *Who owns EP-13?* | The Payments team, through decision D-112 by Neha Moreau, toward goal G-5. |
+| *What changed in the last 30 days?* | A decision replaced, an assumption disproved by an exit survey, new decisions, each with its source. |
 | *Did the blockchain rewrite work?* | **Not in the graph.** Nothing is guessed. |
 
 ---
@@ -46,8 +49,18 @@ The web app has six views, switched from a dock at the bottom of the page.
 | **Outcomes** | Every decision judged against the result it promised: worked, partly worked, missed, ambiguous, too early, not shipped, or never defined success. |
 | **Assumptions** | Assumptions that turned out false and every decision resting on them, flagging decisions made *after* the evidence appeared and decisions that are still live. Untested assumptions are ranked by how much rests on them, and any of them can be traced as a blast-radius tree. |
 | **Graph** | The company map: goals, initiatives, epics, decisions, assumptions, metrics and capabilities, coloured by verdict and status. Click a node to highlight its neighbours and ask about it. |
-| **Act** | One proposed fix per problem found. Each fix is tried on a throwaway copy of the graph first; the real graph changes only after a person approves it, and the original check is re-run to verify the problem is gone. |
+| **Act** | **Tell Splat something new:** paste a new Slack message or note; Splat finds the epics it mentions and the assumptions it contradicts or supports, quoting the words that show it, tries the update on a throwaway copy of the graph, and adds it only after a person approves. Below that, one proposed fix per problem found, tried on a copy first and verified after approval. |
 | **Alignment** | Work that serves no live goal, goals nobody is working on, work continuing under cancelled goals, metrics nobody owns, and teams duplicating each other's work. |
+
+### How it covers what a company brain needs
+
+| Need | How Splat does it |
+|---|---|
+| **Knowledge from docs, tickets and chats in one graph** | Slack threads, decision records, research notes, incident reports, Jira tickets, pull requests, metrics and the org chart are imported into one FalkorDB graph and linked to the people, teams, epics and decisions they concern. New messages are read into the graph from the Act view. |
+| **Who owns what, and who knows what** | Ownership of every epic, metric, goal and decision through teams, deciders and goal owners, with membership tracked over time. Expertise ranked by evidence of real work (decisions made, tickets worked, threads and documents written), with people who have left listed separately. |
+| **Tracing decisions back to their source** | Every decision links to its decision record, the thread where it was discussed, the assumptions it rested on and the evidence that later disproved or supported them. |
+| **Keeping knowledge current as things change** | Assumptions are disproved or supported as evidence arrives, decisions are superseded, goals cancelled, people leave or move teams; "what changed?" lists it all. A new message updates the graph after approval, and every decision resting on a newly disproved assumption is flagged at once. |
+| **Answers with clear sources** | Every answer cites the files it came from, down to the export row (for example `planning/epics.csv#EP-11`), shows the graph path and every query that ran, and says "not in the graph" instead of guessing. |
 
 ## Why it needs a graph
 
@@ -286,7 +299,7 @@ A decision is judged against its own promise, recorded as `(Decision)-[:EXPECTS 
 - **Read-only answers.** Answers run through `GRAPH.RO_QUERY` with a 3-second timeout.
 - **Checked summaries.** A model-written summary keeps a sentence only if every id and number in it appears in the rows the graph returned; the rest is dropped, and the answer says how many sentences were removed.
 - **No guessing.** Unknown names return "not in the graph".
-- **Writes only on approval.** The only writes outside the import are the fixed actions in the Act view. Each is first applied to a throwaway `GRAPH.COPY` of the graph and compared; the real graph changes only after a person approves, the action is recorded as an `Action` node, and the original check is re-run to verify the result.
+- **Writes only on approval.** The only writes outside the import are the fixed writes in the Act view: adding a new message and applying a proposed fix. When a model reads a new message, every id it names must exist in the graph and every quote must appear in the message, or that finding is dropped. Each is first applied to a throwaway `GRAPH.COPY` of the graph and compared; the real graph changes only after a person approves, the action is recorded as an `Action` node, and the original check is re-run to verify the result.
 - **Provenance enforced by the database.** `MANDATORY` constraints mean a fact without a source cannot be stored.
 - **Safe imports.** Batched, idempotent `MERGE`; staging graph swapped in only when complete; saved to disk right after loading; graph copies retried if the server is busy saving.
 - **Honest failures.** If FalkorDB is unreachable, the app shows a banner and the API returns a 503 rather than empty answers. If the language model is unavailable or rate-limited, the keyword router takes over.
@@ -314,7 +327,7 @@ The company contains planted stories (decisions that worked, missed and overlapp
 ## Limitations
 
 - **Synthetic data.** The stories are designed, so the data shows what the mechanism finds rather than proving it on a real company.
-- **Recorded facts only.** A decision's reasons and promised result must be written down, and an assumption counts as disproved only when evidence is recorded against it in the assumption register. Detecting contradictions automatically from new messages is not built.
+- **Recorded facts only.** A decision's reasons and promised result must be written down. Assumptions are disproved by evidence in the assumption register or by a new message a person approves; messages are read one at a time from the Act view, not streamed in automatically from Slack.
 - **Correlation, not causation.** A verdict compares a metric before and after a decision and flags overlapping changes it knows about; changes that are not recorded in the graph cannot be accounted for.
 - **Summaries are checked for ids and numbers, not meaning.** A summary sentence can still phrase a fact loosely; the lines below it, which come straight from the graph, are authoritative.
 - **Fixed question types.** It answers the questions its tools cover, not arbitrary ones.
@@ -332,6 +345,7 @@ src/splat/
   agent.py      question routing and answers
   llm.py        optional model routing and checked summaries
   actions.py    proposed fixes, sandbox dry runs and approved writes
+  learn.py      reading new messages into the graph, with a sandbox check and approval
   web.py        HTTP API
   static/       the web app (HTML, CSS, JavaScript, Cytoscape.js)
 data/kestrel/   the company as tool exports
