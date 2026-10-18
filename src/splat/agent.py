@@ -57,7 +57,7 @@ ROUTES = [
     ("cancelled_goal_work", r"cancel"),
     ("unowned_metrics", r"own(s|er|ed)?\b.*metric|metric.*own|nobody own|unowned"),
     ("goals_without_work", r"goal.*(no|without|nobody|idle).*work|neglect|idle goal"),
-    ("orphaned_work", r"orphan|no goal|not tied|why are we|waste|serve(s)? no"),
+    ("orphaned_work", r"orphan|no goal|not tied|why are we|wast(e|ed|ing)|pointless|serve(s)? no"),
     ("scorecard", r"scorecard|all decisions|overall|how did our decisions|track record"),
     ("similar", r"tried|before|similar|propos|should we|thinking of|plan to"),
     ("verdict", r"work(ed)?\b|did .* (help|pay off|succeed)|result|outcome|impact|verdict"),
