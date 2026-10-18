@@ -4,6 +4,8 @@
 
 Companies remember *what* they decided. They rarely check *whether it worked*, and they almost never notice when the reason a decision was made stops being true. Splat connects decisions, the assumptions they rest on, the results they promised, the evidence for and against them, and the goals and work they created into one knowledge graph in [FalkorDB](https://www.falkordb.com/). Every answer is computed from that graph, cites the files it came from, and shows the queries that produced it.
 
+**Live demo: https://splat-i2jd.onrender.com** (no sign-up, no key). It runs on a free plan, so if it has been idle the first load can take up to a minute; everything after that is quick. To run it on your own machine instead, see [Run it locally](#run-it-locally).
+
 Ask it, for example:
 
 | Question | What comes back |
@@ -97,6 +99,17 @@ Open the FalkorDB Browser at http://localhost:3000, connect to `localhost:6379` 
 MATCH p = (d:Decision)-[:RESTS_ON]->(a:Assumption)-[:CONTRADICTED_BY]->(s:Source)
 RETURN p
 ```
+
+### Run it as one container
+
+The `Dockerfile` packages FalkorDB and the app into a single image (built from the same pinned FalkorDB image). On start it launches FalkorDB inside the container, loads the company data and serves the app on `$PORT`. It uses about 85 MB of memory.
+
+```bash
+docker build -t splat .
+docker run -p 8000:8000 -e GROQ_API_KEY=... splat     # the key is optional
+```
+
+The live demo is this image on Render, described by [`render.yaml`](render.yaml). Every start reloads the data, so actions applied on the live demo reset with each deploy.
 
 ## How it works
 
@@ -323,6 +336,8 @@ src/splat/
   static/       the web app (HTML, CSS, JavaScript, Cytoscape.js)
 data/kestrel/   the company as tool exports
 docker-compose.yml   FalkorDB, pinned by digest
+Dockerfile           FalkorDB and the app in one image, for deployment
+render.yaml          the live demo's deployment on Render
 ```
 
 ## AI assistance
