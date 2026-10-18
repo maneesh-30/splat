@@ -149,9 +149,16 @@ DRAWN = ["RESTS_ON", "CONTRADICTED_BY", "SUPPORTED_BY", "EXPECTS", "FOR", "DECID
          "BUILDS_ON", "DEPENDS_ON", "PART_OF", "SERVES", "TRACKED_BY", "SUPERSEDES", "AFFECTED",
          "REPORTED_IN", "BUILDS", "OWNS", "ASSIGNED_TO"]
 
+# When drawing an answer, follow only what the answer's own nodes point to: a
+# decision's promise, assumption, record and the decision it builds on, an
+# assumption's evidence, an epic's initiative and goal. Following links in both
+# directions pulls in everything else that touches a shared metric or goal.
+EXPAND = ["EXPECTS", "RESTS_ON", "CONTRADICTED_BY", "SUPPORTED_BY", "DECIDED_IN", "BUILDS_ON",
+          "AFFECTED", "REPORTED_IN", "PART_OF", "SERVES", "BUILDS", "SUPERSEDES"]
+
 GRAPH_NEIGHBOURS = """
 MATCH (n) WHERE n.id IN $ids
-OPTIONAL MATCH (n)-[r]-(m) WHERE type(r) IN $types AND NOT m:Task AND NOT m:Reading AND NOT m:Person
+OPTIONAL MATCH (n)-[r]->(m) WHERE type(r) IN $types AND NOT m:Task AND NOT m:Reading AND NOT m:Person
 RETURN collect(DISTINCT m.id)
 """
 

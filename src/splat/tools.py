@@ -242,7 +242,7 @@ class Tools:
         direct neighbours, and every drawable relationship among them."""
         ids = list(dict.fromkeys(i for i in ids if i))
         if expand and ids:
-            ids += self._q("graph_neighbours", Q.GRAPH_NEIGHBOURS, ids=ids, types=Q.DRAWN)[0][0]
+            ids += self._q("graph_neighbours", Q.GRAPH_NEIGHBOURS, ids=ids, types=Q.EXPAND)[0][0]
             ids = list(dict.fromkeys(ids))
         return self._draw(ids)
 
