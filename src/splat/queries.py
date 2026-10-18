@@ -141,6 +141,39 @@ OPTIONAL MATCH (node)-[m:MEMBER_OF]->(t:Team) WHERE m.until IS NULL
 RETURN node.id, node.name, componentId, t.id
 """
 
+# --- Drawing the graph ----------------------------------------------------------
+
+# Relationships worth drawing. Readings, thread participation and derived
+# relationships are left out so pictures show meaning, not plumbing.
+DRAWN = ["RESTS_ON", "CONTRADICTED_BY", "SUPPORTED_BY", "EXPECTS", "FOR", "DECIDED", "DECIDED_IN",
+         "BUILDS_ON", "DEPENDS_ON", "PART_OF", "SERVES", "TRACKED_BY", "SUPERSEDES", "AFFECTED",
+         "REPORTED_IN", "BUILDS", "OWNS", "ASSIGNED_TO"]
+
+GRAPH_NEIGHBOURS = """
+MATCH (n) WHERE n.id IN $ids
+OPTIONAL MATCH (n)-[r]-(m) WHERE type(r) IN $types AND NOT m:Task AND NOT m:Reading AND NOT m:Person
+RETURN collect(DISTINCT m.id)
+"""
+
+GRAPH_NODES = """
+MATCH (n) WHERE n.id IN $ids
+OPTIONAL MATCH (n)-[c:CONTRADICTED_BY]->()
+OPTIONAL MATCH (n)-[s:SUPPORTED_BY]->()
+RETURN n.id, labels(n)[0], coalesce(n.title, n.statement, n.name, n.id),
+       CASE WHEN count(s) > 0 THEN 'supported' ELSE n.status END, count(c) > 0
+"""
+
+GRAPH_EDGES = """
+MATCH (a)-[r]->(b)
+WHERE a.id IN $ids AND b.id IN $ids AND type(r) IN $types
+RETURN DISTINCT a.id, type(r), b.id
+"""
+
+# The company map: how goals, initiatives, epics, decisions, assumptions and
+# metrics connect. About a hundred nodes, small enough to read.
+MAP_LABELS = ["Goal", "Initiative", "Project", "Decision", "Assumption", "Metric", "Capability"]
+MAP_IDS = "MATCH (n) WHERE labels(n)[0] IN $labels RETURN collect(n.id)"
+
 # --- Goals and work ---------------------------------------------------------------
 
 WHY = """

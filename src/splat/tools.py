@@ -237,6 +237,25 @@ class Tools:
         return {"groups": {k: {"people": v["people"], "teams": sorted(v["teams"])} for k, v in groups.items()},
                 "team_islands": team_islands}
 
+    def subgraph(self, ids: list[str], expand: bool = True) -> dict:
+        """Nodes and relationships for drawing: the given nodes, optionally with their
+        direct neighbours, and every drawable relationship among them."""
+        ids = list(dict.fromkeys(i for i in ids if i))
+        if expand and ids:
+            ids += self._q("graph_neighbours", Q.GRAPH_NEIGHBOURS, ids=ids, types=Q.DRAWN)[0][0]
+            ids = list(dict.fromkeys(ids))
+        return self._draw(ids)
+
+    def company_map(self) -> dict:
+        return self._draw(self._q("map_ids", Q.MAP_IDS, labels=Q.MAP_LABELS)[0][0])
+
+    def _draw(self, ids: list[str]) -> dict:
+        nodes = [{"id": r[0], "label": r[1], "title": r[2], "status": r[3], "disproved": r[4]}
+                 for r in self._q("graph_nodes", Q.GRAPH_NODES, ids=ids)]
+        edges = [{"source": r[0], "type": r[1], "target": r[2]}
+                 for r in self._q("graph_edges", Q.GRAPH_EDGES, ids=ids, types=Q.DRAWN)]
+        return {"nodes": nodes, "edges": edges}
+
     def similar(self, text: str) -> list[dict]:
         clean = search_terms(text)
         rows = self._q("similar_decisions", Q.SIMILAR_DECISIONS, text=clean) if clean else []

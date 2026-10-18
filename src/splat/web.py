@@ -75,6 +75,23 @@ def source(source_id: str) -> dict:
     return found
 
 
+@app.get("/api/graph")
+def graph(ids: str = Query(..., max_length=4000), expand: bool = True) -> dict:
+    """The subgraph behind an answer: the given node ids, their neighbours, and the links among them."""
+    t = tools()
+    data = t.subgraph([i.strip() for i in ids.split(",")][:80], expand=expand)
+    trace = t.reset_trace()
+    return {**data, "queries": trace.queries, "ms": trace.total_ms}
+
+
+@app.get("/api/map")
+def company_map() -> dict:
+    t = tools()
+    data = t.company_map()
+    trace = t.reset_trace()
+    return {**data, "queries": trace.queries, "ms": trace.total_ms}
+
+
 @app.get("/api/blast/{assumption_id}")
 def blast(assumption_id: str) -> dict:
     t = tools()
