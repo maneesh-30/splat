@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Splat: did it work, and why are we doing it?</title>
+<meta name="description" content="A company brain on FalkorDB that judges every decision against the result it promised, traces the reasons behind it, and shows which work still serves a goal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/landing.css">
+</head>
+<body class="landing">
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg>
+    </span>
+    <span class="name">Splat</span>
+  </div>
+  <nav class="links">
+    <a href="https://github.com/maneesh-30/splat" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn btn-primary" href="/app">Open the app</a>
+  </nav>
+</header>
+
+<main>
+  <section class="l-hero fade-up">
+    <span class="chip chip-muted">A company brain on FalkorDB</span>
+    <h1 class="display">Did it work, and why are we doing it?</h1>
+    <p class="lead">Companies remember what they decided, but rarely check whether it worked or whether the reasons behind it still hold.
+      Splat connects decisions, their assumptions, the results they promised and the work they created in one graph, and answers from it with sources.</p>
+    <div class="l-cta">
+      <a class="btn btn-primary btn-lg" href="/app">Open the app</a>
+      <a class="btn btn-lg" href="https://github.com/maneesh-30/splat" target="_blank" rel="noopener">View the code</a>
+    </div>
+  </section>
+
+  <section class="l-example card fade-up">
+    <div class="l-q"><span class="muted">Asked:</span> Did the guided onboarding checklist work?</div>
+    <div class="title"><span class="chip chip-info"><span class="dot"></span>Ambiguous</span><h3>D-107 Launch a guided onboarding checklist</h3></div>
+    <div class="facts">
+      <div class="fact"><div class="k">Promised</div><div class="v">-10.0%</div><div class="muted">monthly churn</div></div>
+      <div class="fact"><div class="k">Measured</div><div class="v">-19.2%</div><div class="muted">3.06% → 2.47%</div></div>
+      <div class="fact"><div class="k">Why ambiguous</div><div class="v">D-106</div><div class="muted">a discount hit churn in the same weeks</div></div>
+    </div>
+    <p class="muted l-note">A dashboard would call this a win. Splat sees a second decision on the same metric in the same window, so neither can take the credit.</p>
+    <a class="l-live" href="/app?q=Did%20the%20guided%20onboarding%20checklist%20work%3F">Ask it live →</a>
+  </section>
+
+  <section class="l-three">
+    <div class="card l-cap">
+      <div class="label">Outcomes</div>
+      <h3>Did it work?</h3>
+      <p class="muted">Every decision judged against the result it promised: worked, missed, ambiguous, too early, or never defined success.</p>
+      <a href="/app?q=Did%20caching%20invoice%20reads%20work%3F">Did caching invoice reads work? →</a>
+    </div>
+    <div class="card l-cap">
+      <div class="label">Assumptions</div>
+      <h3>Is it still true?</h3>
+      <p class="muted">Beliefs that turned out false, every decision and ticket resting on them at any depth, and which untested ones to check first.</p>
+      <a href="/app?q=What%20breaks%20if%20A-1%20is%20wrong%3F">What breaks if A-1 is wrong? →</a>
+    </div>
+    <div class="card l-cap">
+      <div class="label">Alignment</div>
+      <h3>Why are we doing this?</h3>
+      <p class="muted">Work that serves no live goal, goals nobody works on, metrics nobody owns, and teams duplicating each other.</p>
+      <a href="/app?q=Are%20we%20wasting%20effort%20anywhere%3F">Are we wasting effort anywhere? →</a>
+    </div>
+  </section>
+
+  <section class="l-why">
+    <div>
+      <div class="label">Why a graph</div>
+      <h2 class="display">Every answer is a chain, not a passage of text.</h2>
+      <p class="muted">Remove FalkorDB and none of these answers exist.</p>
+    </div>
+    <ul class="l-list">
+      <li><b>Any depth.</b> Everything that relies on an assumption, followed as far as it goes with one variable-length pattern.</li>
+      <li><b>PageRank.</b> Untested assumptions ranked by how much work rests on them.</li>
+      <li><b>Connected components.</b> Proof that two teams building the same thing share no chain of conversation.</li>
+      <li><b>Proof of absence.</b> Work with no path to a live goal, and "not in the graph" instead of a guess.</li>
+    </ul>
+  </section>
+
+  <section class="l-safe card">
+    <div class="label">Safe by design</div>
+    <p>Answers run fixed, read-only Cypher. A language model may pick a tool and phrase a summary, but every id and number it writes is checked against the graph.
+      Fixes are tried on a <span class="mono">GRAPH.COPY</span> sandbox first and change the real graph only after a person approves.</p>
+  </section>
+
+  <section class="l-stats">
+    <div><span class="v">30</span><span class="k">decisions judged</span></div>
+    <div><span class="v">438</span><span class="k">threads and documents</span></div>
+    <div><span class="v">1,310</span><span class="k">nodes</span></div>
+    <div><span class="v">2,972</span><span class="k">relationships</span></div>
+  </section>
+</main>
+
+<footer class="l-foot">
+  <span>Built on FalkorDB. The demo company and all its people and data are fictional.</span>
+  <a href="https://github.com/maneesh-30/splat" target="_blank" rel="noopener">GitHub</a>
+</footer>
+</body>
+</html>
