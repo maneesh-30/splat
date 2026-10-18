@@ -20,6 +20,16 @@ app = FastAPI(title="Splat", docs_url="/api/docs")
 app.mount("/static", StaticFiles(directory=STATIC), name="static")
 
 
+@app.middleware("http")
+async def revalidate_page_files(request, call_next):
+    # Make browsers check for a newer page and script on every load, so an
+    # update is never hidden behind a stale cached copy.
+    response = await call_next(request)
+    if request.url.path == "/" or request.url.path.startswith("/static/"):
+        response.headers["Cache-Control"] = "no-cache"
+    return response
+
+
 @app.exception_handler(DatabaseUnavailable)
 def database_unavailable(_, exc: DatabaseUnavailable) -> JSONResponse:
     # Say plainly that the graph is unreachable instead of answering from nothing.
