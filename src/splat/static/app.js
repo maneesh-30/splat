@@ -155,39 +155,75 @@ const NODE = {
   Person: { color: "#8a8f98", shape: "ellipse", name: "Person" },
   Team: { color: "#e0a3c8", shape: "round-octagon", name: "Team" },
 };
-const EDGE_TEXT = { RELIES_ON: "relies on" };
+// Plain-English names for relationships, so arrows read as sentences.
+const EDGE_TEXT = {
+  RELIES_ON: "relies on", RESTS_ON: "rests on", CONTRADICTED_BY: "disproved by", SUPPORTED_BY: "supported by",
+  EXPECTS: "promised to move", DECIDED_IN: "recorded in", BUILDS_ON: "builds on", DEPENDS_ON: "depends on",
+  PART_OF: "part of", SERVES: "serves", TRACKED_BY: "measured by", SUPERSEDES: "replaced", AFFECTED: "hit",
+  REPORTED_IN: "reported in", BUILDS: "builds", FOR: "created", DECIDED: "decided", OWNS: "owns",
+  ASSIGNED_TO: "assigned to",
+};
 let verdictOf = {};
+let disprovedIds = new Set();
 const ID_RE = /\b(?:D|A|EP|G|I|KES|GH|INC)-\d+\b|\b(?:docs|slack|incidents)\/[\w\-./]+/g;
 
 function nodeColor(n) {
   if (n.label === "Decision" && verdictOf[n.id]) return VERDICT[verdictOf[n.id]].color;
-  if (n.label === "Assumption") return n.disproved ? "#ef6a6a" : n.status === "supported" ? "#3dd68c" : "#f5b544";
+  if (n.label === "Assumption") {
+    const disproved = n.disproved || disprovedIds.has(n.id);
+    return disproved ? "#ef6a6a" : n.status === "supported" ? "#3dd68c" : "#f5b544";
+  }
   return (NODE[n.label] || NODE.Source).color;
 }
 
-function drawGraph(container, data, layout = "cose", onTap) {
+const clip = (t, n) => (t.length > n ? t.slice(0, n - 1).trimEnd() + "…" : t);
+
+// Card text: what kind of thing it is and its id, then a short title.
+function cardText(n) {
+  const kind = ((NODE[n.label] || {}).name || n.label).toUpperCase();
+  if (n.label === "Source") {
+    const where = n.id.startsWith("slack/") ? "SLACK THREAD" : n.id.startsWith("incidents/") ? "INCIDENT REPORT" : "DOCUMENT";
+    return `${where}\n${clip(n.title.replace(/^Decision record /, ""), 34)}`;
+  }
+  if (["Metric", "Capability", "Person", "Team"].includes(n.label)) return `${kind}\n${clip(n.title, 34)}`;
+  return `${kind} ${n.id}\n${clip(n.title, 34)}`;
+}
+
+// cards: readable boxes for small answer graphs. dots: compact markers for the big map.
+function drawGraph(container, data, { layout = "cose", onTap = null, root = null, cards = false } = {}) {
   const elements = [
-    ...data.nodes.map((n) => ({ data: { id: n.id, short: n.label === "Source" || n.label === "Person" || n.label === "Metric" ? n.title : n.id,
-      title: n.title, kind: n.label, color: nodeColor(n), shape: (NODE[n.label] || NODE.Source).shape, raw: n } })),
-    ...data.edges.map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target, label: EDGE_TEXT[e.type] || e.type.toLowerCase().replace(/_/g, " ") } })),
+    ...data.nodes.map((n) => ({ data: {
+      id: n.id, raw: n, kind: n.label, color: nodeColor(n), shape: (NODE[n.label] || NODE.Source).shape,
+      text: cards ? cardText(n) : (["Source", "Person", "Metric", "Team"].includes(n.label) ? n.title : n.id) } })),
+    ...data.edges.map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target,
+      label: EDGE_TEXT[e.type] || e.type.toLowerCase().replace(/_/g, " ") } })),
   ];
+  const nodeStyle = cards
+    ? { shape: "round-rectangle", "background-color": "#17191c", "border-width": 2, "border-color": "data(color)",
+        label: "data(text)", color: "#e7eaef", "font-size": 11, "font-family": "Inter, sans-serif",
+        "text-valign": "center", "text-halign": "center", "text-wrap": "wrap", "text-max-width": 170,
+        width: "label", height: "label", padding: "9px", "line-height": 1.35 }
+    : { "background-color": "data(color)", shape: "data(shape)", width: 30, height: 30, label: "data(text)",
+        color: "#d9dce1", "font-size": 10, "font-family": "Roboto Mono, monospace", "min-zoomed-font-size": 5,
+        "text-valign": "bottom", "text-margin-y": 5, "text-wrap": "ellipsis", "text-max-width": 120,
+        "border-width": 1, "border-color": "#0b0b0d" };
   const cy = cytoscape({
     container, elements, wheelSensitivity: 0.25, minZoom: 0.2, maxZoom: 3,
     style: [
-      { selector: "node", style: { "background-color": "data(color)", shape: "data(shape)", width: 30, height: 30,
-        label: "data(short)", color: "#d9dce1", "font-size": 10, "font-family": "Roboto Mono, monospace", "min-zoomed-font-size": 5,
-        "text-valign": "bottom", "text-margin-y": 5, "text-wrap": "ellipsis", "text-max-width": 120,
-        "border-width": 1, "border-color": "#0b0b0d" } },
-      { selector: "node[kind = 'Goal']", style: { width: 46, height: 34, "font-size": 12, color: "#fff" } },
-      { selector: "edge", style: { width: 1.2, "line-color": "#3a3d44", "target-arrow-color": "#3a3d44",
-        "target-arrow-shape": "triangle", "arrow-scale": 0.8, "curve-style": "bezier", label: "data(label)",
-        "font-size": 7, color: "#6f747d", "text-rotation": "autorotate", "text-background-color": "#0b0b0d",
-        "text-background-opacity": 1, "text-background-padding": 1, "min-zoomed-font-size": 9 } },
+      { selector: "node", style: nodeStyle },
+      { selector: "node[kind = 'Goal']", style: cards ? {} : { width: 46, height: 34, "font-size": 12, color: "#fff" } },
+      { selector: "edge", style: { width: cards ? 1.6 : 1.2, "line-color": cards ? "#565a62" : "#3a3d44",
+        "target-arrow-color": cards ? "#565a62" : "#3a3d44", "target-arrow-shape": "triangle", "arrow-scale": 0.9,
+        "curve-style": cards ? "taxi" : "bezier", "taxi-direction": "downward", label: "data(label)",
+        "font-size": cards ? 9 : 7, color: cards ? "#9aa0aa" : "#6f747d", "font-family": "Inter, sans-serif",
+        "text-rotation": cards ? "none" : "autorotate", "text-background-color": "#0b0b0d",
+        "text-background-opacity": 1, "text-background-padding": 2, "min-zoomed-font-size": cards ? 4 : 9 } },
       { selector: "node:selected", style: { "border-width": 3, "border-color": "#fff" } },
       { selector: ".faded", style: { opacity: 0.15 } },
     ],
     layout: layout === "tree"
-      ? { name: "breadthfirst", directed: true, spacingFactor: 1.1, padding: 20 }
+      ? { name: "breadthfirst", directed: !root, roots: root ? [root] : undefined, spacingFactor: cards ? 0.95 : 1.1,
+          padding: 16, avoidOverlap: true }
       : { name: "cose", animate: false, nodeRepulsion: 6000, idealEdgeLength: 60, gravity: 1.2, padding: 16, componentSpacing: 40 },
   });
   cy.on("tap", "node", (evt) => {
@@ -197,7 +233,15 @@ function drawGraph(container, data, layout = "cose", onTap) {
     if (onTap) onTap(node.data("raw"));
   });
   cy.on("tap", (evt) => { if (evt.target === cy) cy.elements().removeClass("faded"); });
-  cy.ready(() => cy.fit(undefined, 16));
+  const fit = () => {
+    cy.resize();
+    cy.fit(undefined, 16);
+    // Keep small answer graphs readable: never shrink cards below a legible size.
+    if (cards && cy.zoom() < 0.75) { cy.zoom(0.75); cy.center(); }
+  };
+  cy.ready(fit);
+  // Refit whenever the container changes size (window resized, panel opened).
+  new ResizeObserver(() => { if (container.offsetWidth) fit(); }).observe(container);
   container.cy = cy;
   return cy;
 }
@@ -207,23 +251,29 @@ function legendHtml(labels) {
     + `<span class="swatch"><i style="background:#ef6a6a"></i>Disproved</span><span class="swatch"><i style="background:#3dd68c"></i>Worked / supported</span>`;
 }
 
+const ANSWER_LEGEND = `<div class="graph-legend">Arrows read as sentences, for example “decision rests on assumption”.
+  Decisions are outlined in their verdict colour; assumptions in red when disproved, green when supported, amber when never tested.</div>`;
+
 // Draw the subgraph behind an answer, on demand.
 document.addEventListener("click", async (e) => {
   const btn = e.target.closest("[data-graph]");
   if (!btn) return;
   const box = btn.nextElementSibling;
-  if (!box.hidden) { box.hidden = true; btn.textContent = "Show the graph behind this answer"; return; }
+  const legend = box.nextElementSibling;
+  if (!box.hidden) { box.hidden = true; legend.hidden = true; btn.textContent = "Show the graph behind this answer"; return; }
   box.hidden = false;
+  legend.hidden = false;
   btn.textContent = "Hide graph";
   box.innerHTML = "";
   const payload = JSON.parse(btn.dataset.graph);
   if (payload.blast) {
-    drawGraph(box, payload.blast, "tree");
+    drawGraph(box, payload.blast, { layout: "tree", root: payload.blast.nodes[0].id, cards: true });
     return;
   }
   try {
     const g = await api("/api/graph?ids=" + encodeURIComponent(payload.ids.join(",")));
-    drawGraph(box, g, "cose");
+    const root = g.nodes.some((n) => n.id === payload.root) ? payload.root : null;
+    drawGraph(box, g, { layout: "tree", root, cards: true });
   } catch (err) {
     box.innerHTML = `<p class="muted" style="padding:12px">${esc(err.message)}</p>`;
   }
@@ -234,15 +284,20 @@ function graphButton(a) {
   if (a.tool === "blast_radius" && a.data && a.data.items) {
     const b = a.data;
     payload = { blast: {
-      nodes: [{ id: b.assumption, label: "Assumption", title: b.assumption, disproved: false },
+      nodes: [{ id: b.assumption, label: "Assumption", title: b.assumption, disproved: disprovedIds.has(b.assumption) },
         ...b.items.map((i) => ({ id: i.id, label: i.kind, title: i.title, status: i.status }))],
       edges: b.edges.map((e) => ({ source: e.child, target: e.parent, type: "RELIES_ON" })) } };
   } else {
-    const ids = [...new Set((JSON.stringify(a.data || {}) + " " + (a.sources || []).join(" ")).match(ID_RE) || [])].slice(0, 60);
+    let ids = [...new Set((JSON.stringify(a.data || {}) + " " + (a.sources || []).join(" ")).match(ID_RE) || [])].slice(0, 40);
+    // "Did it work?" is about the decision's promise and reasons, not where its epic sits in the plan.
+    if (a.tool === "verdict") ids = ids.filter((i) => !i.startsWith("EP-"));
     if (!ids.length) return "";
-    payload = { ids };
+    // Start the tree from what the question was about, when there is one subject.
+    const root = (a.tool === "verdict" || a.tool === "why") && a.data ? a.data.id : null;
+    payload = { ids, root };
   }
-  return `<button class="btn toggle-graph" data-graph='${esc(JSON.stringify(payload))}'>Show the graph behind this answer</button><div class="graph-canvas" hidden></div>`;
+  return `<button class="btn toggle-graph" data-graph='${esc(JSON.stringify(payload))}'>Show the graph behind this answer</button>`
+    + `<div class="graph-canvas" hidden></div><div hidden>${ANSWER_LEGEND}</div>`;
 }
 
 // The company map view.
@@ -255,7 +310,7 @@ async function loadMap() {
   try {
     const m = await api("/api/map");
     $("#map").innerHTML = "";
-    drawGraph($("#map"), m, "cose", showNode);
+    drawGraph($("#map"), m, { onTap: showNode });
     $("#map-trace").innerHTML = renderTrace(m.queries, m.ms, "company_map");
   } catch (err) {
     mapDrawn = false;
@@ -309,6 +364,7 @@ async function loadOverview() {
     const o = await api("/api/overview");
     $("#company").textContent = `Kestrel · data as of ${o.as_of}`;
     verdictOf = Object.fromEntries(o.scorecard.decisions.map((d) => [d.id, d.verdict]));
+    disprovedIds = new Set(o.cascade.map((a) => a.id));
     renderTiles(o);
     renderOutcomes(o.scorecard);
     renderAssumptions(o);
