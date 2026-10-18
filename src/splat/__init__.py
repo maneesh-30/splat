@@ -10,6 +10,7 @@ def main() -> None:
     sub.add_parser("health", help="check the FalkorDB connection (default)")
     sub.add_parser("generate", help="regenerate the synthetic company data")
     sub.add_parser("load", help="load the company data into FalkorDB")
+    sub.add_parser("serve", help="run the web app on http://localhost:8000")
     ask = sub.add_parser("ask", help="ask a question")
     ask.add_argument("question", nargs="+")
     ask.add_argument("--trace", action="store_true", help="print every query that ran")
@@ -22,6 +23,9 @@ def main() -> None:
         elif args.command == "load":
             from splat.ingest import main as load
             load()
+        elif args.command == "serve":
+            from splat.web import run
+            run()
         elif args.command == "ask":
             from splat.agent import Agent
             from splat.tools import Tools
