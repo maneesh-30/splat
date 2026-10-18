@@ -525,3 +525,7 @@ document.addEventListener("click", async (e) => {
 });
 
 loadOverview();
+
+// Links from the landing page open the app with a question already asked: /app?q=...
+const startQuestion = new URLSearchParams(location.search).get("q");
+if (startQuestion) ask(startQuestion);

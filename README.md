@@ -4,7 +4,7 @@
 
 Companies remember *what* they decided. They rarely check *whether it worked*, and they almost never notice when the reason a decision was made stops being true. Splat connects decisions, the assumptions they rest on, the results they promised, the evidence for and against them, and the goals and work they created into one knowledge graph in [FalkorDB](https://www.falkordb.com/). Every answer is computed from that graph, cites the files it came from, and shows the queries that produced it.
 
-**Live demo: https://splat-i2jd.onrender.com** (no sign-up, no key). It runs on a free plan, so if it has been idle the first load can take up to a minute; everything after that is quick. To run it on your own machine instead, see [Run it locally](#run-it-locally).
+**Live demo: https://splat-i2jd.onrender.com** (no sign-up, no key; the app itself is at [/app](https://splat-i2jd.onrender.com/app)). It runs on a free plan, so if it has been idle the first load can take up to a minute; everything after that is quick. To run it on your own machine instead, see [Run it locally](#run-it-locally).
 
 Ask it, for example:
 

@@ -25,7 +25,7 @@ async def revalidate_page_files(request, call_next):
     # Make browsers check for a newer page and script on every load, so an
     # update is never hidden behind a stale cached copy.
     response = await call_next(request)
-    if request.url.path == "/" or request.url.path.startswith("/static/"):
+    if request.url.path in ("/", "/app") or request.url.path.startswith("/static/"):
         response.headers["Cache-Control"] = "no-cache"
     return response
 
@@ -41,6 +41,11 @@ def tools() -> Tools:
 
 
 @app.get("/")
+def landing() -> FileResponse:
+    return FileResponse(STATIC / "landing.html")
+
+
+@app.get("/app")
 def index() -> FileResponse:
     return FileResponse(STATIC / "index.html")
 
