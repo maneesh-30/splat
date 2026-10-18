@@ -4,6 +4,8 @@
 
 Companies remember *what* they decided. They rarely check *whether it worked*, and they almost never notice when the reason a decision was made stops being true. Splat connects decisions, the assumptions they rest on, the results they promised, the evidence for and against them, and the goals and work they created into one knowledge graph in [FalkorDB](https://www.falkordb.com/). Every answer is computed from that graph, cites the files it came from, and shows the queries that produced it.
 
+**Demo video: https://youtu.be/1Ah_t_ckVZw**
+
 **Live demo: https://splat-i2jd.onrender.com** (no sign-up, no key; the app itself is at [/app](https://splat-i2jd.onrender.com/app)). It runs on a free plan, so if it has been idle the first load can take up to a minute; everything after that is quick. To run it on your own machine instead, see [Run it locally](#run-it-locally).
 
 Ask it, for example:
@@ -16,6 +18,7 @@ Ask it, for example:
 | *Are we wasting effort anywhere?* | 4 epics and 4 tickets with no path to a live goal, including EU work that continued for months after the EU launch was cancelled. |
 | *Are two teams building the same thing?* | Payments and Platform are both building retry tooling, and they sit in separate conversation islands: no chain of people who have talked connects them. |
 | *Who knows the most about webhook retries?* | People ranked by evidence: Neha Moreau decided D-112, wrote its record, worked ticket KES-148 and led the epic; every item is cited. |
+| *What is the Growth team working on?* | Its 6 current members, its active epics with their open tickets, and its recent decisions, each with its source. |
 | *Who owns EP-13?* | The Payments team, through decision D-112 by Neha Moreau, toward goal G-5. |
 | *What changed in the last 30 days?* | A decision replaced, an assumption disproved by an exit survey, new decisions, each with its source. |
 | *Did the blockchain rewrite work?* | **Not in the graph.** Nothing is guessed. |
@@ -336,6 +339,8 @@ The company contains planted stories (decisions that worked, missed and overlapp
 
 ```
 src/splat/
+  __init__.py   the command line: health, generate, load, serve, ask
+  db.py         FalkorDB connection, health check and graph copies
   generate.py   synthetic company and its tool exports
   exports.py    reading and writing the export formats
   schema.py     indexes and constraints
@@ -346,12 +351,14 @@ src/splat/
   llm.py        optional model routing and checked summaries
   actions.py    proposed fixes, sandbox dry runs and approved writes
   learn.py      reading new messages into the graph, with a sandbox check and approval
-  web.py        HTTP API
-  static/       the web app (HTML, CSS, JavaScript, Cytoscape.js)
+  web.py        HTTP API, serving the landing page at / and the app at /app
+  static/       the landing page and the web app (HTML, CSS, JavaScript, Cytoscape.js)
 data/kestrel/   the company as tool exports
 docker-compose.yml   FalkorDB, pinned by digest
 Dockerfile           FalkorDB and the app in one image, for deployment
+docker-entrypoint.sh starts FalkorDB, loads the data and serves the app inside that image
 render.yaml          the live demo's deployment on Render
+.github/workflows/keepwarm.yml   pings the live demo every 10 minutes so it stays awake
 ```
 
 ## AI assistance
