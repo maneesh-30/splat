@@ -232,16 +232,41 @@ RETURN g.id, g.title, g.cancelled_at, i.id, i.title, i.status, p.id, p.title, p.
        count(t) AS tasks_after_cancel
 """
 
-# A metric is unowned if nobody owns it, or if its owner no longer belongs to any team.
+# A metric is unowned when none of its owners still belongs to a team.
 UNOWNED_METRICS = """
 MATCH (m:Metric)
 OPTIONAL MATCH (o:Person)-[:OWNS]->(m)
 OPTIONAL MATCH (o)-[mem:MEMBER_OF]->(:Team) WHERE mem.until IS NULL
-OPTIONAL MATCH (o)-[left:MEMBER_OF]->(:Team) WHERE left.until IS NOT NULL
+WITH m, collect(DISTINCT CASE WHEN mem IS NULL THEN NULL ELSE o.id END) AS current
+WHERE size(current) = 0
+OPTIONAL MATCH (former:Person)-[:OWNS]->(m)
+OPTIONAL MATCH (former)-[left:MEMBER_OF]->(:Team) WHERE left.until IS NOT NULL
 OPTIONAL MATCH (g:Goal)-[:TRACKED_BY]->(m)
-WITH m, o, count(mem) AS current, max(left.until) AS left_on, collect(g.id + ' (' + g.status + ')') AS goals
-WHERE o IS NULL OR current = 0
-RETURN m.id, m.name, o.name, left_on, goals
+WITH m, former, max(left.until) AS left_on, collect(DISTINCT g.id + ' (' + g.status + ')') AS goals
+RETURN m.id, m.name, former.name, left_on, goals
+"""
+
+# Who should own an unowned metric: whoever decided to move it, else whoever owns
+# a goal it measures, provided they are still at the company.
+METRIC_OWNER_CANDIDATES = """
+MATCH (m:Metric {id: $metric})
+OPTIONAL MATCH (decider:Person)-[:DECIDED]->(d:Decision)-[:EXPECTS]->(m)
+OPTIONAL MATCH (decider)-[dm:MEMBER_OF]->(:Team) WHERE dm.until IS NULL
+OPTIONAL MATCH (goal_owner:Person)-[:OWNS]->(g:Goal)-[:TRACKED_BY]->(m)
+OPTIONAL MATCH (goal_owner)-[gm:MEMBER_OF]->(:Team) WHERE gm.until IS NULL
+RETURN collect(DISTINCT CASE WHEN dm IS NULL THEN NULL ELSE [decider.id, decider.name, d.id] END),
+       collect(DISTINCT CASE WHEN gm IS NULL THEN NULL ELSE [goal_owner.id, goal_owner.name, g.id] END)
+"""
+
+PROJECT_OWNERS = """
+UNWIND $ids AS pid
+MATCH (t:Team)-[:OWNS]->(p:Project {id: pid})
+MATCH (member:Person)-[m:MEMBER_OF]->(t) WHERE m.until IS NULL
+OPTIONAL MATCH (decider:Person)-[:DECIDED]->(:Decision)-[:FOR]->(p)
+WITH pid, decider, member ORDER BY member.id
+WITH pid, collect(DISTINCT decider)[0] AS decider, collect(member)[0] AS member
+WITH pid, coalesce(decider, member) AS lead
+RETURN pid, lead.id, lead.name
 """
 
 # Two active projects in different teams building the same capability.

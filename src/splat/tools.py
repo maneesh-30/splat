@@ -299,7 +299,7 @@ class Tools:
                  "initiative": {"id": r[3], "title": r[4], "status": r[5]},
                  "project": {"id": r[6], "title": r[7], "status": r[8]}, "tasks_after_cancel": r[9]}
                 for r in self._q("cancelled_goal_work", Q.CANCELLED_GOAL_WORK)
-                if r[8] == "active" or r[9] > 0]
+                if r[8] == "active"]
 
     def unowned_metrics(self) -> list[dict]:
         return [{"id": r[0], "name": r[1], "former_owner": r[2], "owner_left_on": r[3], "goals": r[4]}
@@ -322,6 +322,18 @@ class Tools:
                                      "people": len(islands["groups"][k]["people"])}
                                     for k in sorted(ia | ib) if len(islands["groups"][k]["people"]) > 1]})
         return out
+
+    def suggest_metric_owner(self, metric_id: str) -> dict | None:
+        deciders, goal_owners = self._q("metric_owner_candidates", Q.METRIC_OWNER_CANDIDATES, metric=metric_id)[0]
+        for pid, name, did in deciders:
+            return {"id": pid, "name": name, "reason": f"decided {did}, which promised to move it"}
+        for pid, name, gid in goal_owners:
+            return {"id": pid, "name": name, "reason": f"owns goal {gid}, which it measures"}
+        return None
+
+    def project_owners(self, project_ids: list[str]) -> list[dict]:
+        rows = {r[0]: {"id": r[1], "name": r[2]} for r in self._q("project_owners", Q.PROJECT_OWNERS, ids=project_ids)}
+        return [rows[p] for p in project_ids if p in rows]
 
     def _teams(self) -> list[dict]:
         return [{"id": r[0], "name": r[1]} for r in self._q("teams", "MATCH (t:Team) RETURN t.id, t.name")]
