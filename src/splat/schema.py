@@ -21,6 +21,13 @@ FULLTEXT = {
     "Decision": ["title"],
     "Assumption": ["statement"],
     "Project": ["title"],
+    # Searching what people actually wrote and worked on is how "who knows what" is found.
+    "Source": ["title", "text"],
+    "Task": ["title"],
+    "Metric": ["name"],
+    "Goal": ["title"],
+    "Team": ["name"],
+    "Capability": ["name"],
 }
 
 

@@ -16,7 +16,7 @@ RETURN n.id, coalesce(n.title, n.statement) ORDER BY n.id
 
 FIND = """
 CALL db.idx.fulltext.queryNodes($label, $text) YIELD node, score
-RETURN node.id AS id, coalesce(node.title, node.statement) AS text, score
+RETURN node.id AS id, coalesce(node.title, node.statement, node.name) AS text, score
 ORDER BY score DESC LIMIT $limit
 """
 
@@ -185,6 +185,138 @@ RETURN DISTINCT a.id, type(r), b.id
 # metrics connect. About a hundred nodes, small enough to read.
 MAP_LABELS = ["Goal", "Initiative", "Project", "Decision", "Assumption", "Metric", "Capability"]
 MAP_IDS = "MATCH (n) WHERE labels(n)[0] IN $labels RETURN collect(n.id)"
+
+# --- People: who owns what, who knows what ------------------------------------------
+
+# Evidence of knowing about a topic: every thread, document, ticket, epic and
+# decision whose text matches it, and the people connected to each one.
+KNOWS_SOURCES = """
+CALL db.idx.fulltext.queryNodes('Source', $text) YIELD node, score
+WITH node, score ORDER BY score DESC LIMIT 40
+OPTIONAL MATCH (author:Person)-[:AUTHORED]->(node)
+OPTIONAL MATCH (poster:Person)-[:POSTED_IN]->(node)
+RETURN node.id, node.title, node.at, score, author.id, collect(DISTINCT poster.id)
+"""
+
+KNOWS_TASKS = """
+CALL db.idx.fulltext.queryNodes('Task', $text) YIELD node, score
+WITH node, score ORDER BY score DESC LIMIT 40
+MATCH (node)-[:ASSIGNED_TO]->(p:Person)
+RETURN node.id, node.title, coalesce(node.closed_at, node.created_at), score, p.id
+"""
+
+KNOWS_PROJECTS = """
+CALL db.idx.fulltext.queryNodes('Project', $text) YIELD node, score
+WITH node, score ORDER BY score DESC LIMIT 10
+MATCH (t:Task)-[:PART_OF]->(node)
+MATCH (t)-[:ASSIGNED_TO]->(p:Person)
+RETURN node.id, node.title, score, p.id, count(t)
+"""
+
+KNOWS_DECISIONS = """
+CALL db.idx.fulltext.queryNodes('Decision', $text) YIELD node, score
+WITH node, score ORDER BY score DESC LIMIT 10
+MATCH (p:Person)-[:DECIDED]->(node)
+OPTIONAL MATCH (node)-[:DECIDED_IN]->(doc:Source)
+RETURN node.id, node.title, node.decided_at, score, p.id, doc.id
+"""
+
+PEOPLE = """
+MATCH (p:Person)
+OPTIONAL MATCH (p)-[now:MEMBER_OF]->(t:Team) WHERE now.until IS NULL
+OPTIONAL MATCH (p)-[was:MEMBER_OF]->(:Team) WHERE was.until IS NOT NULL
+RETURN p.id, p.name, t.name, max(was.until)
+"""
+
+# Ownership of one thing, whatever kind of thing it is.
+OWNERS_OF_PROJECT = """
+MATCH (e:Project {id: $id})
+OPTIONAL MATCH (team:Team)-[:OWNS]->(e)
+OPTIONAL MATCH (member:Person)-[m:MEMBER_OF]->(team) WHERE m.until IS NULL
+OPTIONAL MATCH (decider:Person)-[:DECIDED]->(d:Decision)-[:FOR]->(e)
+OPTIONAL MATCH (e)-[:PART_OF]->(i:Initiative)
+OPTIONAL MATCH (i)-[:SERVES]->(g:Goal)
+OPTIONAL MATCH (gowner:Person)-[:OWNS]->(g)
+RETURN e.id, e.title, e.status, team.name, collect(DISTINCT member.name),
+       collect(DISTINCT [decider.name, d.id, d.title]), i.id, i.title, g.id, g.title, g.status, gowner.name
+"""
+
+OWNERS_OF_METRIC = """
+MATCH (m:Metric {id: $id})
+OPTIONAL MATCH (o:Person)-[:OWNS]->(m)
+OPTIONAL MATCH (o)-[now:MEMBER_OF]->(t:Team) WHERE now.until IS NULL
+OPTIONAL MATCH (g:Goal)-[:TRACKED_BY]->(m)
+RETURN m.id, m.name, collect(DISTINCT [o.name, t.name]), collect(DISTINCT g.id + ': ' + g.title)
+"""
+
+OWNERS_OF_GOAL = """
+MATCH (g:Goal {id: $id})
+OPTIONAL MATCH (o:Person)-[:OWNS]->(g)
+OPTIONAL MATCH (o)-[now:MEMBER_OF]->(t:Team) WHERE now.until IS NULL
+OPTIONAL MATCH (i:Initiative)-[:SERVES]->(g)
+RETURN g.id, g.title, g.status, o.name, t.name, collect(DISTINCT i.id + ': ' + i.title)
+"""
+
+OWNERS_OF_DECISION = """
+MATCH (d:Decision {id: $id})
+OPTIONAL MATCH (p:Person)-[:DECIDED]->(d)
+OPTIONAL MATCH (p)-[now:MEMBER_OF]->(t:Team) WHERE now.until IS NULL
+OPTIONAL MATCH (d)-[:DECIDED_IN]->(doc:Source)
+RETURN d.id, d.title, p.name, t.name, doc.id
+"""
+
+# What a team is doing now: its open epics with open tickets, recent decisions, members.
+TEAM_WORK = """
+MATCH (t:Team {id: $team})
+OPTIONAL MATCH (p:Person)-[m:MEMBER_OF]->(t) WHERE m.until IS NULL
+WITH t, collect(p.name) AS members
+OPTIONAL MATCH (t)-[:OWNS]->(e:Project) WHERE e.status = 'active'
+OPTIONAL MATCH (task:Task)-[:PART_OF]->(e) WHERE task.closed_at IS NULL
+WITH t, members, e, collect(task.id + ': ' + task.title) AS open_tasks
+RETURN t.name, members, collect(CASE WHEN e IS NULL THEN NULL ELSE [e.id, e.title, open_tasks] END)
+"""
+
+TEAM_DECISIONS = """
+MATCH (p:Person)-[:MEMBER_OF]->(:Team {id: $team})
+MATCH (p)-[:DECIDED]->(d:Decision)
+OPTIONAL MATCH (d)-[:DECIDED_IN]->(doc:Source)
+RETURN DISTINCT d.id, d.title, d.decided_at, d.status, doc.id ORDER BY d.decided_at DESC LIMIT 6
+"""
+
+# --- What changed ------------------------------------------------------------------
+
+CHANGES = """
+MATCH (a:Assumption)-[c:CONTRADICTED_BY]->(s:Source) WHERE c.at >= $since
+RETURN 'assumption disproved' AS kind, c.at AS at, a.id AS id, a.statement AS what, s.id AS source
+UNION
+MATCH (new:Decision)-[:SUPERSEDES]->(old:Decision) WHERE new.decided_at >= $since
+OPTIONAL MATCH (new)-[:DECIDED_IN]->(s:Source)
+RETURN 'decision replaced' AS kind, new.decided_at AS at, old.id AS id,
+       old.title + ' replaced by ' + new.id + ' ' + new.title AS what, s.id AS source
+UNION
+MATCH (d:Decision) WHERE d.decided_at >= $since AND NOT (d)-[:SUPERSEDES]->()
+OPTIONAL MATCH (d)-[:DECIDED_IN]->(s:Source)
+RETURN 'decision made' AS kind, d.decided_at AS at, d.id AS id, d.title AS what, s.id AS source
+UNION
+MATCH (g:Goal) WHERE g.cancelled_at >= $since
+RETURN 'goal cancelled' AS kind, g.cancelled_at AS at, g.id AS id, g.title AS what, 'planning/goals.csv#' + g.id AS source
+UNION
+MATCH (p:Person)-[m:MEMBER_OF]->(t:Team) WHERE m.until >= $since
+OPTIONAL MATCH (p)-[now:MEMBER_OF]->(t2:Team) WHERE now.until IS NULL
+RETURN CASE WHEN t2 IS NULL THEN 'person left' ELSE 'person moved team' END AS kind, m.until AS at, p.id AS id,
+       p.name + CASE WHEN t2 IS NULL THEN ' left ' + t.name ELSE ' moved from ' + t.name + ' to ' + t2.name END AS what,
+       'org/memberships.csv#' + p.id AS source
+UNION
+MATCH (i:Incident)-[:AFFECTED]->(m:Metric) WHERE i.at >= $since
+OPTIONAL MATCH (i)-[:REPORTED_IN]->(s:Source)
+RETURN 'incident' AS kind, i.at AS at, i.id AS id, i.title + ' (hit ' + m.name + ')' AS what, s.id AS source
+"""
+
+# A single graph node by id, to show the record a structured fact came from.
+RECORD = """
+MATCH (n {id: $id})
+RETURN labels(n)[0], properties(n)
+"""
 
 # --- Goals and work ---------------------------------------------------------------
 

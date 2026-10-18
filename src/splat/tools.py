@@ -25,13 +25,42 @@ STOPWORDS = {"a", "an", "the", "to", "of", "in", "on", "for", "and", "or", "is",
               "did", "does", "do", "be", "by", "with", "this", "that", "what", "why", "how", "should",
               # words that frame a question rather than name the thing asked about
               "plan", "plans", "planning", "thinking", "tried", "try", "before", "similar", "been", "has",
-              "have", "want", "considering", "idea", "anyone", "someone", "already", "something"}
+              "have", "want", "considering", "idea", "anyone", "someone", "already", "something",
+              "who", "knows", "know", "most", "about", "expert", "experts", "ask", "talk", "owns", "own",
+              "responsible", "team", "working", "doing", "can", "could", "would", "need"}
 
 
 def search_terms(text: str) -> str:
     """Full-text query that matches any meaningful word (the index default is all words)."""
     words = [w for w in re.findall(r"[a-zA-Z0-9]+", text.lower()) if w not in STOPWORDS and len(w) > 2]
     return "|".join(dict.fromkeys(words))
+
+
+ROW_FILES = [("EP-", "planning/epics.csv"), ("KES-", "jira/issues.csv"), ("GH-", "github/pull_requests.csv"),
+             ("G-", "planning/goals.csv"), ("I-", "planning/initiatives.csv"), ("A-", "assumptions/register.csv"),
+             ("INC-", "incidents")]
+
+
+def row_source(node_id: str | None) -> str | None:
+    """Where a structured fact lives in the exports, e.g. planning/epics.csv#EP-11."""
+    if not node_id:
+        return None
+    for prefix, path in ROW_FILES:
+        if node_id.startswith(prefix):
+            return f"{path}#{node_id}"
+    if "@" in node_id:
+        return f"org/people.csv#{node_id}"
+    return f"metrics/metrics.csv#{node_id}"
+
+
+def _dedupe(items: list[dict]) -> list[dict]:
+    seen, out = set(), []
+    for item in items:
+        key = (item["kind"], item["id"])
+        if key not in seen:
+            seen.add(key)
+            out.append(item)
+    return out
 
 
 @dataclass
@@ -326,6 +355,112 @@ class Tools:
                                      "people": len(islands["groups"][k]["people"])}
                                     for k in sorted(ia | ib) if len(islands["groups"][k]["people"]) > 1]})
         return out
+
+    # -- people: who knows, who owns, what a team does ------------------------------
+
+    def _people(self) -> dict[str, dict]:
+        return {r[0]: {"id": r[0], "name": r[1], "team": r[2], "left_on": r[3] if not r[2] else None}
+                for r in self._q("people", Q.PEOPLE)}
+
+    def who_knows(self, text: str, limit: int = 5) -> dict:
+        """People ranked by evidence that they know a topic: decisions they made, tickets
+        they worked, threads and documents they wrote or replied in."""
+        terms = search_terms(text)
+        if not terms:
+            return {"topic": text, "people": [], "former": []}
+        weights = {"decided": 4, "ticket": 2, "authored": 2, "replied": 1, "epic": 1}
+        score: dict[str, float] = {}
+        evidence: dict[str, list[dict]] = {}
+
+        def add(pid, kind, item, source, title):
+            if not pid:
+                return
+            score[pid] = score.get(pid, 0) + weights[kind]
+            evidence.setdefault(pid, []).append({"kind": kind, "id": item, "title": title, "source": source})
+
+        for sid, title, at, _, author, posters in self._q("knows_sources", Q.KNOWS_SOURCES, text=terms):
+            add(author, "authored", sid, sid, title)
+            for p in posters:
+                if p != author:
+                    add(p, "replied", sid, sid, title)
+        for tid, title, at, _, pid in self._q("knows_tasks", Q.KNOWS_TASKS, text=terms):
+            add(pid, "ticket", tid, row_source(tid), title)
+        for did, title, at, _, pid, doc in self._q("knows_decisions", Q.KNOWS_DECISIONS, text=terms):
+            add(pid, "decided", did, doc, title)
+        for eid, title, _, pid, n in self._q("knows_projects", Q.KNOWS_PROJECTS, text=terms):
+            for _ in range(min(int(n), 3)):
+                add(pid, "epic", eid, row_source(eid), title)
+
+        people = self._people()
+        ranked = sorted(score, key=lambda p: -score[p])
+        out, former = [], []
+        for pid in ranked:
+            person = {**people.get(pid, {"id": pid, "name": pid, "team": None, "left_on": None}),
+                      "score": score[pid], "evidence": _dedupe(evidence[pid])}
+            (out if person["team"] else former).append(person)
+        return {"topic": text, "people": out[:limit], "former": former[:3]}
+
+    def who_owns(self, node_id: str) -> dict:
+        """Who is responsible for an epic, metric, goal or decision."""
+        if node_id.startswith("EP-"):
+            rows = self._q("owners_of_project", Q.OWNERS_OF_PROJECT, id=node_id)
+            if not rows:
+                return {"found": False}
+            (eid, title, status, team, members, deciders, ini, ini_title, gid, gtitle, gstatus, gowner) = rows[0]
+            return {"found": True, "kind": "Epic", "id": eid, "title": title, "status": status, "team": team,
+                    "members": members, "deciders": [d for d in deciders if d[0]],
+                    "initiative": ini and f"{ini}: {ini_title}", "goal": gid and f"{gid}: {gtitle} ({gstatus})",
+                    "goal_owner": gowner, "sources": [row_source(eid)] + ([row_source(gid)] if gid else [])}
+        if node_id.startswith("G-"):
+            rows = self._q("owners_of_goal", Q.OWNERS_OF_GOAL, id=node_id)
+            if not rows:
+                return {"found": False}
+            gid, title, status, owner, team, initiatives = rows[0]
+            return {"found": True, "kind": "Goal", "id": gid, "title": title, "status": status, "owner": owner,
+                    "owner_team": team, "initiatives": initiatives, "sources": [row_source(gid)]}
+        if node_id.startswith("D-"):
+            rows = self._q("owners_of_decision", Q.OWNERS_OF_DECISION, id=node_id)
+            if not rows:
+                return {"found": False}
+            did, title, decider, team, doc = rows[0]
+            return {"found": True, "kind": "Decision", "id": did, "title": title, "owner": decider,
+                    "owner_team": team, "sources": [doc] if doc else []}
+        rows = self._q("owners_of_metric", Q.OWNERS_OF_METRIC, id=node_id)
+        if not rows:
+            return {"found": False}
+        mid, name, owners, goals = rows[0]
+        return {"found": True, "kind": "Metric", "id": mid, "title": name,
+                "owners": [{"name": o, "current": bool(t)} for o, t in owners if o], "goals": goals,
+                "sources": [row_source(mid)]}
+
+    def team_work(self, team_id: str) -> dict:
+        rows = self._q("team_work", Q.TEAM_WORK, team=team_id)
+        if not rows or rows[0][0] is None:
+            return {"found": False}
+        name, members, epics = rows[0]
+        decisions = [{"id": r[0], "title": r[1], "decided_at": r[2], "status": r[3], "source": r[4]}
+                     for r in self._q("team_decisions", Q.TEAM_DECISIONS, team=team_id)]
+        return {"found": True, "team": name, "members": members,
+                "epics": [{"id": e[0], "title": e[1], "open_tasks": e[2]} for e in epics if e],
+                "decisions": decisions}
+
+    def changes(self, days: int = 90) -> dict:
+        since = (self.as_of - timedelta(days=days)).isoformat()
+        rows = self._q("changes", Q.CHANGES, since=since)
+        items = sorted(({"kind": r[0], "at": r[1], "id": r[2], "what": r[3], "source": r[4]} for r in rows),
+                       key=lambda x: x["at"], reverse=True)
+        return {"since": since, "until": self.as_of.isoformat(), "items": items}
+
+    def record(self, row_id: str) -> dict | None:
+        """The graph record behind a structured source such as planning/epics.csv#EP-11."""
+        path, _, node_id = row_id.partition("#")
+        rows = self._q("record", Q.RECORD, id=node_id)
+        if not rows:
+            return None
+        label, props = rows[0]
+        text = "\n".join(f"{k}: {v}" for k, v in sorted(props.items()) if k not in ("embedding",))
+        return {"id": row_id, "kind": "record", "title": f"{node_id} in {path}", "at": None, "author": None,
+                "text": text}
 
     def suggest_metric_owner(self, metric_id: str) -> dict | None:
         deciders, goal_owners = self._q("metric_owner_candidates", Q.METRIC_OWNER_CANDIDATES, metric=metric_id)[0]
