@@ -12,7 +12,13 @@
 <header class="top">
   <a class="brand" href="/" title="Back to the overview">
     <span class="mark" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="6" cy="12" r="3" fill="currentColor" fill-opacity="0.15"/>
+        <circle cx="18" cy="6" r="3" fill="currentColor" fill-opacity="0.15"/>
+        <circle cx="18" cy="18" r="3" fill="currentColor" fill-opacity="0.15"/>
+        <line x1="8.7" y1="10.7" x2="15.3" y2="7.3"/>
+        <line x1="8.7" y1="13.3" x2="15.3" y2="16.7"/>
+      </svg>
     </span>
     <span class="name">Splat</span>
   </a>
@@ -79,8 +85,58 @@
       <div id="map" class="graph-canvas"></div>
       <div id="map-info" class="map-info card"><span class="muted">Click a node.</span></div>
     </div>
+
+    <!-- Timeline scrubber -->
+    <div class="scrubber-wrap" id="scrubber-wrap" hidden>
+      <div class="scrubber-header">
+        <div class="scrubber-title-group">
+          <span class="scrubber-badge">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Timeline Replay
+          </span>
+          <span class="muted scrubber-caption">Scrub through decisions & graph changes</span>
+        </div>
+        <div class="scrubber-date-display">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="scrub-date" class="scrub-date-text"></span>
+          <span id="scrub-live-tag" class="scrub-live-pill">LIVE</span>
+        </div>
+        <div class="scrubber-nav-group">
+          <button id="scrub-start" class="btn scrub-nav-btn" title="Jump to earliest event">Start</button>
+          <button id="scrub-reset" class="btn scrub-nav-btn scrub-nav-btn-active" title="Reset to present">Now</button>
+        </div>
+      </div>
+
+      <div class="scrubber-control-row">
+        <button id="scrub-play" class="scrub-play-btn" title="Play timeline" aria-label="Play timeline">
+          <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M7 4.5l12 7.5-12 7.5V4.5z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><rect x="5.5" y="4.5" width="4" height="15" rx="1.5"/><rect x="14.5" y="4.5" width="4" height="15" rx="1.5"/></svg>
+        </button>
+        <div class="scrubber-track-wrap">
+          <div class="scrubber-ticks-container">
+            <div class="scrubber-ticks" id="scrubber-ticks"></div>
+          </div>
+          <input id="scrubber" type="range" min="0" max="100" value="100" class="scrubber-input" aria-label="Timeline scrubber">
+        </div>
+      </div>
+
+      <div class="scrub-legend">
+        <span class="scrub-legend-item"><i style="background:#8fb4ff"></i>Decision Decided</span>
+        <span class="scrub-legend-item"><i style="background:#3dd68c"></i>Decision Shipped</span>
+        <span class="scrub-legend-item"><i style="background:#ef6a6a"></i>Assumption Disproved</span>
+        <span class="scrub-legend-item"><i style="background:#f5b544"></i>Goal Cancelled</span>
+        <span class="scrub-legend-item"><i style="background:#e05f5f"></i>Incident</span>
+      </div>
+
+      <div class="scrub-activity-box">
+        <div class="scrub-activity-label">Activity on this date:</div>
+        <div id="scrub-events" class="scrub-events"></div>
+      </div>
+    </div>
+
     <div id="map-trace"></div>
   </section>
+
 
   <!-- Act -->
   <section class="view" data-view="act" hidden>

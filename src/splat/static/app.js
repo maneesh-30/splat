@@ -171,6 +171,7 @@ const EDGE_TEXT = {
 };
 let verdictOf = {};
 let disprovedIds = new Set();
+let globalAsOf = null; // set by loadOverview, used by the timeline scrubber
 const ID_RE = /\b(?:D|A|EP|G|I|KES|GH|INC)-\d+\b|\b(?:docs|slack|incidents)\/[\w\-./]+/g;
 
 function nodeColor(n) {
@@ -306,25 +307,303 @@ function graphButton(a) {
     + `<div class="graph-canvas" hidden></div><div hidden>${ANSWER_LEGEND}</div>`;
 }
 
-// The company map view.
+// The company map view — with timeline scrubber.
 let mapDrawn = false;
+let mapData = null; // full /api/map payload, kept for scrubber re-renders
+
 async function loadMap() {
   if (mapDrawn) return;
   mapDrawn = true;
-  $("#map-legend").innerHTML = legendHtml(["Goal", "Initiative", "Project", "Decision", "Assumption", "Metric", "Capability"]);
+  $("#map-legend").innerHTML = legendHtml(["Goal", "Initiative", "Project", "Decision", "Assumption", "Metric", "Capability"])
+    + `<span class="muted" style="margin-left:12px;font-size:11px">Drag · scroll to zoom</span>`;
   $("#map").innerHTML = loader("Drawing the company graph");
   try {
     const m = await api("/api/map");
+    mapData = m;
     $("#map").innerHTML = "";
     drawGraph($("#map"), m, { onTap: showNode });
     $("#map-trace").innerHTML = renderTrace(m.queries, m.ms, "company_map");
+    initScrubber(m);
   } catch (err) {
     mapDrawn = false;
     $("#map").innerHTML = `<p class="muted" style="padding:16px">${esc(err.message)}</p>`;
   }
 }
 
+
+// ---------------------------------------------------------------- timeline scrubber
+
+const KIND_LABEL = {
+  decision_decided:     "Decision made",
+  decision_shipped:     "Decision shipped",
+  assumption_disproved: "Assumption disproved",
+  goal_cancelled:       "Goal cancelled",
+  incident:             "Incident",
+  task_created:         "Task created",
+};
+
+let scrubPlaying = false;
+let scrubTimer   = null;
+let scrubTimeline = [];   // sorted events from /api/map
+let scrubBornAt   = {};   // node_id -> ISO date string
+let scrubMinMs    = 0;
+let scrubMaxMs    = 0;
+
+function initScrubber(m) {
+  if (!m.timeline || !m.timeline.length) return;
+  scrubTimeline = m.timeline;
+  scrubBornAt   = m.born_at || {};
+
+  // Scrubber range: first event date → as_of date
+  scrubMinMs = new Date(scrubTimeline[0].at).getTime();
+  const asOf = globalAsOf || scrubTimeline[scrubTimeline.length - 1].at;
+  scrubMaxMs = new Date(asOf).getTime();
+
+  const wrap = $("#scrubber-wrap");
+  wrap.hidden = false;
+
+  // Draw ticks
+  buildTicks(scrubTimeline);
+
+  // Seed slider
+  const slider = $("#scrubber");
+  slider.min = scrubMinMs;
+  slider.max = scrubMaxMs;
+  slider.value = scrubMaxMs;
+  updateScrubDate(scrubMaxMs);
+
+  if (!slider._hasScrubListeners) {
+    slider._hasScrubListeners = true;
+
+    slider.addEventListener("input", () => {
+      stopPlay();
+      applyScrub(Number(slider.value));
+    });
+
+    // Tick clicks jump slider to that date
+    $("#scrubber-ticks").addEventListener("click", (e) => {
+      const tick = e.target.closest(".scrub-tick");
+      if (!tick) return;
+      const ts = Number(tick.dataset.ts);
+      slider.value = ts;
+      stopPlay();
+      applyScrub(ts);
+    });
+
+    // Play button
+    $("#scrub-play").addEventListener("click", togglePlay);
+
+    // Jump to beginning
+    const startBtn = $("#scrub-start");
+    if (startBtn) {
+      startBtn.addEventListener("click", () => {
+        stopPlay();
+        slider.value = scrubMinMs;
+        applyScrub(scrubMinMs);
+      });
+    }
+
+    // Reset to present
+    $("#scrub-reset").addEventListener("click", () => {
+      stopPlay();
+      slider.value = scrubMaxMs;
+      applyScrub(scrubMaxMs);
+    });
+  }
+
+  // Initial state at "now"
+  applyScrub(scrubMaxMs);
+}
+
+function buildTicks(events) {
+  const container = $("#scrubber-ticks");
+  const totalMs = scrubMaxMs - scrubMinMs || 1;
+  // De-duplicate ticks that land within 0.5% of each other (many tasks on same day)
+  const placed = [];
+  const html = events.map(ev => {
+    const ts = new Date(ev.at).getTime();
+    const pct = ((ts - scrubMinMs) / totalMs) * 100;
+    // Suppress task_created ticks from visual clutter (show events but not ticks)
+    if (ev.kind === "task_created") return "";
+    const tooClose = placed.some(p => Math.abs(p - pct) < 0.4);
+    if (tooClose) return "";
+    placed.push(pct);
+    const label = esc(`${ev.at} (${KIND_LABEL[ev.kind] || ev.kind}): ${ev.what ? ev.what.slice(0, 60) : ev.id}`);
+    return `<div class="scrub-tick" data-kind="${esc(ev.kind)}" data-ts="${ts}"
+                 style="left:${pct.toFixed(2)}%" title="${label}"></div>`;
+  }).join("");
+  container.innerHTML = html;
+}
+
+function applyScrub(tsMs) {
+  const cy = $("#map").cy;
+  if (!cy) return;
+
+  const T = new Date(tsMs).toISOString().slice(0, 10); // "YYYY-MM-DD"
+  updateScrubDate(tsMs);
+
+  // Update track gradient fill
+  const slider = $("#scrubber");
+  if (slider) {
+    const total = scrubMaxMs - scrubMinMs || 1;
+    const pct = Math.min(100, Math.max(0, ((tsMs - scrubMinMs) / total) * 100));
+    slider.style.setProperty("--scrub-pct", `${pct.toFixed(2)}%`);
+  }
+
+  // Update nav button active states
+  const isPresent = tsMs >= scrubMaxMs;
+  const isStart = tsMs <= scrubMinMs;
+  const resetBtn = $("#scrub-reset");
+  if (resetBtn) resetBtn.classList.toggle("scrub-nav-btn-active", isPresent);
+  const startBtn = $("#scrub-start");
+  if (startBtn) startBtn.classList.toggle("scrub-nav-btn-active", isStart);
+
+  // --- Show/hide nodes ---
+  // Rules from our design: hide Decision/Task/Incident/Source if born_at > T.
+  // Everything else always visible; only re-coloured.
+  cy.nodes().forEach(node => {
+    const id = node.id();
+    const born = scrubBornAt[id];
+    if (born && born > T) {
+      node.style("display", "none");
+    } else {
+      node.style("display", "element");
+    }
+  });
+
+  // Hide edges where either endpoint is hidden
+  cy.edges().forEach(edge => {
+    const src = cy.getElementById(edge.data("source"));
+    const tgt = cy.getElementById(edge.data("target"));
+    const hidden = src.style("display") === "none" || tgt.style("display") === "none";
+    edge.style("display", hidden ? "none" : "element");
+  });
+
+  // --- Re-colour nodes based on status at T ---
+  cy.nodes().forEach(node => {
+    if (node.style("display") === "none") return;
+    const raw = node.data("raw");
+    if (!raw) return;
+    const recolored = statusAtT(raw, T);
+    node.style("background-color", recolored.color);
+    node.style("border-color", recolored.borderColor || recolored.color);
+  });
+
+  // --- Update "what happened" event strip ---
+  renderEventStrip(T);
+}
+
+function statusAtT(n, T) {
+  // Decisions: unshipped before shipped_at, else use verdict colour
+  if (n.label === "Decision") {
+    if (n.decided_at && n.decided_at > T) return { color: NODE.Decision.color };
+    if (!n.shipped_at || n.shipped_at > T) return { color: "#4b4f57" }; // not-shipped grey
+    // shipped — use the verdict colour if we have it, else decision default
+    const vc = verdictOf[n.id] ? VERDICT[verdictOf[n.id]].color : NODE.Decision.color;
+    return { color: vc };
+  }
+  // Assumptions: amber untested, red if contradicted_at <= T
+  if (n.label === "Assumption") {
+    const disproved = n.contradicted_at && n.contradicted_at <= T;
+    return { color: disproved ? "#ef6a6a" : (n.status === "supported" ? "#3dd68c" : "#f5b544") };
+  }
+  // Goals: active (bright) → cancelled (muted amber) when cancelled_at <= T
+  if (n.label === "Goal") {
+    if (n.cancelled_at && n.cancelled_at <= T) return { color: "#8a6a2a" };
+    return { color: NODE.Goal.color };
+  }
+  // All other node types: use their static colour
+  return { color: nodeColor(n) };
+}
+
+function renderEventStrip(T) {
+  // Show events on the current date (exact match) or the most recent day that has events
+  const onDay = scrubTimeline.filter(e => e.at === T && e.kind !== "task_created");
+  const isPresent = T >= new Date(scrubMaxMs).toISOString().slice(0, 10);
+
+  if (onDay.length) {
+    $("#scrub-events").innerHTML = onDay.map(e =>
+      `<span class="scrub-event scrub-event-${esc(e.kind)}"><i></i>${esc(KIND_LABEL[e.kind] || e.kind)}: ${esc((e.what || e.id).slice(0, 60))}</span>`
+    ).join("");
+    return;
+  }
+
+  // If nothing on this day, find previous events ≤ T
+  const prev = scrubTimeline.filter(e => e.at <= T && e.kind !== "task_created");
+  if (prev.length) {
+    const lastDate = prev[prev.length - 1].at;
+    const recent = prev.filter(e => e.at === lastDate);
+    $("#scrub-events").innerHTML =
+      `<span class="scrub-event-empty">No new events on this date &bull; Last event on ${esc(lastDate)}:</span> ` +
+      recent.map(e =>
+        `<span class="scrub-event scrub-event-${esc(e.kind)}"><i></i>${esc(KIND_LABEL[e.kind] || e.kind)}: ${esc((e.what || e.id).slice(0, 50))}</span>`
+      ).join("");
+    return;
+  }
+
+  $("#scrub-events").innerHTML = `<span class="scrub-event-empty">Before company recorded timeline events.</span>`;
+}
+
+function updateScrubDate(tsMs) {
+  const d = new Date(tsMs);
+  const isPresent = tsMs >= scrubMaxMs;
+  const formatted = d.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC"
+  });
+
+  const dateEl = $("#scrub-date");
+  if (dateEl) {
+    dateEl.textContent = formatted;
+  }
+  const liveTag = $("#scrub-live-tag");
+  if (liveTag) {
+    liveTag.hidden = !isPresent;
+  }
+}
+
+function togglePlay() {
+  scrubPlaying ? stopPlay() : startPlay();
+}
+
+function startPlay() {
+  scrubPlaying = true;
+  const playBtn = $("#scrub-play");
+  if (playBtn) {
+    playBtn.classList.add("playing");
+    playBtn.setAttribute("title", "Pause timeline");
+    playBtn.setAttribute("aria-label", "Pause timeline");
+  }
+  const slider = $("#scrubber");
+  // If at the end, restart from the beginning
+  if (Number(slider.value) >= scrubMaxMs) slider.value = scrubMinMs;
+  const totalMs = scrubMaxMs - scrubMinMs;
+  // 30 seconds to traverse the full year
+  const stepMs  = totalMs / (30 * 20); // 20 fps
+  scrubTimer = setInterval(() => {
+    const cur = Number(slider.value);
+    if (cur >= scrubMaxMs) { stopPlay(); slider.value = scrubMaxMs; applyScrub(scrubMaxMs); return; }
+    slider.value = cur + stepMs;
+    applyScrub(Number(slider.value));
+  }, 50);
+}
+
+function stopPlay() {
+  scrubPlaying = false;
+  clearInterval(scrubTimer);
+  const playBtn = $("#scrub-play");
+  if (playBtn) {
+    playBtn.classList.remove("playing");
+    playBtn.setAttribute("title", "Play timeline");
+    playBtn.setAttribute("aria-label", "Play timeline");
+  }
+}
+
+
 function showNode(n) {
+
   const kind = (NODE[n.label] || {}).name || n.label;
   const question = {
     Decision: `Did ${n.id} work?`, Assumption: `What breaks if ${n.id} is wrong?`,
@@ -495,6 +774,7 @@ async function loadOverview() {
     $("#company").textContent = `Kestrel · data as of ${o.as_of}`;
     verdictOf = Object.fromEntries(o.scorecard.decisions.map((d) => [d.id, d.verdict]));
     disprovedIds = new Set(o.cascade.map((a) => a.id));
+    globalAsOf = o.as_of; // used by scrubber
     renderTiles(o);
     renderOutcomes(o.scorecard);
     renderAssumptions(o);

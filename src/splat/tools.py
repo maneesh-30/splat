@@ -280,14 +280,41 @@ class Tools:
         return self._draw(ids)
 
     def company_map(self) -> dict:
-        return self._draw(self._q("map_ids", Q.MAP_IDS, labels=Q.MAP_LABELS)[0][0])
+        ids = self._q("map_ids", Q.MAP_IDS, labels=Q.MAP_LABELS)[0][0]
+        data = self._draw(ids)
+        data["timeline"] = self.timeline()
+        data["born_at"] = self._born_at(Q.MAP_LABELS)
+        return data
+
+    def timeline(self) -> list[dict]:
+        """All dated events ordered by date, for the client-side scrubber.
+        No queries run per tick; the full list is sent once with the map payload."""
+        rows = self._q("timeline", Q.TIMELINE)
+        events = [{"at": r[0], "kind": r[1], "id": r[2], "what": r[3], "source_id": r[4]}
+                  for r in rows if r[0]]
+        events.sort(key=lambda e: e["at"])
+        return events
+
+    def _born_at(self, labels: list[str]) -> dict[str, str]:
+        """Map of node_id -> ISO date string for nodes that have a creation date.
+        Structural nodes (Goal, Metric, Assumption, etc.) are not included;
+        they always existed and should never be hidden by the scrubber."""
+        rows = self._q("born_at", Q.BORN_AT, labels=labels)
+        return {r[0]: r[1] for r in rows if r[1]}
 
     def _draw(self, ids: list[str]) -> dict:
-        nodes = [{"id": r[0], "label": r[1], "title": r[2], "status": r[3], "disproved": r[4]}
-                 for r in self._q("graph_nodes", Q.GRAPH_NODES, ids=ids)]
+        nodes = [{
+            "id": r[0], "label": r[1], "title": r[2], "status": r[3], "disproved": r[4],
+            # Date fields for client-side scrubber status re-derivation.
+            "decided_at":      r[5],
+            "shipped_at":      r[6],
+            "cancelled_at":    r[7],
+            "contradicted_at": r[8],
+        } for r in self._q("graph_nodes", Q.GRAPH_NODES, ids=ids)]
         edges = [{"source": r[0], "type": r[1], "target": r[2]}
                  for r in self._q("graph_edges", Q.GRAPH_EDGES, ids=ids, types=Q.DRAWN)]
         return {"nodes": nodes, "edges": edges}
+
 
     def similar(self, text: str) -> list[dict]:
         clean = search_terms(text)

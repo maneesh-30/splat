@@ -172,7 +172,8 @@ MATCH (n) WHERE n.id IN $ids
 OPTIONAL MATCH (n)-[c:CONTRADICTED_BY]->()
 OPTIONAL MATCH (n)-[s:SUPPORTED_BY]->()
 RETURN n.id, labels(n)[0], coalesce(n.title, n.statement, n.name, n.id),
-       CASE WHEN count(s) > 0 THEN 'supported' ELSE n.status END, count(c) > 0
+       CASE WHEN count(s) > 0 THEN 'supported' ELSE n.status END, count(c) > 0,
+       n.decided_at, n.shipped_at, n.cancelled_at, min(c.at)
 """
 
 GRAPH_EDGES = """
@@ -316,6 +317,68 @@ RETURN 'incident' AS kind, i.at AS at, i.id AS id, i.title + ' (hit ' + m.name +
 RECORD = """
 MATCH (n {id: $id})
 RETURN labels(n)[0], properties(n)
+"""
+
+# --- Timeline scrubber: events and node inception dates -----------------------------
+
+# Timeline: all dated events that change the graph over time.
+# Each row: (at, kind, id, what, source_id)
+#   kind  = 'decision_decided' | 'decision_shipped' | 'assumption_disproved'
+#           | 'goal_cancelled'  | 'incident'         | 'task_created'
+# These are used client-side only: no queries run per scrub tick.
+TIMELINE = """
+MATCH (d:Decision) WHERE d.decided_at IS NOT NULL
+RETURN d.decided_at AS at, 'decision_decided' AS kind, d.id AS id,
+       d.title AS what, d.id AS source_id
+
+UNION
+
+MATCH (d:Decision) WHERE d.shipped_at IS NOT NULL
+RETURN d.shipped_at AS at, 'decision_shipped' AS kind, d.id AS id,
+       d.title AS what, d.id AS source_id
+
+UNION
+
+MATCH (a:Assumption)-[c:CONTRADICTED_BY]->(s:Source)
+RETURN c.at AS at, 'assumption_disproved' AS kind, a.id AS id,
+       a.statement AS what, s.id AS source_id
+
+UNION
+
+MATCH (g:Goal) WHERE g.cancelled_at IS NOT NULL
+RETURN g.cancelled_at AS at, 'goal_cancelled' AS kind, g.id AS id,
+       g.title AS what, g.id AS source_id
+
+UNION
+
+MATCH (i:Incident)
+OPTIONAL MATCH (i)-[:REPORTED_IN]->(s:Source)
+RETURN i.at AS at, 'incident' AS kind, i.id AS id,
+       i.title AS what, coalesce(s.id, i.id) AS source_id
+
+UNION
+
+MATCH (t:Task) WHERE t.created_at IS NOT NULL
+RETURN t.created_at AS at, 'task_created' AS kind, t.id AS id,
+       t.title AS what, t.id AS source_id
+"""
+
+# For each node in the map that has a creation/first-event date, return it.
+# Structural nodes (Goal, Metric, Assumption, Initiative, Capability) always existed
+# so they get no born_at. Decisions get decided_at, Tasks get created_at,
+# Incidents get at, Sources get at.
+BORN_AT = """
+MATCH (n) WHERE labels(n)[0] IN $labels
+WITH n,
+     CASE labels(n)[0]
+       WHEN 'Decision' THEN n.decided_at
+       WHEN 'Task'     THEN n.created_at
+       WHEN 'Incident' THEN n.at
+       WHEN 'Source'   THEN n.at
+       ELSE null
+     END AS born_at
+WHERE born_at IS NOT NULL
+RETURN n.id, born_at
 """
 
 # --- Goals and work ---------------------------------------------------------------
