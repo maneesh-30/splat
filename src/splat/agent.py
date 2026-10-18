@@ -15,7 +15,7 @@ import re
 from dataclasses import dataclass, field
 
 from splat import llm
-from splat.tools import Tools, search_terms
+from splat.tools import Tools, row_source, search_terms
 
 VERDICT_LABEL = {
     "worked": "Worked",
@@ -49,13 +49,19 @@ class Answer:
 
 
 # Order matters: the first matching route wins.
+TEAMS = {"platform", "payments", "growth", "mobile", "data"}
+
 ROUTES = [
+    ("team_work", r"(what|which).*\b(platform|payments|growth|mobile|data)\b.*(working|doing|up to|busy)|team.*working on"),
+    ("who_knows", r"who (knows|understands)|expert|who (should|can|do) (i|we) (ask|talk)|who to (ask|talk)|knows the most"),
+    ("changes", r"what changed|what's new|what is new|recent changes|changed recently|lately"),
     ("load_bearing", r"load.?bearing|verify first|check first|riskiest|untested|most .*depend"),
     ("blast_radius", r"blast|what breaks|downstream|ripple|knock.?on|relies on|rely on|depends on a-|a-\d+ .*(wrong|false)"),
     ("cascade", r"assumption|wrong|disprove|false|still true|still hold"),
     ("duplicate_work", r"duplicat|same thing|already build|two teams|overlap"),
     ("cancelled_goal_work", r"cancel"),
-    ("unowned_metrics", r"own(s|er|ed)?\b.*metric|metric.*own|nobody own|unowned"),
+    ("unowned_metrics", r"own(s|er|ed)?\b.*metrics|metrics.*own|nobody own|unowned"),
+    ("who_owns", r"who owns|owner of|who is responsible|responsible for|accountable for|whose"),
     ("goals_without_work", r"goal.*(no|without|nobody|idle).*work|neglect|idle goal"),
     ("orphaned_work", r"orphan|no goal|not tied|why are we|wast(e|ed|ing)|pointless|serve(s)? no"),
     ("scorecard", r"scorecard|all decisions|overall|how did our decisions|track record"),
@@ -67,7 +73,8 @@ ID_PATTERN = re.compile(r"\b(D-\d+|EP-\d+|KES-\d+|GH-\d+|I-\d+|A-\d+|G-\d+)\b", 
 
 # Words that describe the question rather than the thing being asked about.
 GENERIC_WORDS = {"work", "worked", "working", "help", "helped", "decision", "result", "results", "outcome",
-                 "impact", "succeed", "pay", "off", "project", "exist", "exists", "has", "have", "been"}
+                 "impact", "succeed", "pay", "off", "project", "exist", "exists", "has", "have", "been",
+                 "goal", "metric", "epic", "initiative"}
 MIN_COVERAGE = 0.6
 
 
@@ -80,7 +87,7 @@ def route(question: str) -> str:
 
 
 # Tools that are about one specific item, which the model may name by id.
-SUBJECT_TOOLS = {"verdict", "blast_radius", "why", "cascade"}
+SUBJECT_TOOLS = {"verdict", "blast_radius", "why", "cascade", "who_owns", "team_work"}
 
 
 class Agent:
@@ -101,6 +108,8 @@ class Agent:
         argument = question
         if subject and tool in SUBJECT_TOOLS and ID_PATTERN.fullmatch(subject.strip()):
             argument = subject.strip().upper()
+        elif subject and tool == "team_work" and subject.strip().lower() in TEAMS:
+            argument = subject.strip().lower()
         answer = getattr(self, f"_{tool}")(argument)
         trace = self.tools.reset_trace()
         answer.trace, answer.ms, answer.router = trace.queries, trace.total_ms, router
@@ -257,7 +266,93 @@ class Agent:
         if disproved:
             lines.append("Already disproved: " + ", ".join(f"{a['id']} ({a['dependents']} dependents)"
                                                          for a in disproved) + ".")
-        return Answer("load_bearing", "Assumptions to verify first", lines, ranked)
+        return Answer("load_bearing", "Assumptions to verify first", lines, ranked,
+                      sources=[row_source(a["id"]) for a in untested[:5]])
+
+    def _who_knows(self, question: str) -> Answer:
+        k = self.tools.who_knows(question)
+        if not k["people"]:
+            return self._not_found("who_knows", "thread, document, ticket or decision")
+        names = {"decided": "decided", "ticket": "worked ticket", "authored": "wrote", "replied": "replied in",
+                 "epic": "worked on epic"}
+        lines, sources = [], []
+        for n, p in enumerate(k["people"], start=1):
+            proof = "; ".join(f"{names[e['kind']]} {e['id']}" for e in p["evidence"][:4])
+            lines.append(f"{n}. {p['name']} ({p['team']}), evidence score {p['score']:g}: {proof}.")
+            sources += [e["source"] for e in p["evidence"][:4] if e["source"]]
+        for p in k["former"]:
+            lines.append(f"Also knew it but left on {p['left_on']}: {p['name']} ({len(p['evidence'])} pieces of evidence).")
+        return Answer("who_knows", "Who knows about this, ranked by evidence", lines, k, sources=sources,
+                      path=["(Person)-[:DECIDED|AUTHORED|POSTED_IN|ASSIGNED_TO]-(matching decision, document, thread or ticket)"])
+
+    def _who_owns(self, question: str) -> Answer:
+        team = next((t for t in TEAMS if re.search(rf"\b{t}\b", question.lower())), None)
+        node = None
+        m = ID_PATTERN.search(question)
+        if m and m.group(1).upper().split("-")[0] in ("EP", "G", "D"):
+            node = m.group(1).upper()
+        if not node:
+            for label in ("Project", "Metric", "Goal", "Decision"):
+                node = self._resolve(question, label)
+                if node:
+                    break
+        if not node and team:
+            return self._team_work(team)
+        if not node:
+            return self._not_found("who_owns", "epic, metric, goal or decision")
+        o = self.tools.who_owns(node)
+        if not o["found"]:
+            return self._not_found("who_owns", "epic, metric, goal or decision")
+        lines = []
+        if o["kind"] == "Epic":
+            lines.append(f"Owned by the {o['team']} team ({len(o['members'])} current members).")
+            for name, did, dtitle in o["deciders"]:
+                lines.append(f"Created by decision {did} ({dtitle}), decided by {name}.")
+            if o["goal"]:
+                lines.append(f"Serves {o['initiative']} toward goal {o['goal']}, owned by {o['goal_owner']}.")
+            else:
+                lines.append("It serves no goal.")
+        elif o["kind"] == "Metric":
+            current = [x["name"] for x in o["owners"] if x["current"]]
+            gone = [x["name"] for x in o["owners"] if not x["current"]]
+            lines.append(f"Owned by {', '.join(current)}." if current else "Nobody currently owns it.")
+            if gone:
+                lines.append(f"Former owner(s) who left: {', '.join(gone)}.")
+            if o["goals"]:
+                lines.append(f"Measures {', '.join(o['goals'])}.")
+        else:
+            team_note = f" ({o['owner_team']})" if o.get("owner_team") else " (no longer at the company)"
+            lines.append(f"Owned by {o['owner']}{team_note}." if o.get("owner") else "No owner is recorded.")
+            if o["kind"] == "Goal":
+                lines.append(f"Status: {o['status']}. Pursued through {', '.join(o['initiatives']) or 'no initiative'}.")
+        return Answer("who_owns", f"Who owns {o['id']} {o['title']}", lines, o, sources=o["sources"])
+
+    def _team_work(self, question: str) -> Answer:
+        team = question if question in TEAMS else next(
+            (t for t in TEAMS if re.search(rf"\b{t}\b", question.lower())), None)
+        if not team:
+            return self._not_found("team_work", "team")
+        w = self.tools.team_work(team)
+        if not w["found"]:
+            return self._not_found("team_work", "team")
+        lines = [f"{len(w['members'])} current members: {', '.join(w['members'])}."]
+        for e in w["epics"]:
+            lines.append(f"Active epic {e['id']} {e['title']}: {len(e['open_tasks'])} open tickets.")
+            lines += [f"  {t}" for t in e["open_tasks"][:4]]
+        if not w["epics"]:
+            lines.append("No active epics.")
+        for d in w["decisions"][:4]:
+            lines.append(f"Recent decision {d['id']} {d['title']} ({d['decided_at']}, {d['status']}).")
+        sources = [row_source(e["id"]) for e in w["epics"]] + [d["source"] for d in w["decisions"][:4] if d["source"]]
+        return Answer("team_work", f"What the {w['team']} team is working on", lines, w, sources=sources)
+
+    def _changes(self, question: str) -> Answer:
+        m = re.search(r"(\d+)\s*(day|week|month)", question.lower())
+        days = int(m.group(1)) * {"day": 1, "week": 7, "month": 30}[m.group(2)] if m else 90
+        c = self.tools.changes(days)
+        lines = [f"{x['at']}  {x['kind']}: {x['id']} {x['what']}" for x in c["items"]]
+        return Answer("changes", f"What changed between {c['since']} and {c['until']}", lines or ["Nothing recorded."],
+                      c, sources=[x["source"] for x in c["items"] if x["source"]])
 
     def _similar(self, question: str) -> Answer:
         found = self.tools.similar(question)
@@ -304,14 +399,16 @@ class Agent:
                  + ("reaches only " + ", ".join(p["reaches"]) if p["reaches"] else "no path to any goal")
                  for p in o["projects"]]
         lines += [f"Task {t['id']} {t['title']} ({t['assignee']}): not part of any project" for t in o["tasks"]]
+        sources = [row_source(p["id"]) for p in o["projects"]] + [row_source(t["id"]) for t in o["tasks"]]
         return Answer("orphaned_work", f"{len(o['projects'])} active projects and {len(o['tasks'])} open tasks "
-                      "serve no active goal", lines, o)
+                      "serve no active goal", lines, o, sources=sources)
 
     def _goals_without_work(self, question: str) -> Answer:
         g = self.tools.goals_without_work()
         lines = [f"{x['id']} {x['title']} (owner {x['owner']}). Past work: {', '.join(x['past_work']) or 'none'}"
                  for x in g]
-        return Answer("goals_without_work", f"{len(g)} active goals have no active work", lines, g)
+        return Answer("goals_without_work", f"{len(g)} active goals have no active work", lines, g,
+                      sources=[row_source(x["id"]) for x in g])
 
     def _cancelled_goal_work(self, question: str) -> Answer:
         c = self.tools.cancelled_goal_work()
@@ -320,6 +417,7 @@ class Agent:
                  f"{x['project']['title']} gained {x['tasks_after_cancel']} tasks after the cancellation."
                  for x in c]
         return Answer("cancelled_goal_work", "Work still running under cancelled goals", lines, c,
+                      sources=[s for x in c for s in (row_source(x["goal"]["id"]), row_source(x["project"]["id"]))],
                       path=[f"{x['project']['id']} -PART_OF-> {x['initiative']['id']} -SERVES-> {x['goal']['id']}"
                             for x in c])
 
@@ -328,7 +426,8 @@ class Agent:
         lines = [f"{x['name']}: " + (f"owner {x['former_owner']} left on {x['owner_left_on']}"
                                      if x["former_owner"] else "nobody has ever owned it")
                  + (f"; tracks {', '.join(x['goals'])}" if x["goals"] else "") for x in u]
-        return Answer("unowned_metrics", f"{len(u)} metrics have no current owner", lines, u)
+        return Answer("unowned_metrics", f"{len(u)} metrics have no current owner", lines, u,
+                      sources=[row_source(x["id"]) for x in u])
 
     def _duplicate_work(self, question: str) -> Answer:
         d = self.tools.duplicate_work()
@@ -343,4 +442,5 @@ class Agent:
                 groups = " and ".join("{" + ", ".join(i["teams"]) + "}" for i in x["islands"])
                 lines.append(f"The two teams are in separate conversation islands ({groups}): no chain of people "
                              "who have talked to each other connects them.")
-        return Answer("duplicate_work", f"{len(d)} pairs of teams are building the same thing", lines, d)
+        return Answer("duplicate_work", f"{len(d)} pairs of teams are building the same thing", lines, d,
+                      sources=[row_source(p["id"]) for x in d for p in x["projects"]])

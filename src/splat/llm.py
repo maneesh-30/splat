@@ -41,6 +41,10 @@ TOOLS = {
     "cancelled_goal_work": "What work continues under cancelled goals?",
     "unowned_metrics": "Which metrics have no owner?",
     "duplicate_work": "Are teams building the same thing?",
+    "who_knows": "Who knows about a topic / who should I ask about something? Subject: null (the topic is read from the question).",
+    "who_owns": "Who owns or is responsible for a specific epic, metric, goal or decision? Needs it as subject.",
+    "team_work": "What is a team working on / doing? Subject: the team name in lower case (platform, payments, growth, mobile, data).",
+    "changes": "What changed recently in the company?",
 }
 
 
