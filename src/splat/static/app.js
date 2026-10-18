@@ -52,6 +52,7 @@ function go(view) {
   document.querySelectorAll(".dock button").forEach((b) => b.classList.toggle("active", b.dataset.go === view));
   window.scrollTo({ top: 0 });
   if (view === "graph") loadMap();
+  if (view === "act") loadActions();
 }
 document.querySelectorAll(".dock button").forEach((b) => b.addEventListener("click", () => go(b.dataset.go)));
 
@@ -330,6 +331,66 @@ function showNode(n) {
     <h4>${esc(n.title)}</h4><div class="mono muted">${esc(n.id)}</div>
     ${question ? `<button class="btn btn-primary" data-ask="${esc(question)}">${esc(question)}</button>` : ""}`;
 }
+
+// ---------------------------------------------------------------- act
+
+async function loadActions() {
+  $("#actions").innerHTML = loader("Looking for problems to fix");
+  try {
+    const list = await api("/api/actions");
+    if (!list.length) { $("#actions").innerHTML = `<div class="card muted">Nothing to fix right now.</div>`; return; }
+    $("#actions").innerHTML = list.map((a) => `<div class="card action fade-up" data-action="${esc(a.id)}">
+        <span class="chip chip-warn"><span class="dot"></span>Proposed</span>
+        <h3 style="margin-top:10px">${esc(a.title)}</h3>
+        <div class="why">${esc(a.why)}</div>
+        <details><summary>The exact write it would run</summary><div class="path" style="margin-top:8px">${esc(a.cypher.trim())}</div></details>
+        <div class="buttons"><button class="btn" data-dry="${esc(a.id)}">Try it on a sandbox copy</button></div>
+        <div class="result"></div>
+      </div>`).join("");
+  } catch (err) {
+    $("#actions").innerHTML = `<div class="card muted">${esc(err.message)}</div>`;
+  }
+}
+
+async function post(path) {
+  const res = await fetch(path, { method: "POST" });
+  if (res.status === 503) { showDown(true); throw new Error("database unavailable"); }
+  if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail || res.statusText);
+  return res.json();
+}
+
+const writes = (w) => `${w.nodes_created} node(s), ${w.relationships_created} relationship(s), ${w.properties_set} propert${w.properties_set === 1 ? "y" : "ies"}`;
+const state = (c) => `<span class="chip ${c.problem ? "chip-danger" : "chip-success"}"><span class="dot"></span>${c.problem ? "Problem present" : "Problem gone"}</span><div style="margin-top:6px">${esc(c.detail)}</div>`;
+
+document.addEventListener("click", async (e) => {
+  const dry = e.target.closest("[data-dry]");
+  const go = e.target.closest("[data-apply]");
+  if (!dry && !go) return;
+  const card = e.target.closest(".action");
+  const result = card.querySelector(".result");
+  const id = (dry || go).dataset.dry || (dry || go).dataset.apply;
+  if (dry) {
+    result.innerHTML = loader("Copying the graph and trying the change there");
+    try {
+      const r = await post(`/api/actions/${encodeURIComponent(id)}/dry-run`);
+      result.innerHTML = `<div class="muted" style="font-size:13px">Copied the whole graph to <span class="mono">${esc(r.sandbox)}</span> in ${r.copy_ms} ms,
+          wrote ${writes(r.writes)} there, re-ran the check, then deleted the copy. The real graph is unchanged.</div>
+        <div class="compare"><div class="side"><div class="k">Real graph now</div>${state(r.before)}</div>
+          <div class="side"><div class="k">Sandbox after the change</div>${state(r.after)}</div></div>
+        ${!r.after.problem ? `<div class="buttons"><button class="btn btn-primary" data-apply="${esc(id)}">Approve and apply to the real graph</button></div>` : ""}`;
+    } catch (err) { result.innerHTML = `<p class="muted">${esc(err.message)}</p>`; }
+  } else {
+    result.innerHTML = loader("Applying the approved change and verifying it");
+    try {
+      const r = await post(`/api/actions/${encodeURIComponent(id)}/apply`);
+      card.querySelector(".chip").outerHTML = `<span class="chip ${r.verified ? "chip-success" : "chip-danger"}"><span class="dot"></span>${r.verified ? "Applied and verified" : "Applied, not verified"}</span>`;
+      card.querySelector(".buttons").remove();
+      result.innerHTML = `<div class="muted" style="font-size:13px">Wrote ${writes(r.writes)} to the real graph and recorded the approved action, then re-ran the original check.</div>
+        <div class="compare"><div class="side"><div class="k">Before</div>${state(r.before)}</div><div class="side"><div class="k">After, re-checked</div>${state(r.after)}</div></div>`;
+      loadOverview();
+    } catch (err) { result.innerHTML = `<p class="muted">${esc(err.message)}</p>`; }
+  }
+});
 
 // ---------------------------------------------------------------- sources
 

@@ -82,6 +82,15 @@
     <div id="map-trace"></div>
   </section>
 
+  <!-- Act -->
+  <section class="view" data-view="act" hidden>
+    <div class="head">
+      <h2 class="display">Act</h2>
+      <p class="muted">One proposed fix per problem the graph found. Each is tried on a throwaway copy of the graph first; the real graph changes only after you approve, and the original check is re-run to verify the problem is gone.</p>
+    </div>
+    <div id="actions"></div>
+  </section>
+
   <!-- Alignment -->
   <section class="view" data-view="alignment" hidden>
     <div class="head">
@@ -104,6 +113,9 @@
   </button>
   <button data-go="graph" title="Graph">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.2 7.3 10.6 16M16.8 7.3 13.4 16M7.5 6h9"/></svg><span>Graph</span>
+  </button>
+  <button data-go="act" title="Act">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0 5 5L22 13.6 13.6 22 11.3 19.7a4 4 0 0 0-5-5L4 12.4 12.4 4l2.3 2.3Z"/><path d="m9 15 6-6"/></svg><span>Act</span>
   </button>
   <button data-go="alignment" title="Alignment">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Alignment</span>
