@@ -51,6 +51,7 @@ function go(view) {
   document.querySelectorAll(".view").forEach((v) => { v.hidden = v.dataset.view !== view; });
   document.querySelectorAll(".dock button").forEach((b) => b.classList.toggle("active", b.dataset.go === view));
   window.scrollTo({ top: 0 });
+  if (view === "graph") loadMap();
 }
 document.querySelectorAll(".dock button").forEach((b) => b.addEventListener("click", () => go(b.dataset.go)));
 
@@ -103,7 +104,7 @@ function renderAnswer(a) {
   const path = a.path && a.path.length ? `<div class="section-k">Graph path</div><div class="path">${esc(a.path.join("\n"))}</div>` : "";
   const sources = a.sources && a.sources.length
     ? `<div class="section-k">Sources</div><div class="sources">${[...new Set(a.sources)].map((s) => `<button class="source-btn" data-source="${esc(s)}">${esc(s)}</button>`).join("")}</div>` : "";
-  const trace = renderTrace(a.trace, a.ms, a.tool);
+  const trace = graphButton(a) + renderTrace(a.trace, a.ms, a.tool);
 
   // The badge already states the verdict, so drop the same words from the title.
   const title = badge ? a.title.replace(/^[^:]+:\s*/, "") : a.title;
@@ -138,6 +139,143 @@ function renderTree(b) {
   return `<div class="tree"><span class="node"><span class="kind">Assumption</span><span class="id">${esc(b.assumption)}</span><span class="chip chip-danger">root</span></span>${walk(b.assumption)}</div>`;
 }
 
+// ---------------------------------------------------------------- graph drawing
+
+const NODE = {
+  Goal: { color: "#f5f5f5", shape: "round-rectangle", name: "Goal" },
+  Initiative: { color: "#c9ccd2", shape: "round-rectangle", name: "Initiative" },
+  Project: { color: "#8fb4ff", shape: "ellipse", name: "Epic" },
+  Decision: { color: "#9aa0aa", shape: "ellipse", name: "Decision" },
+  Assumption: { color: "#f5b544", shape: "diamond", name: "Assumption" },
+  Metric: { color: "#b394f2", shape: "hexagon", name: "Metric" },
+  Capability: { color: "#5ec4c4", shape: "round-triangle", name: "Capability" },
+  Source: { color: "#6b7079", shape: "rectangle", name: "Source" },
+  Incident: { color: "#ef6a6a", shape: "vee", name: "Incident" },
+  Task: { color: "#4e535c", shape: "ellipse", name: "Task" },
+  Person: { color: "#8a8f98", shape: "ellipse", name: "Person" },
+  Team: { color: "#e0a3c8", shape: "round-octagon", name: "Team" },
+};
+const EDGE_TEXT = { RELIES_ON: "relies on" };
+let verdictOf = {};
+const ID_RE = /\b(?:D|A|EP|G|I|KES|GH|INC)-\d+\b|\b(?:docs|slack|incidents)\/[\w\-./]+/g;
+
+function nodeColor(n) {
+  if (n.label === "Decision" && verdictOf[n.id]) return VERDICT[verdictOf[n.id]].color;
+  if (n.label === "Assumption") return n.disproved ? "#ef6a6a" : n.status === "supported" ? "#3dd68c" : "#f5b544";
+  return (NODE[n.label] || NODE.Source).color;
+}
+
+function drawGraph(container, data, layout = "cose", onTap) {
+  const elements = [
+    ...data.nodes.map((n) => ({ data: { id: n.id, short: n.label === "Source" || n.label === "Person" || n.label === "Metric" ? n.title : n.id,
+      title: n.title, kind: n.label, color: nodeColor(n), shape: (NODE[n.label] || NODE.Source).shape, raw: n } })),
+    ...data.edges.map((e, i) => ({ data: { id: "e" + i, source: e.source, target: e.target, label: EDGE_TEXT[e.type] || e.type.toLowerCase().replace(/_/g, " ") } })),
+  ];
+  const cy = cytoscape({
+    container, elements, wheelSensitivity: 0.25, minZoom: 0.2, maxZoom: 3,
+    style: [
+      { selector: "node", style: { "background-color": "data(color)", shape: "data(shape)", width: 30, height: 30,
+        label: "data(short)", color: "#d9dce1", "font-size": 10, "font-family": "Roboto Mono, monospace", "min-zoomed-font-size": 5,
+        "text-valign": "bottom", "text-margin-y": 5, "text-wrap": "ellipsis", "text-max-width": 120,
+        "border-width": 1, "border-color": "#0b0b0d" } },
+      { selector: "node[kind = 'Goal']", style: { width: 46, height: 34, "font-size": 12, color: "#fff" } },
+      { selector: "edge", style: { width: 1.2, "line-color": "#3a3d44", "target-arrow-color": "#3a3d44",
+        "target-arrow-shape": "triangle", "arrow-scale": 0.8, "curve-style": "bezier", label: "data(label)",
+        "font-size": 7, color: "#6f747d", "text-rotation": "autorotate", "text-background-color": "#0b0b0d",
+        "text-background-opacity": 1, "text-background-padding": 1, "min-zoomed-font-size": 9 } },
+      { selector: "node:selected", style: { "border-width": 3, "border-color": "#fff" } },
+      { selector: ".faded", style: { opacity: 0.15 } },
+    ],
+    layout: layout === "tree"
+      ? { name: "breadthfirst", directed: true, spacingFactor: 1.1, padding: 20 }
+      : { name: "cose", animate: false, nodeRepulsion: 6000, idealEdgeLength: 60, gravity: 1.2, padding: 16, componentSpacing: 40 },
+  });
+  cy.on("tap", "node", (evt) => {
+    const node = evt.target;
+    cy.elements().addClass("faded");
+    node.closedNeighborhood().removeClass("faded");
+    if (onTap) onTap(node.data("raw"));
+  });
+  cy.on("tap", (evt) => { if (evt.target === cy) cy.elements().removeClass("faded"); });
+  cy.ready(() => cy.fit(undefined, 16));
+  container.cy = cy;
+  return cy;
+}
+
+function legendHtml(labels) {
+  return labels.map((l) => `<span class="swatch"><i style="background:${NODE[l].color}"></i>${NODE[l].name}</span>`).join("")
+    + `<span class="swatch"><i style="background:#ef6a6a"></i>Disproved</span><span class="swatch"><i style="background:#3dd68c"></i>Worked / supported</span>`;
+}
+
+// Draw the subgraph behind an answer, on demand.
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest("[data-graph]");
+  if (!btn) return;
+  const box = btn.nextElementSibling;
+  if (!box.hidden) { box.hidden = true; btn.textContent = "Show the graph behind this answer"; return; }
+  box.hidden = false;
+  btn.textContent = "Hide graph";
+  box.innerHTML = "";
+  const payload = JSON.parse(btn.dataset.graph);
+  if (payload.blast) {
+    drawGraph(box, payload.blast, "tree");
+    return;
+  }
+  try {
+    const g = await api("/api/graph?ids=" + encodeURIComponent(payload.ids.join(",")));
+    drawGraph(box, g, "cose");
+  } catch (err) {
+    box.innerHTML = `<p class="muted" style="padding:12px">${esc(err.message)}</p>`;
+  }
+});
+
+function graphButton(a) {
+  let payload;
+  if (a.tool === "blast_radius" && a.data && a.data.items) {
+    const b = a.data;
+    payload = { blast: {
+      nodes: [{ id: b.assumption, label: "Assumption", title: b.assumption, disproved: false },
+        ...b.items.map((i) => ({ id: i.id, label: i.kind, title: i.title, status: i.status }))],
+      edges: b.edges.map((e) => ({ source: e.child, target: e.parent, type: "RELIES_ON" })) } };
+  } else {
+    const ids = [...new Set((JSON.stringify(a.data || {}) + " " + (a.sources || []).join(" ")).match(ID_RE) || [])].slice(0, 60);
+    if (!ids.length) return "";
+    payload = { ids };
+  }
+  return `<button class="btn toggle-graph" data-graph='${esc(JSON.stringify(payload))}'>Show the graph behind this answer</button><div class="graph-canvas" hidden></div>`;
+}
+
+// The company map view.
+let mapDrawn = false;
+async function loadMap() {
+  if (mapDrawn) return;
+  mapDrawn = true;
+  $("#map-legend").innerHTML = legendHtml(["Goal", "Initiative", "Project", "Decision", "Assumption", "Metric", "Capability"]);
+  $("#map").innerHTML = loader("Drawing the company graph");
+  try {
+    const m = await api("/api/map");
+    $("#map").innerHTML = "";
+    drawGraph($("#map"), m, "cose", showNode);
+    $("#map-trace").innerHTML = renderTrace(m.queries, m.ms, "company_map");
+  } catch (err) {
+    mapDrawn = false;
+    $("#map").innerHTML = `<p class="muted" style="padding:16px">${esc(err.message)}</p>`;
+  }
+}
+
+function showNode(n) {
+  const kind = (NODE[n.label] || {}).name || n.label;
+  const question = {
+    Decision: `Did ${n.id} work?`, Assumption: `What breaks if ${n.id} is wrong?`,
+    Project: `Why does ${n.id} exist?`, Initiative: `Why does ${n.id} exist?`,
+  }[n.label];
+  const verdict = n.label === "Decision" && verdictOf[n.id] ? chip(verdictOf[n.id]) : "";
+  const status = n.label === "Assumption" ? chip(n.disproved ? "missed" : "too_early").replace(/Missed|Too early/, n.disproved ? "Disproved" : n.status || "Untested") : "";
+  $("#map-info").innerHTML = `<span class="chip chip-muted">${esc(kind)}</span> ${verdict}${status}
+    <h4>${esc(n.title)}</h4><div class="mono muted">${esc(n.id)}</div>
+    ${question ? `<button class="btn btn-primary" data-ask="${esc(question)}">${esc(question)}</button>` : ""}`;
+}
+
 // ---------------------------------------------------------------- sources
 
 document.addEventListener("click", async (e) => {
@@ -170,6 +308,7 @@ async function loadOverview() {
     if (!health.loaded) { $("#tiles").innerHTML = `<div class="card">The graph is empty. Run <code>uv run splat load</code>.</div>`; return; }
     const o = await api("/api/overview");
     $("#company").textContent = `Kestrel · data as of ${o.as_of}`;
+    verdictOf = Object.fromEntries(o.scorecard.decisions.map((d) => [d.id, d.verdict]));
     renderTiles(o);
     renderOutcomes(o.scorecard);
     renderAssumptions(o);

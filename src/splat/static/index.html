@@ -68,6 +68,20 @@
     <div id="blast"></div>
   </section>
 
+  <!-- Graph -->
+  <section class="view" data-view="graph" hidden>
+    <div class="head">
+      <h2 class="display">The company graph</h2>
+      <p class="muted">Goals, initiatives, epics, decisions, assumptions and metrics, and how they connect. Click a node to see what it is and ask about it.</p>
+    </div>
+    <div class="legend" id="map-legend"></div>
+    <div class="map-wrap">
+      <div id="map" class="graph-canvas"></div>
+      <div id="map-info" class="map-info card"><span class="muted">Click a node.</span></div>
+    </div>
+    <div id="map-trace"></div>
+  </section>
+
   <!-- Alignment -->
   <section class="view" data-view="alignment" hidden>
     <div class="head">
@@ -88,6 +102,9 @@
   <button data-go="assumptions" title="Assumptions">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 21h20L12 2Z"/><path d="M12 9v5"/><path d="M12 17.5v.5"/></svg><span>Assumptions</span>
   </button>
+  <button data-go="graph" title="Graph">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.2 7.3 10.6 16M16.8 7.3 13.4 16M7.5 6h9"/></svg><span>Graph</span>
+  </button>
   <button data-go="alignment" title="Alignment">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Alignment</span>
   </button>
@@ -100,6 +117,7 @@
   </div>
 </aside>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.2/cytoscape.min.js"></script>
 <script src="/static/app.js"></script>
 </body>
 </html>

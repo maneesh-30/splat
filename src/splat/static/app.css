@@ -120,6 +120,20 @@ details.trace .q .qh { font-size: 12px; color: var(--muted); margin-bottom: 4px;
 .node .kind { font-family: var(--mono); font-size: 11px; color: var(--muted); width: 64px; }
 .node .id { font-family: var(--mono); font-size: 12px; color: #fff; }
 
+/* ---------- graph ---------- */
+.graph-canvas { background: radial-gradient(circle at 50% 40%, #121317, #0b0b0d 70%); border: 1px solid var(--border);
+  border-radius: 12px; }
+.answer .graph-canvas { height: 420px; margin-top: 10px; }
+.map-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 14px; margin-top: 14px; }
+#map { height: 66vh; min-height: 460px; }
+.map-info { font-size: 13.5px; align-self: start; }
+.map-info h4 { margin: 8px 0 6px; font-size: 15px; }
+.map-info .btn { margin: 10px 6px 0 0; }
+.swatch { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); margin-right: 12px; }
+.swatch i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.toggle-graph { margin-top: 18px; }
+@media (max-width: 760px) { .map-wrap { grid-template-columns: 1fr; } }
+
 /* ---------- rows ---------- */
 .rows { border-top: 1px solid rgba(255,255,255,.08); }
 .row { display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 6px; border: 0;
