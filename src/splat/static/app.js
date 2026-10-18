@@ -67,11 +67,7 @@ async function ask(q) {
   $("#answer").innerHTML = loader("Walking the graph");
   try {
     const a = await api("/api/ask?q=" + encodeURIComponent(q));
-    // Once there is an answer, shrink the intro so the answer and its graph sit near the top.
-    document.querySelector('[data-view="ask"]').classList.add("answered");
     $("#answer").innerHTML = renderAnswer(a);
-    $("#answer").scrollIntoView({ behavior: "smooth", block: "start" });
-    drawAnswerGraphs($("#answer"));
   } catch (err) {
     $("#answer").innerHTML = `<div class="card answer fade-up"><h3>Could not answer</h3><p class="muted">${esc(err.message)}</p></div>`;
   }
@@ -108,20 +104,13 @@ function renderAnswer(a) {
   const path = a.path && a.path.length ? `<div class="section-k">Graph path</div><div class="path">${esc(a.path.join("\n"))}</div>` : "";
   const sources = a.sources && a.sources.length
     ? `<div class="section-k">Sources</div><div class="sources">${[...new Set(a.sources)].map((s) => `<button class="source-btn" data-source="${esc(s)}">${esc(s)}</button>`).join("")}</div>` : "";
-  const trace = renderTrace(a.trace, a.ms, a.tool);
-  const payload = graphPayload(a);
-  const graph = payload
-    ? `<div class="answer-graph"><div class="section-k">The graph behind this answer</div>
-        <div class="graph-canvas" data-graph='${esc(JSON.stringify(payload))}'></div></div>` : "";
+  const trace = graphButton(a) + renderTrace(a.trace, a.ms, a.tool);
 
   // The badge already states the verdict, so drop the same words from the title.
   const title = badge ? a.title.replace(/^[^:]+:\s*/, "") : a.title;
   return `<div class="card answer fade-up">
     <div class="title">${badge}<h3>${esc(title)}</h3></div>
-    <div class="${graph ? "answer-split" : ""}">
-      <div class="answer-text">${facts}${body}${sources}</div>${graph}
-    </div>
-    ${path}${trace}
+    ${facts}${body}${path}${sources}${trace}
   </div>`;
 }
 
@@ -168,7 +157,6 @@ const NODE = {
 };
 const EDGE_TEXT = { RELIES_ON: "relies on" };
 let verdictOf = {};
-let disprovedIds = new Set();
 const ID_RE = /\b(?:D|A|EP|G|I|KES|GH|INC)-\d+\b|\b(?:docs|slack|incidents)\/[\w\-./]+/g;
 
 function nodeColor(n) {
@@ -177,7 +165,7 @@ function nodeColor(n) {
   return (NODE[n.label] || NODE.Source).color;
 }
 
-function drawGraph(container, data, layout = "cose", onTap, root) {
+function drawGraph(container, data, layout = "cose", onTap) {
   const elements = [
     ...data.nodes.map((n) => ({ data: { id: n.id, short: n.label === "Source" || n.label === "Person" || n.label === "Metric" ? n.title : n.id,
       title: n.title, kind: n.label, color: nodeColor(n), shape: (NODE[n.label] || NODE.Source).shape, raw: n } })),
@@ -199,7 +187,7 @@ function drawGraph(container, data, layout = "cose", onTap, root) {
       { selector: ".faded", style: { opacity: 0.15 } },
     ],
     layout: layout === "tree"
-      ? { name: "breadthfirst", directed: false, roots: root ? [root] : undefined, spacingFactor: 1.05, padding: 20 }
+      ? { name: "breadthfirst", directed: true, spacingFactor: 1.1, padding: 20 }
       : { name: "cose", animate: false, nodeRepulsion: 6000, idealEdgeLength: 60, gravity: 1.2, padding: 16, componentSpacing: 40 },
   });
   cy.on("tap", "node", (evt) => {
@@ -219,37 +207,42 @@ function legendHtml(labels) {
     + `<span class="swatch"><i style="background:#ef6a6a"></i>Disproved</span><span class="swatch"><i style="background:#3dd68c"></i>Worked / supported</span>`;
 }
 
-// Draw the subgraph behind each answer as soon as the answer appears.
-async function drawAnswerGraphs(root) {
-  for (const box of root.querySelectorAll("[data-graph]")) {
-    const payload = JSON.parse(box.dataset.graph);
-    box.removeAttribute("data-graph");
-    if (payload.blast) { drawGraph(box, payload.blast, "tree", null, payload.blast.nodes[0].id); continue; }
-    box.innerHTML = loader("Drawing the graph");
-    try {
-      const g = await api("/api/graph?ids=" + encodeURIComponent(payload.ids.join(",")));
-      box.innerHTML = "";
-      drawGraph(box, g, "cose");
-    } catch (err) {
-      box.innerHTML = `<p class="muted" style="padding:12px">${esc(err.message)}</p>`;
-    }
+// Draw the subgraph behind an answer, on demand.
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest("[data-graph]");
+  if (!btn) return;
+  const box = btn.nextElementSibling;
+  if (!box.hidden) { box.hidden = true; btn.textContent = "Show the graph behind this answer"; return; }
+  box.hidden = false;
+  btn.textContent = "Hide graph";
+  box.innerHTML = "";
+  const payload = JSON.parse(btn.dataset.graph);
+  if (payload.blast) {
+    drawGraph(box, payload.blast, "tree");
+    return;
   }
-}
+  try {
+    const g = await api("/api/graph?ids=" + encodeURIComponent(payload.ids.join(",")));
+    drawGraph(box, g, "cose");
+  } catch (err) {
+    box.innerHTML = `<p class="muted" style="padding:12px">${esc(err.message)}</p>`;
+  }
+});
 
-function graphPayload(a) {
+function graphButton(a) {
   let payload;
   if (a.tool === "blast_radius" && a.data && a.data.items) {
     const b = a.data;
     payload = { blast: {
-      nodes: [{ id: b.assumption, label: "Assumption", title: b.assumption, disproved: disprovedIds.has(b.assumption) },
+      nodes: [{ id: b.assumption, label: "Assumption", title: b.assumption, disproved: false },
         ...b.items.map((i) => ({ id: i.id, label: i.kind, title: i.title, status: i.status }))],
       edges: b.edges.map((e) => ({ source: e.child, target: e.parent, type: "RELIES_ON" })) } };
   } else {
     const ids = [...new Set((JSON.stringify(a.data || {}) + " " + (a.sources || []).join(" ")).match(ID_RE) || [])].slice(0, 60);
-    if (!ids.length) return null;
+    if (!ids.length) return "";
     payload = { ids };
   }
-  return payload;
+  return `<button class="btn toggle-graph" data-graph='${esc(JSON.stringify(payload))}'>Show the graph behind this answer</button><div class="graph-canvas" hidden></div>`;
 }
 
 // The company map view.
@@ -316,7 +309,6 @@ async function loadOverview() {
     const o = await api("/api/overview");
     $("#company").textContent = `Kestrel · data as of ${o.as_of}`;
     verdictOf = Object.fromEntries(o.scorecard.decisions.map((d) => [d.id, d.verdict]));
-    disprovedIds = new Set(o.cascade.map((a) => a.id));
     renderTiles(o);
     renderOutcomes(o.scorecard);
     renderAssumptions(o);

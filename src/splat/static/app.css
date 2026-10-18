@@ -131,19 +131,8 @@ details.trace .q .qh { font-size: 12px; color: var(--muted); margin-bottom: 4px;
 .map-info .btn { margin: 10px 6px 0 0; }
 .swatch { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); margin-right: 12px; }
 .swatch i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
-.answer-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 22px; align-items: start; }
-.answer-graph { position: sticky; top: 12px; }
-.answer-graph .section-k { margin-top: 16px; }
-.answer .answer-graph .graph-canvas { height: 440px; margin-top: 0; }
-.answer-split .facts { grid-template-columns: repeat(3, 1fr); }
-/* After the first answer, the intro shrinks so the answer starts near the top. */
-.answered .hero { margin: 18px 0 14px; }
-.answered .hero h1 { font-size: 20px; margin-bottom: 0; }
-.answered .hero p { display: none; }
-.answered .chips button { padding: 4px 10px; font-size: 12px; }
-.answered .tiles { display: none; }
-#answer { scroll-margin-top: 12px; }
-@media (max-width: 900px) { .map-wrap, .answer-split { grid-template-columns: 1fr; } .answer-graph { position: static; } }
+.toggle-graph { margin-top: 18px; }
+@media (max-width: 760px) { .map-wrap { grid-template-columns: 1fr; } }
 
 /* ---------- rows ---------- */
 .rows { border-top: 1px solid rgba(255,255,255,.08); }
