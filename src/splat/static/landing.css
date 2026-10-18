@@ -20,6 +20,8 @@
 .l-live:hover { text-decoration: underline; }
 
 .l-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 56px; }
+.l-four { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1100px) { .l-four { grid-template-columns: repeat(2, 1fr); } }
 .l-cap .label { margin: 0 0 10px; }
 .l-cap h3 { margin: 0 0 8px; font-size: 17px; }
 .l-cap p { font-size: 14px; margin: 0 0 14px; line-height: 1.55; }

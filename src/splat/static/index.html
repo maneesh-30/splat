@@ -88,6 +88,21 @@
       <h2 class="display">Act</h2>
       <p class="muted">One proposed fix per problem the graph found. Each is tried on a throwaway copy of the graph first; the real graph changes only after you approve, and the original check is re-run to verify the problem is gone.</p>
     </div>
+    <div class="card learn fade-up">
+      <span class="chip chip-info"><span class="dot"></span>Keep it current</span>
+      <h3 style="margin:10px 0 6px">Tell Splat something new</h3>
+      <p class="muted" style="margin:0 0 12px;font-size:14px">Paste a new Slack message or note. Splat works out which epics it is about and which recorded assumptions it contradicts or supports, quoting the words that show it, tries the update on a sandbox copy, and adds it only when you approve.</p>
+      <form id="learn-form">
+        <div class="learn-meta">
+          <label>Posted by <select id="learn-author"></select></label>
+          <label>Channel <input id="learn-channel" value="growth"></label>
+        </div>
+        <textarea id="learn-text" rows="4"></textarea>
+        <div class="buttons"><button class="btn" type="submit">Read it and try it on a sandbox</button></div>
+      </form>
+      <div id="learn-result"></div>
+    </div>
+    <div class="label">Fixes for problems already in the graph</div>
     <div id="actions"></div>
   </section>
 

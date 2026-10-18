@@ -14,13 +14,14 @@ const VERDICT = {
 const ORDER = ["worked", "partial", "missed", "ambiguous", "too_early", "not_shipped", "no_success_metric"];
 
 const SUGGESTIONS = [
-  "Did caching invoice reads work?",
   "Did the guided onboarding checklist work?",
+  "Who knows the most about webhook retries?",
+  "Who owns EP-13?",
+  "What is the growth team working on?",
+  "What changed in the last 30 days?",
   "What breaks if A-1 is wrong?",
   "Which assumptions should we verify first?",
-  "We are thinking of caching dashboard reads to cut latency. Has this been tried?",
-  "Are two teams building the same thing?",
-  "What work serves no goal?",
+  "Are we wasting effort anywhere?",
   "Did the blockchain rewrite work?",
 ];
 
@@ -52,7 +53,7 @@ function go(view) {
   document.querySelectorAll(".dock button").forEach((b) => b.classList.toggle("active", b.dataset.go === view));
   window.scrollTo({ top: 0 });
   if (view === "graph") loadMap();
-  if (view === "act") loadActions();
+  if (view === "act") { loadActions(); loadLearn(); }
 }
 document.querySelectorAll(".dock button").forEach((b) => b.addEventListener("click", () => go(b.dataset.go)));
 
@@ -396,6 +397,70 @@ document.addEventListener("click", async (e) => {
   }
 });
 
+// ---------------------------------------------------------------- learn from a new message
+
+const EXAMPLE_MESSAGE = "Ran the numbers on the signup form test. The three-field form converted no better than the old one; " +
+  "people drop off at email verification, not because of form length. The Signup flow redesign did not move signups.";
+let learnLoaded = false;
+
+async function loadLearn() {
+  if (learnLoaded) return;
+  learnLoaded = true;
+  $("#learn-text").value = EXAMPLE_MESSAGE;
+  try {
+    const people = await api("/api/people");
+    $("#learn-author").innerHTML = people.map((p) =>
+      `<option value="${esc(p.id)}" ${p.name.startsWith("Ivan") ? "selected" : ""}>${esc(p.name)} (${esc(p.team)})</option>`).join("");
+  } catch (err) { /* the select stays empty; the message can still be read */ }
+}
+
+function findingList(items, cls, label) {
+  return items.map((f) => `<div class="finding"><span class="chip ${cls}"><span class="dot"></span>${label} ${esc(f.id)}</span>
+      <div><b>${esc(f.statement)}</b></div><div class="muted">“${esc(f.quote)}”</div></div>`).join("");
+}
+
+$("#learn-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const out = $("#learn-result");
+  out.innerHTML = loader("Reading the message and trying it on a sandbox copy");
+  try {
+    const res = await fetch("/api/learn", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: $("#learn-text").value, author: $("#learn-author").value, channel: $("#learn-channel").value }) });
+    if (res.status === 503) { showDown(true); throw new Error("database unavailable"); }
+    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail || res.statusText);
+    const r = await res.json();
+    const p = r.proposal;
+    const newly = r.after.disproved.filter((a) => !r.before.disproved.includes(a));
+    const flagged = r.after.flagged.filter((d) => newly.includes(d.assumption));
+    const nothing = !p.mentions.length && !p.contradicts.length && !p.supports.length;
+    out.innerHTML = `<div class="muted" style="font-size:13px;margin-top:14px">Read by ${p.read_by === "llm" ? "the language model (ids and quotes checked against the graph and the message)" : "keyword rules"}.</div>
+      ${nothing ? `<p class="muted">This message does not mention any epic or say anything about a recorded assumption. Nothing to add.</p>` : `
+      ${p.mentions.length ? `<div class="section-k">Mentions</div><div class="sources">${p.mentions.map((m) => `<span class="source-btn">${esc(m.id)} ${esc(m.title)}</span>`).join("")}</div>` : ""}
+      ${p.contradicts.length ? `<div class="section-k">Contradicts</div>${findingList(p.contradicts, "chip-danger", "Disproves")}` : ""}
+      ${p.supports.length ? `<div class="section-k">Supports</div>${findingList(p.supports, "chip-success", "Supports")}` : ""}
+      <div class="section-k">On a sandbox copy of the graph</div>
+      <div class="compare"><div class="side"><div class="k">Real graph now</div>${r.before.disproved.length} disproved assumptions</div>
+        <div class="side"><div class="k">Sandbox after adding it</div>${r.after.disproved.length} disproved assumptions${newly.length ? `: <b>${newly.map(esc).join(", ")} newly disproved</b>` : ""}
+          ${flagged.length ? `<div style="margin-top:6px">Decisions now resting on a false assumption: ${flagged.map((d) => `${esc(d.id)} ${esc(d.title)}`).join("; ")}</div>` : ""}
+          ${Object.entries(r.after.reach).map(([a, n]) => `<div class="muted" style="margin-top:4px">${n} decisions, epics and open tickets rely on ${esc(a)}</div>`).join("")}</div></div>
+      <div class="buttons"><button class="btn btn-primary" data-learn="${esc(p.id)}">Approve and add to the graph</button></div>`}`;
+  } catch (err) { out.innerHTML = `<p class="muted">${esc(err.message)}</p>`; }
+});
+
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest("[data-learn]");
+  if (!btn) return;
+  btn.disabled = true;
+  try {
+    const r = await post(`/api/learn/${encodeURIComponent(btn.dataset.learn)}/apply`);
+    const newly = r.after.disproved.filter((a) => !r.before.disproved.includes(a));
+    btn.closest(".buttons").outerHTML = `<div style="margin-top:14px"><span class="chip ${r.verified ? "chip-success" : "chip-danger"}"><span class="dot"></span>${r.verified ? "Added and verified" : "Not verified"}</span>
+      <span class="muted" style="margin-left:8px">Stored as <span class="mono">${esc(r.proposal.source_id)}</span>${newly.length ? `; ${newly.map(esc).join(", ")} now shows as disproved in Assumptions` : ""}.</span></div>`;
+    loadOverview();
+    learnLoaded = false;
+  } catch (err) { btn.disabled = false; btn.insertAdjacentHTML("afterend", `<span class="muted"> ${esc(err.message)}</span>`); }
+});
+
 // ---------------------------------------------------------------- sources
 
 document.addEventListener("click", async (e) => {
@@ -409,7 +474,7 @@ document.addEventListener("click", async (e) => {
     const text = s.kind === "slack"
       ? s.text.split("\n").map((l) => { const i = l.indexOf(": "); return `<div class="msg"><b>${esc(l.slice(0, i))}</b>${esc(l.slice(i + 2))}</div>`; }).join("")
       : `<div class="doc">${esc(s.text)}</div>`;
-    $("#drawer-body").innerHTML = `<span class="chip chip-muted">${esc(s.kind === "slack" ? "Slack thread" : "Document")}</span>
+    $("#drawer-body").innerHTML = `<span class="chip chip-muted">${esc(s.kind === "slack" ? "Slack thread" : s.kind === "record" ? "Export row" : "Document")}</span>
       <h3>${esc(s.title)}</h3><div class="muted">${esc(s.author || "")} · ${esc(s.at)}</div>
       <div class="muted mono" style="margin-top:6px">${esc(s.id)}</div>${s.kind === "slack" ? `<div style="margin-top:14px">${text}</div>` : text}`;
   } catch (err) {

@@ -48,7 +48,7 @@
     <a class="l-live" href="/app?q=Did%20the%20guided%20onboarding%20checklist%20work%3F">Ask it live →</a>
   </section>
 
-  <section class="l-three">
+  <section class="l-three l-four">
     <div class="card l-cap">
       <div class="label">Outcomes</div>
       <h3>Did it work?</h3>
@@ -60,6 +60,12 @@
       <h3>Is it still true?</h3>
       <p class="muted">Beliefs that turned out false, every decision and ticket resting on them at any depth, and which untested ones to check first.</p>
       <a href="/app?q=What%20breaks%20if%20A-1%20is%20wrong%3F">What breaks if A-1 is wrong? →</a>
+    </div>
+    <div class="card l-cap">
+      <div class="label">People</div>
+      <h3>Who owns it, who knows it?</h3>
+      <p class="muted">Owners of every epic, metric, goal and decision, and people ranked by evidence of what they have actually worked on.</p>
+      <a href="/app?q=Who%20knows%20the%20most%20about%20webhook%20retries%3F">Who knows about webhook retries? →</a>
     </div>
     <div class="card l-cap">
       <div class="label">Alignment</div>
@@ -86,7 +92,7 @@
   <section class="l-safe card">
     <div class="label">Safe by design</div>
     <p>Answers run fixed, read-only Cypher. A language model may pick a tool and phrase a summary, but every id and number it writes is checked against the graph.
-      Fixes are tried on a <span class="mono">GRAPH.COPY</span> sandbox first and change the real graph only after a person approves.</p>
+      New messages are read into the graph, and fixes are applied, only after they are tried on a <span class="mono">GRAPH.COPY</span> sandbox and a person approves.</p>
   </section>
 
   <section class="l-stats">

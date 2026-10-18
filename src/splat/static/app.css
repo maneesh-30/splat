@@ -141,6 +141,15 @@ details.trace .q .qh { font-size: 12px; color: var(--muted); margin-bottom: 4px;
 .toggle-graph { margin-top: 18px; }
 @media (max-width: 760px) { .map-wrap { grid-template-columns: 1fr; } }
 
+/* ---------- learn ---------- */
+.learn { margin-bottom: 8px; }
+.learn-meta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; font-size: 13px; color: var(--muted); }
+.learn-meta select, .learn-meta input, .learn textarea { background: var(--surface-2); color: var(--text); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 10px; font: inherit; font-size: 13.5px; margin-left: 6px; }
+.learn textarea { width: 100%; margin: 0; resize: vertical; line-height: 1.5; }
+.finding { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 14px; }
+.finding .chip { margin-bottom: 6px; }
+
 /* ---------- actions ---------- */
 .action { margin-bottom: 14px; }
 .action h3 { margin: 0 0 6px; font-size: 16px; }
