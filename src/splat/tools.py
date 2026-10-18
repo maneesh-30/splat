@@ -204,7 +204,9 @@ class Tools:
         hit = [{"kind": r[0], "id": r[1], "title": r[2], "status": r[3], "hops": r[4]} for r in rows]
         goals, workers, deciders, metrics = (self._q("blast_reach", Q.BLAST_REACH, id=assumption_id)[0]
                                              if hit else ([], [], [], []))
-        return {"assumption": assumption_id, "items": hit,
+        edges = [{"child": r[0], "parent": r[1]}
+                 for r in self._q("blast_edges", Q.BLAST_EDGES, id=assumption_id)] if hit else []
+        return {"assumption": assumption_id, "items": hit, "edges": edges,
                 "decisions": [h for h in hit if h["kind"] == "Decision"],
                 "epics": [h for h in hit if h["kind"] == "Project"],
                 "open_tasks": [h for h in hit if h["kind"] == "Task"],

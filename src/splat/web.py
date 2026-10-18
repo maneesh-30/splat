@@ -59,18 +59,28 @@ def overview() -> dict:
         "cancelled_goal_work": t.cancelled_goal_work(),
         "unowned_metrics": t.unowned_metrics(),
         "duplicates": t.duplicate_work(),
+        "load_bearing": t.load_bearing(),
     }
     trace = t.reset_trace()
     data["queries"], data["ms"] = len(trace.queries), trace.total_ms
     return data
 
 
-@app.get("/api/source/{source_id}")
+@app.get("/api/source/{source_id:path}")
 def source(source_id: str) -> dict:
+    # Source ids are file paths such as docs/decisions/D-101.md, hence the :path converter.
     found = tools().source(source_id)
     if not found:
         raise HTTPException(404, "No such source in the graph.")
     return found
+
+
+@app.get("/api/blast/{assumption_id}")
+def blast(assumption_id: str) -> dict:
+    t = tools()
+    data = t.blast_radius(assumption_id.upper())
+    trace = t.reset_trace()
+    return {**data, "queries": trace.queries, "ms": trace.total_ms}
 
 
 def run() -> None:

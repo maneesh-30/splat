@@ -99,6 +99,16 @@ RETURN labels(n)[0], n.id, coalesce(n.title, n.id), n.status, hops
 ORDER BY hops, n.id
 """
 
+# The RELIES_ON links among everything hit, so the blast radius can be drawn as a tree.
+BLAST_EDGES = """
+MATCH (n)-[:RELIES_ON*1..]->(a:Assumption {id: $id})
+WITH collect(DISTINCT n) + collect(DISTINCT a) AS hit
+UNWIND hit AS child
+MATCH (child)-[:RELIES_ON]->(parent)
+WHERE parent IN hit
+RETURN DISTINCT child.id, parent.id
+"""
+
 BLAST_REACH = """
 MATCH (n)-[:RELIES_ON*1..]->(:Assumption {id: $id})
 WITH collect(DISTINCT n) AS hit
