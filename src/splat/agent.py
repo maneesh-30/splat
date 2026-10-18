@@ -292,7 +292,13 @@ class Agent:
         if m and m.group(1).upper().split("-")[0] in ("EP", "G", "D"):
             node = m.group(1).upper()
         if not node:
-            for label in ("Project", "Metric", "Goal", "Decision"):
+            # Look first for the kind of thing the question names, e.g. "the churn goal".
+            labels = ["Project", "Metric", "Goal", "Decision"]
+            named = {"goal": "Goal", "metric": "Metric", "decision": "Decision", "epic": "Project", "project": "Project"}
+            for word, label in named.items():
+                if re.search(rf"\b{word}\b", question.lower()):
+                    labels.insert(0, labels.pop(labels.index(label)))
+            for label in labels:
                 node = self._resolve(question, label)
                 if node:
                     break
